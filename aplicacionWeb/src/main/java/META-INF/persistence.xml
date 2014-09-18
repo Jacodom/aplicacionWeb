@@ -4,7 +4,7 @@
 		<class>model.Formulario</class>
 		<class>model.Grupo</class>
 		<class>model.Modulo</class>
-		<class>model.Perfile</class>
+		<class>model.Perfil</class>
 		<class>model.Permiso</class>
 		<class>model.Usuario</class>
 	</persistence-unit>

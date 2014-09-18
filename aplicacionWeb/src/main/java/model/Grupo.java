@@ -27,7 +27,7 @@ public class Grupo implements Serializable {
 
 	//bi-directional many-to-one association to Perfile
 	@OneToMany(mappedBy="grupo")
-	private List<Perfile> perfiles;
+	private List<Perfil> perfiles;
 
 	//bi-directional many-to-many association to Usuario
 	@ManyToMany(mappedBy="grupos")
@@ -60,22 +60,22 @@ public class Grupo implements Serializable {
 		this.estadoGrupo = estadoGrupo;
 	}
 
-	public List<Perfile> getPerfiles() {
+	public List<Perfil> getPerfiles() {
 		return this.perfiles;
 	}
 
-	public void setPerfiles(List<Perfile> perfiles) {
+	public void setPerfiles(List<Perfil> perfiles) {
 		this.perfiles = perfiles;
 	}
 
-	public Perfile addPerfile(Perfile perfile) {
+	public Perfil addPerfile(Perfil perfile) {
 		getPerfiles().add(perfile);
 		perfile.setGrupo(this);
 
 		return perfile;
 	}
 
-	public Perfile removePerfile(Perfile perfile) {
+	public Perfil removePerfile(Perfil perfile) {
 		getPerfiles().remove(perfile);
 		perfile.setGrupo(null);
 

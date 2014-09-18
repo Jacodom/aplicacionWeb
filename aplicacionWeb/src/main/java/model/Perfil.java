@@ -11,8 +11,8 @@ import java.util.Date;
  */
 @Entity
 @Table(name="perfiles")
-@NamedQuery(name="Perfile.findAll", query="SELECT p FROM Perfile p")
-public class Perfile implements Serializable {
+@NamedQuery(name="Perfil.findAll", query="SELECT p FROM Perfil p")
+public class Perfil implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -42,7 +42,7 @@ public class Perfile implements Serializable {
 	@JoinColumn(name="id_permiso")
 	private Permiso permiso;
 
-	public Perfile() {
+	public Perfil() {
 	}
 
 	public int getIdPerfil() {

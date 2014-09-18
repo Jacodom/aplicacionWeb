@@ -48,7 +48,7 @@ public class Formulario implements Serializable {
 
 	//bi-directional many-to-one association to Perfile
 	@OneToMany(mappedBy="formulario")
-	private List<Perfile> perfiles;
+	private List<Perfil> perfiles;
 
 	public Formulario() {
 	}
@@ -101,26 +101,26 @@ public class Formulario implements Serializable {
 		this.permisos = permisos;
 	}
 
-	public List<Perfile> getPerfiles() {
+	public List<Perfil> getPerfiles() {
 		return this.perfiles;
 	}
 
-	public void setPerfiles(List<Perfile> perfiles) {
+	public void setPerfiles(List<Perfil> perfiles) {
 		this.perfiles = perfiles;
 	}
 
-	public Perfile addPerfile(Perfile perfile) {
-		getPerfiles().add(perfile);
-		perfile.setFormulario(this);
+	public Perfil addPerfil(Perfil perfil) {
+		getPerfiles().add(perfil);
+		perfil.setFormulario(this);
 
-		return perfile;
+		return perfil;
 	}
 
-	public Perfile removePerfile(Perfile perfile) {
-		getPerfiles().remove(perfile);
-		perfile.setFormulario(null);
+	public Perfil removePerfil(Perfil perfil) {
+		getPerfiles().remove(perfil);
+		perfil.setFormulario(null);
 
-		return perfile;
+		return perfil;
 	}
 
 }

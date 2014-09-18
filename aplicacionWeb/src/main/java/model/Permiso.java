@@ -28,7 +28,7 @@ public class Permiso implements Serializable {
 
 	//bi-directional many-to-one association to Perfile
 	@OneToMany(mappedBy="permiso")
-	private List<Perfile> perfiles;
+	private List<Perfil> perfiles;
 
 	public Permiso() {
 	}
@@ -57,22 +57,22 @@ public class Permiso implements Serializable {
 		this.formularios = formularios;
 	}
 
-	public List<Perfile> getPerfiles() {
+	public List<Perfil> getPerfiles() {
 		return this.perfiles;
 	}
 
-	public void setPerfiles(List<Perfile> perfiles) {
+	public void setPerfiles(List<Perfil> perfiles) {
 		this.perfiles = perfiles;
 	}
 
-	public Perfile addPerfile(Perfile perfile) {
+	public Perfil addPerfile(Perfil perfile) {
 		getPerfiles().add(perfile);
 		perfile.setPermiso(this);
 
 		return perfile;
 	}
 
-	public Perfile removePerfile(Perfile perfile) {
+	public Perfil removePerfile(Perfil perfile) {
 		getPerfiles().remove(perfile);
 		perfile.setPermiso(null);
 
