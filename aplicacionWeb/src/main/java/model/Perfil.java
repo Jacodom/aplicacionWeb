@@ -17,6 +17,7 @@ public class Perfil implements Serializable {
 
 	@Id
 	@Column(name="id_perfil")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idPerfil;
 
 	private String accion;
