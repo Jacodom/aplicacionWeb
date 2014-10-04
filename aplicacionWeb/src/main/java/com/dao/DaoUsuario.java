@@ -1,17 +1,20 @@
-package dao;
+package com.dao;
 
 import java.util.List;
 
 
 
-import hibernate.hibernateUtil;
-import model.Usuario;
+
+
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-public class daoUsuario implements daoBase<Usuario> {
+import com.hibernate.HibernateUtil;
+import com.model.Usuario;
+
+public class DaoUsuario implements DaoBase<Usuario> {
 	
 	private Session sesion;
 	private Transaction transaccion;
@@ -19,7 +22,7 @@ public class daoUsuario implements daoBase<Usuario> {
 	
 	private void iniciarOperacion() throws HibernateException 
     { 
-        sesion = hibernateUtil.obtenerInstanciaSesion().openSession();
+        sesion = HibernateUtil.obtenerInstanciaSesion().openSession();
         transaccion = sesion.beginTransaction(); 
     }  
 
@@ -30,7 +33,8 @@ public class daoUsuario implements daoBase<Usuario> {
     }
 
 
-    public List<Usuario> obtener(){
+    @SuppressWarnings("unchecked")
+	public List<Usuario> obtener(){
     	try{
     		iniciarOperacion();
     		org.hibernate.Query query = sesion.createQuery("FROM Usuario u"); 

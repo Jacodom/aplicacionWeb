@@ -2,8 +2,8 @@ package aplicacionWeb;
 
 import java.util.List;
 
-import dao.daoUsuario;
-import model.Usuario;
+import com.dao.DaoUsuario;
+import com.model.Usuario;
 
 
 public class prueba {
@@ -22,7 +22,7 @@ public class prueba {
 		
 		
 		
-		daoUsuario daoUser = new daoUsuario();
+		DaoUsuario daoUser = new DaoUsuario();
 		
 		List<Usuario> lista= daoUser.obtener();
 		

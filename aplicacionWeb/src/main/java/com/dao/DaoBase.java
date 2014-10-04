@@ -1,11 +1,11 @@
-package dao;
+package com.dao;
 
 import java.util.List;
 
 
 
 
-public interface daoBase<T> {
+public interface DaoBase<T> {
 	
 	public List<T> obtener();
 	public Boolean agregar(T objeto);
