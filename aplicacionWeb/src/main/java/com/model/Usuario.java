@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -34,17 +35,8 @@ public class Usuario implements Serializable {
 	private String nombreUsuario;
 
 	//bi-directional many-to-many association to Grupo
-	@ManyToMany
-	@JoinTable(
-		name="usuarios_grupos"
-		, joinColumns={
-			@JoinColumn(name="id_usuario")
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="id_grupo")
-			}
-		)
-	private List<Grupo> grupos;
+	@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	private List<Grupo> grupos=new ArrayList<Grupo>();
 
 	public Usuario() {
 	}
@@ -96,4 +88,8 @@ public class Usuario implements Serializable {
 	public void setGrupos(List<Grupo> grupos) {
 		this.grupos = grupos;
 	}	
+	
+	public void addGrupo(Grupo grupo){
+		this.grupos.add(grupo);
+	}
 }

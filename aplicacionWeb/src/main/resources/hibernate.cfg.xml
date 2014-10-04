@@ -13,12 +13,13 @@
         <property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>     
         <property name="show_sql">true</property>      
         
+        
         <!-- Clases entidades a las que mapea el hibernate --> 
-        <mapping class="model.Formulario" />   
-        <mapping class="model.Grupo" /> 
-        <mapping class="model.Modulo" /> 
-        <mapping class="model.Perfil" /> 
-        <mapping class="model.Permiso" /> 
-        <mapping class="model.Usuario" />   
+        <mapping class="com.model.Formulario" />   
+        <mapping class="com.model.Grupo" /> 
+        <mapping class="com.model.Modulo" /> 
+        <mapping class="com.model.Perfil" /> 
+        <mapping class="com.model.Permiso" /> 
+        <mapping class="com.model.Usuario" />   
     </session-factory>
 </hibernate-configuration>

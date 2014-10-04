@@ -52,7 +52,7 @@ public class DaoUsuario implements DaoBase<Usuario> {
 	public Boolean agregar(Usuario usuario) {
 		 try{ 
 		        iniciarOperacion(); 
-		        sesion.save(usuario); 
+		        sesion.save(usuario);
 		        transaccion.commit(); 
 		 }catch(HibernateException he) 
 		    { 

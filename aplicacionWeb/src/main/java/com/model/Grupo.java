@@ -1,7 +1,10 @@
 package com.model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -25,13 +28,13 @@ public class Grupo implements Serializable {
 	@Column(name="estado_grupo")
 	private byte estadoGrupo;
 
-	//bi-directional many-to-one association to Perfile
+	//bi-directional many-to-one association to Perfil
 	@OneToMany(mappedBy="grupo")
 	private List<Perfil> perfiles;
 
 	//bi-directional many-to-many association to Usuario
 	@ManyToMany(mappedBy="grupos")
-	private List<Usuario> usuarios;
+	private List<Usuario> usuarios= new ArrayList<Usuario>();
 
 	public Grupo() {
 	}
@@ -88,6 +91,11 @@ public class Grupo implements Serializable {
 
 	public void setUsuarios(List<Usuario> usuarios) {
 		this.usuarios = usuarios;
+	}
+	
+	public void addUsuario(Usuario usuario){
+		this.usuarios.add(usuario);
+		usuario.addGrupo(this);
 	}
 
 }
