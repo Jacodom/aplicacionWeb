@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 
 /**
@@ -22,20 +22,6 @@ public class Permiso implements Serializable {
 	@Column(name="id_permiso")
 	private String idPermiso;
 
-	@Column(name="descripcion_permiso")
-	private String descripcionPermiso;
-
-	//bi-directional many-to-many association to Formulario
-	@ManyToMany(mappedBy="permisos")
-	private List<Formulario> formularios=new ArrayList<Formulario>();
-
-	//bi-directional many-to-one association to Perfiles
-	@OneToMany(mappedBy="permiso")
-	private List<Perfil> perfiles =  new ArrayList<Perfil>();
-
-	public Permiso() {
-	}
-
 	public String getIdPermiso() {
 		return this.idPermiso;
 	}
@@ -43,6 +29,9 @@ public class Permiso implements Serializable {
 	public void setIdPermiso(String idPermiso) {
 		this.idPermiso = idPermiso;
 	}
+	
+	@Column(name="descripcion_permiso")
+	private String descripcionPermiso;
 
 	public String getDescripcionPermiso() {
 		return this.descripcionPermiso;
@@ -51,20 +40,34 @@ public class Permiso implements Serializable {
 	public void setDescripcionPermiso(String descripcionPermiso) {
 		this.descripcionPermiso = descripcionPermiso;
 	}
+	
+	//bi-directional many-to-many association to Formulario
+	@ManyToMany(mappedBy="permisos")
+	private Set<Formulario> formularios=new HashSet<Formulario>();
 
-	public List<Formulario> getFormularios() {
+	Set<Formulario> getFormularios() {
 		return this.formularios;
 	}
 
-	public void setFormularios(List<Formulario> formularios) {
+	void setFormularios(HashSet<Formulario> formularios) {
 		this.formularios = formularios;
 	}
+	
+	public void addFormulario(Formulario formulario){
+		this.formularios.add(formulario);
+		formulario.addPermiso(this);
+	}
+	
+	//bi-directional many-to-one association to Perfiles
+	@OneToMany(mappedBy="permiso")
+	private Set<Perfil> perfiles =  new HashSet<Perfil>();
 
-	public List<Perfil> getPerfiles() {
+	
+	Set<Perfil> getPerfiles() {
 		return this.perfiles;
 	}
 
-	public void setPerfiles(List<Perfil> perfiles) {
+	void setPerfiles(HashSet<Perfil> perfiles) {
 		this.perfiles = perfiles;
 	}
 
@@ -74,6 +77,9 @@ public class Permiso implements Serializable {
 
 	public void removePerfil(Perfil perfil) {
 		this.perfiles.remove(perfil);
+	}
+	
+	public Permiso() {
 	}
 
 }

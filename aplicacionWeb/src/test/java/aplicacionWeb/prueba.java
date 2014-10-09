@@ -1,9 +1,8 @@
 package aplicacionWeb;
 
-import java.util.List;
+
 
 import com.dao.DaoUsuario;
-import com.model.Grupo;
 import com.model.Usuario;
 
 
@@ -15,35 +14,17 @@ public class prueba {
 
 		
 
-		/*user.setIdUsuario("JacodomD");
-		user.setNombreUsuario("jacobito");
-		user.setEmailUsuario("noec@asd.com");
+		user.setIdUsuario("Pablo");
+		user.setNombreUsuario("Pablo cordoba");
+		user.setEmailUsuario("pablo@asd.com");
 		user.setClaveUsuario("12345");
 		
-		grupo.setIdGrupo("ADM");
-		grupo.setDescripcionGrupo("ADMINISTRADORES");
+		DaoUsuario daouser = new DaoUsuario();
 		
-		grupo.addUsuario(user);*/
+		boolean add=  daouser.agregar(user);
 		
-		DaoUsuario daoUsuario= new DaoUsuario();
-		
-		//daoUsuario.agregar(user);
-		
-		List<Usuario> lista= daoUsuario.obtener();
-		
-		user= lista.get(2);
-		System.out.println("usuario: "+user.getNombreUsuario()+" grupo: "+user.getGrupos().get(0).getDescripcionGrupo());
-		
-		
-		
-		/*for(int x=0;x<lista.size();x++){
-			user= (Usuario)lista.get(x);
-			grupo= user.getGrupos().get(0);
-			System.out.println("Usuario: "+user.getNombreUsuario()+" Grupo: "+grupo.getDescripcionGrupo());
-		}*/
-		
-		
-		
+		if(add==true)
+			System.out.println("agregó!!");
 		
 		}
 

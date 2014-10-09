@@ -45,7 +45,8 @@ public class DaoUsuario implements DaoBase<Usuario> {
     		manejarExcepcion(he);
     		throw he;
     	}finally{
-    		sesion.close();
+    		if(sesion!=null)
+    			sesion.close();
     	}
     }
     
@@ -59,8 +60,9 @@ public class DaoUsuario implements DaoBase<Usuario> {
 		        manejarExcepcion(he);
 		        throw he; 
 		    }finally 
-		    { 
-		        sesion.close(); 
+		    {
+		    	if(sesion!=null)
+		    		sesion.close(); 
 		    }  
 		 
 		 return true;
@@ -75,7 +77,8 @@ public class DaoUsuario implements DaoBase<Usuario> {
 			manejarExcepcion(he);
 			throw he;
 		}finally{
-			sesion.close();
+			if(sesion!=null)
+				sesion.close();
 		}
 		
 		return true;
@@ -90,7 +93,8 @@ public class DaoUsuario implements DaoBase<Usuario> {
 			manejarExcepcion(he);
 			throw he;
 		}finally{
-			sesion.close();
+			if(sesion!=null)
+				sesion.close();
 		}
 		
 		return true;

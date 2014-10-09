@@ -13,16 +13,18 @@ public class HibernateUtil {
 	private static Configuration cfg;
 	
 	public static SessionFactory obtenerInstanciaSesion(){
-		
-		if(sessionFactory==null)
-		{
-			cfg = new Configuration();
-			cfg.configure();
-			serviceRegistry = new ServiceRegistryBuilder().applySettings(cfg.getProperties()).buildServiceRegistry();
-			
-			sessionFactory = cfg.buildSessionFactory(serviceRegistry);
+		try{
+			if(sessionFactory==null)
+			{
+				cfg = new Configuration();
+				cfg.configure();
+				serviceRegistry = new ServiceRegistryBuilder().applySettings(cfg.getProperties()).buildServiceRegistry();
+				
+				sessionFactory = cfg.buildSessionFactory(serviceRegistry);
+			}
+		}catch(Throwable ex){
+			ex.printStackTrace();
 		}
-		
 		
 		
 		return sessionFactory;

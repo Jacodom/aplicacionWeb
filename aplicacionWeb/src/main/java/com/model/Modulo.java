@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 
 /**
@@ -21,17 +21,7 @@ public class Modulo implements Serializable {
 	@Id
 	@Column(name="id_modulo")
 	private String idModulo;
-
-	@Column(name="descripcion_modulo")
-	private String descripcionModulo;
-
-	//bi-directional many-to-one association to Formulario
-	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER, mappedBy="modulo")
-	private List<Formulario> formularios=new ArrayList<Formulario>();
-
-	public Modulo() {
-	}
-
+	
 	public String getIdModulo() {
 		return this.idModulo;
 	}
@@ -40,6 +30,9 @@ public class Modulo implements Serializable {
 		this.idModulo = idModulo;
 	}
 
+	@Column(name="descripcion_modulo")
+	private String descripcionModulo;
+	
 	public String getDescripcionModulo() {
 		return this.descripcionModulo;
 	}
@@ -48,11 +41,15 @@ public class Modulo implements Serializable {
 		this.descripcionModulo = descripcionModulo;
 	}
 
-	public List<Formulario> getFormularios() {
+	//bi-directional many-to-one association to Formulario
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER, mappedBy="modulo")
+	private Set<Formulario> formularios=new HashSet<Formulario>();
+
+	Set<Formulario> getFormularios() {
 		return this.formularios;
 	}
 
-	public void setFormularios(List<Formulario> formularios) {
+	void setFormularios(HashSet<Formulario> formularios) {
 		this.formularios = formularios;
 	}
 
@@ -62,6 +59,9 @@ public class Modulo implements Serializable {
 
 	public void removeFormulario(Formulario formulario) {
 		this.formularios.remove(formulario);
+	}
+	
+	public Modulo() {
 	}
 
 }

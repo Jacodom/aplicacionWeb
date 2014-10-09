@@ -1,8 +1,11 @@
 package com.model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
-import java.util.List;
+
+import java.util.HashSet;
+import java.util.Set;
 
 
 /**
@@ -19,39 +22,6 @@ public class Formulario implements Serializable {
 	@Column(name="id_formulario")
 	private String idFormulario;
 
-	@Column(name="descripcion_formulario")
-	private String descripcionFormulario;
-
-	@Column(name="estado_formulario")
-	private byte estadoFormulario;
-
-	@Column(name="nombre_formulario")
-	private String nombreFormulario;
-
-	//bi-directional many-to-one association to Modulo
-	@ManyToOne
-	private Modulo modulo;
-
-	//bi-directional many-to-many association to Permiso
-	@ManyToMany
-	@JoinTable(
-		name="formularios_permisos"
-		, joinColumns={
-			@JoinColumn(name="id_formulario")
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="id_permiso")
-			}
-		)
-	private List<Permiso> permisos;
-
-	//bi-directional many-to-one association to Perfil
-	@OneToMany(mappedBy="formulario")
-	private List<Perfil> perfiles;
-
-	public Formulario() {
-	}
-
 	public String getIdFormulario() {
 		return this.idFormulario;
 	}
@@ -59,6 +29,9 @@ public class Formulario implements Serializable {
 	public void setIdFormulario(String idFormulario) {
 		this.idFormulario = idFormulario;
 	}
+	
+	@Column(name="descripcion_formulario")
+	private String descripcionFormulario;
 
 	public String getDescripcionFormulario() {
 		return this.descripcionFormulario;
@@ -67,14 +40,20 @@ public class Formulario implements Serializable {
 	public void setDescripcionFormulario(String descripcionFormulario) {
 		this.descripcionFormulario = descripcionFormulario;
 	}
-
-	public byte getEstadoFormulario() {
+	
+	@Column(name="estado_formulario")
+	private boolean estadoFormulario;
+	
+	public boolean getEstadoFormulario() {
 		return this.estadoFormulario;
 	}
 
-	public void setEstadoFormulario(byte estadoFormulario) {
+	public void setEstadoFormulario(boolean estadoFormulario) {
 		this.estadoFormulario = estadoFormulario;
 	}
+
+	@Column(name="nombre_formulario")
+	private String nombreFormulario;
 
 	public String getNombreFormulario() {
 		return this.nombreFormulario;
@@ -83,7 +62,11 @@ public class Formulario implements Serializable {
 	public void setNombreFormulario(String nombreFormulario) {
 		this.nombreFormulario = nombreFormulario;
 	}
-
+	
+	//bi-directional many-to-one association to Modulo
+	@ManyToOne
+	private Modulo modulo;
+	
 	public Modulo getModulo() {
 		return this.modulo;
 	}
@@ -92,34 +75,43 @@ public class Formulario implements Serializable {
 		this.modulo = modulo;
 	}
 
-	public List<Permiso> getPermisos() {
+	//bi-directional many-to-many association to Permiso
+	@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	private Set<Permiso> permisos= new HashSet<Permiso>();
+
+	Set<Permiso> getPermisos() {
 		return this.permisos;
 	}
 
-	public void setPermisos(List<Permiso> permisos) {
+	void setPermisos(HashSet<Permiso> permisos) {
 		this.permisos = permisos;
 	}
+	
+	public void addPermiso(Permiso permiso){
+		this.permisos.add(permiso);
+	}
+	
+	//bi-directional many-to-one association to Perfil
+	@OneToMany(mappedBy="formulario")
+	private Set<Perfil> perfiles= new HashSet<Perfil>();
 
-	public List<Perfil> getPerfiles() {
+	Set<Perfil> getPerfiles() {
 		return this.perfiles;
 	}
 
-	public void setPerfiles(List<Perfil> perfiles) {
+	void setPerfiles(HashSet<Perfil> perfiles) {
 		this.perfiles = perfiles;
 	}
 
-	public Perfil addPerfil(Perfil perfil) {
-		getPerfiles().add(perfil);
-		perfil.setFormulario(this);
-
-		return perfil;
+	public void addPerfil(Perfil perfil) {
+		this.perfiles.add(perfil);
 	}
 
-	public Perfil removePerfil(Perfil perfil) {
-		getPerfiles().remove(perfil);
-		perfil.setFormulario(null);
-
-		return perfil;
+	public void removePerfil(Perfil perfil) {
+		this.perfiles.remove(perfil);
+	}
+	
+	public Formulario() {
 	}
 
 }

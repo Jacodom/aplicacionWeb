@@ -14,6 +14,9 @@
         <property name="show_sql">true</property>      
         
         
+		<property name="hbm2ddl.auto">create-drop</property>
+        
+        
         <!-- Clases entidades a las que mapea el hibernate --> 
         <mapping class="com.model.Formulario" />   
         <mapping class="com.model.Grupo" /> 

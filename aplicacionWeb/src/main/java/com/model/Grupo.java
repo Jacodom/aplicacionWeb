@@ -4,8 +4,9 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.HashSet;
+import java.util.Set;
 
 
 /**
@@ -21,24 +22,7 @@ public class Grupo implements Serializable {
 	@Id
 	@Column(name="id_grupo")
 	private String idGrupo;
-
-	@Column(name="descripcion_grupo")
-	private String descripcionGrupo;
-
-	@Column(name="estado_grupo")
-	private byte estadoGrupo;
-
-	//bi-directional many-to-one association to Perfil
-	@OneToMany(mappedBy="grupo")
-	private List<Perfil> perfiles;
-
-	//bi-directional many-to-many association to Usuario
-	@ManyToMany(mappedBy="grupos")
-	private List<Usuario> usuarios= new ArrayList<Usuario>();
-
-	public Grupo() {
-	}
-
+	
 	public String getIdGrupo() {
 		return this.idGrupo;
 	}
@@ -47,6 +31,9 @@ public class Grupo implements Serializable {
 		this.idGrupo = idGrupo;
 	}
 
+	@Column(name="descripcion_grupo")
+	private String descripcionGrupo;
+	
 	public String getDescripcionGrupo() {
 		return this.descripcionGrupo;
 	}
@@ -55,47 +42,56 @@ public class Grupo implements Serializable {
 		this.descripcionGrupo = descripcionGrupo;
 	}
 
-	public byte getEstadoGrupo() {
+	@Column(name="estado_grupo")
+	private boolean estadoGrupo;
+	
+	public boolean getEstadoGrupo() {
 		return this.estadoGrupo;
 	}
 
-	public void setEstadoGrupo(byte estadoGrupo) {
+	public void setEstadoGrupo(Boolean estadoGrupo) {
 		this.estadoGrupo = estadoGrupo;
 	}
 
-	public List<Perfil> getPerfiles() {
+	//bi-directional many-to-one association to Perfil
+	@OneToMany(mappedBy="grupo")
+	private Set<Perfil> perfiles= new HashSet<Perfil>();
+	
+	Set<Perfil> getPerfiles() {
 		return this.perfiles;
 	}
 
-	public void setPerfiles(List<Perfil> perfiles) {
+	void setPerfiles(HashSet<Perfil> perfiles) {
 		this.perfiles = perfiles;
 	}
-
-	public Perfil addPerfile(Perfil perfile) {
-		getPerfiles().add(perfile);
-		perfile.setGrupo(this);
-
-		return perfile;
+	
+	public void addPerfil(Perfil perfil) {
+		this.perfiles.add(perfil);
 	}
 
-	public Perfil removePerfile(Perfil perfile) {
-		getPerfiles().remove(perfile);
-		perfile.setGrupo(null);
-
-		return perfile;
+	public void removePerfil(Perfil perfil) {
+		this.perfiles.remove(perfil);
 	}
-
-	public List<Usuario> getUsuarios() {
+	
+	//bi-directional many-to-many association to Usuario
+	@ManyToMany(mappedBy="grupos")
+	private Set<Usuario> usuarios= new HashSet<Usuario>();
+	
+	Set<Usuario> getUsuarios() {
 		return this.usuarios;
 	}
 
-	public void setUsuarios(List<Usuario> usuarios) {
+	void setUsuarios(HashSet<Usuario> usuarios) {
 		this.usuarios = usuarios;
 	}
 	
 	public void addUsuario(Usuario usuario){
 		this.usuarios.add(usuario);
 		usuario.addGrupo(this);
+	}
+	
+
+	public Grupo() {
 	}
 
 }
