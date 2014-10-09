@@ -63,5 +63,27 @@ public class Modulo implements Serializable {
 	
 	public Modulo() {
 	}
+	
+	//hascode() and equals() implementations
+		@Override
+		public boolean equals(Object objeto){
+			if (this == objeto) return true;
+	        if ( !(objeto instanceof Modulo) ) return false;
+
+	        final Modulo modulo = (Modulo) objeto;
+
+	        if ( !modulo.getIdModulo().equals( this.getIdModulo() ) ) return false;
+	        if ( !modulo.getDescripcionModulo().equals( this.getDescripcionModulo() ) ) return false;
+
+	        return true;
+		} 
+		
+		@Override
+		public int hashCode(){
+			int result;
+	        result = this.getIdModulo().hashCode();
+	        result = 100 * result + this.getDescripcionModulo().hashCode();
+	        return result;
+		}
 
 }

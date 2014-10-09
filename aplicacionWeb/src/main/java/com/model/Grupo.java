@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -90,8 +89,35 @@ public class Grupo implements Serializable {
 		usuario.addGrupo(this);
 	}
 	
+	public void delUsuario(Usuario usuario){
+		this.usuarios.remove(usuario);
+		usuario.delGrupo(this);
+	}
+	
 
 	public Grupo() {
 	}
+	
+	//hascode() and equals() implementations
+		@Override
+		public boolean equals(Object objeto){
+			if (this == objeto) return true;
+	        if ( !(objeto instanceof Grupo) ) return false;
+
+	        final Grupo grupo = (Grupo) objeto;
+
+	        if ( !grupo.getIdGrupo().equals( this.getIdGrupo() ) ) return false;
+	        if ( !grupo.getDescripcionGrupo().equals( this.getDescripcionGrupo() ) ) return false;
+
+	        return true;
+		} 
+		
+		@Override
+		public int hashCode(){
+			int result;
+	        result = this.getIdGrupo().hashCode();
+	        result = 100 * result + this.getDescripcionGrupo().hashCode();
+	        return result;
+		}
 
 }

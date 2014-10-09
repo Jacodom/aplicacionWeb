@@ -81,5 +81,27 @@ public class Permiso implements Serializable {
 	
 	public Permiso() {
 	}
+	
+	//hascode() and equals() implementations
+	@Override
+	public boolean equals(Object objeto){
+		if (this == objeto) return true;
+        if ( !(objeto instanceof Permiso) ) return false;
+
+        final Permiso permiso = (Permiso) objeto;
+
+        if ( !permiso.getIdPermiso().equals( this.getIdPermiso() ) ) return false;
+        if ( !permiso.getDescripcionPermiso().equals( this.getDescripcionPermiso() ) ) return false;
+
+        return true;
+	} 
+	
+	@Override
+	public int hashCode(){
+		int result;
+        result = this.getIdPermiso().hashCode();
+        result = 100 * result + this.getDescripcionPermiso().hashCode();
+        return result;
+	}
 
 }

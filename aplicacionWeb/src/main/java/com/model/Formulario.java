@@ -113,5 +113,27 @@ public class Formulario implements Serializable {
 	
 	public Formulario() {
 	}
+	
+	//hascode() and equals() implementations
+		@Override
+		public boolean equals(Object objeto){
+			if (this == objeto) return true;
+	        if ( !(objeto instanceof Formulario) ) return false;
+
+	        final Formulario formulario = (Formulario) objeto;
+
+	        if ( !formulario.getIdFormulario().equals( this.getIdFormulario() ) ) return false;
+	        if ( !formulario.getDescripcionFormulario().equals( this.getDescripcionFormulario() ) ) return false;
+
+	        return true;
+		} 
+		
+		@Override
+		public int hashCode(){
+			int result;
+	        result = this.getIdFormulario().hashCode();
+	        result = 100 * result + this.getDescripcionFormulario().hashCode();
+	        return result;
+		}
 
 }

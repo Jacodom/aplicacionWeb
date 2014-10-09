@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,7 +20,7 @@ public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="id_usuario")
+	@Column(name="id_usuario",unique=true,updatable=false)
 	private String idUsuario;
 	
 	public String getIdUsuario() {
@@ -81,6 +82,11 @@ public class Usuario implements Serializable {
 	Set<Grupo> getGrupos() {
 		return this.grupos;
 	}
+	
+	//grupos visibles
+	public Set<Grupo>getColeccionGrupos(){
+		return Collections.unmodifiableSet(grupos);
+	}
 
 	void setGrupos(HashSet<Grupo> grupos) {
 		this.grupos = grupos;
@@ -88,6 +94,10 @@ public class Usuario implements Serializable {
 	
 	public void addGrupo(Grupo grupo){
 		this.grupos.add(grupo);
+	}
+	
+	public void delGrupo(Grupo grupo){
+		this.grupos.remove(grupo);
 	}
 	
 	public Usuario() {
@@ -107,6 +117,29 @@ public class Usuario implements Serializable {
 	
 	public void addPerfil(Perfil perfil){
 		this.perfiles.add(perfil);
+	}
+	
+	
+	//hascode() and equals() implementations
+	@Override
+	public boolean equals(Object objeto){
+		if (this == objeto) return true;
+        if ( !(objeto instanceof Usuario) ) return false;
+
+        final Usuario usuario = (Usuario) objeto;
+
+        if ( !usuario.getIdUsuario().equals( this.getIdUsuario() ) ) return false;
+        if ( !usuario.getEmailUsuario().equals( this.getEmailUsuario() ) ) return false;
+
+        return true;
+	} 
+	
+	@Override
+	public int hashCode(){
+		int result;
+        result = this.getEmailUsuario().hashCode();
+        result = 100 * result + this.getIdUsuario().hashCode();
+        return result;
 	}
 	
 	

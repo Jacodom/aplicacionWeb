@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 
-
 import java.util.Date;
 
 
@@ -98,6 +97,26 @@ public class Perfil implements Serializable {
 	}
 
 	public Perfil() {
+	}
+	
+	//hascode() and equals() implementations
+	@Override
+	public boolean equals(Object objeto){
+		if (this == objeto) return true;
+        if ( !(objeto instanceof Perfil) ) return false;
+
+        final Perfil perfil = (Perfil) objeto;
+
+        if ( perfil.getIdPerfil()!=this.getIdPerfil() ) return false;
+
+        return true;
+	} 
+	
+	@Override
+	public int hashCode(){
+		int result;
+        result = getIdPerfil();
+        return result;
 	}
 
 }
