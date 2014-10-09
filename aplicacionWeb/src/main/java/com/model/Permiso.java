@@ -1,7 +1,10 @@
 package com.model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -24,11 +27,11 @@ public class Permiso implements Serializable {
 
 	//bi-directional many-to-many association to Formulario
 	@ManyToMany(mappedBy="permisos")
-	private List<Formulario> formularios;
+	private List<Formulario> formularios=new ArrayList<Formulario>();
 
-	//bi-directional many-to-one association to Perfile
+	//bi-directional many-to-one association to Perfiles
 	@OneToMany(mappedBy="permiso")
-	private List<Perfil> perfiles;
+	private List<Perfil> perfiles =  new ArrayList<Perfil>();
 
 	public Permiso() {
 	}
@@ -65,18 +68,12 @@ public class Permiso implements Serializable {
 		this.perfiles = perfiles;
 	}
 
-	public Perfil addPerfile(Perfil perfile) {
-		getPerfiles().add(perfile);
-		perfile.setPermiso(this);
-
-		return perfile;
+	public void addPerfil(Perfil perfil) {
+		this.perfiles.add(perfil);
 	}
 
-	public Perfil removePerfile(Perfil perfile) {
-		getPerfiles().remove(perfile);
-		perfile.setPermiso(null);
-
-		return perfile;
+	public void removePerfil(Perfil perfil) {
+		this.perfiles.remove(perfil);
 	}
 
 }

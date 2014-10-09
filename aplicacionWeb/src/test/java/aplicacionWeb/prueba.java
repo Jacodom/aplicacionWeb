@@ -12,7 +12,7 @@ public class prueba {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Usuario user = new Usuario();
-		Grupo grupo = new Grupo();
+
 		
 
 		/*user.setIdUsuario("JacodomD");
@@ -33,6 +33,7 @@ public class prueba {
 		
 		user= lista.get(2);
 		System.out.println("usuario: "+user.getNombreUsuario()+" grupo: "+user.getGrupos().get(0).getDescripcionGrupo());
+		
 		
 		
 		/*for(int x=0;x<lista.size();x++){

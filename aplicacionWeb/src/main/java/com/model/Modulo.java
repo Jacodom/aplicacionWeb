@@ -1,7 +1,10 @@
 package com.model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -23,8 +26,8 @@ public class Modulo implements Serializable {
 	private String descripcionModulo;
 
 	//bi-directional many-to-one association to Formulario
-	@OneToMany(mappedBy="modulo")
-	private List<Formulario> formularios;
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER, mappedBy="modulo")
+	private List<Formulario> formularios=new ArrayList<Formulario>();
 
 	public Modulo() {
 	}
@@ -53,18 +56,12 @@ public class Modulo implements Serializable {
 		this.formularios = formularios;
 	}
 
-	public Formulario addFormulario(Formulario formulario) {
-		getFormularios().add(formulario);
-		formulario.setModulo(this);
-
-		return formulario;
+	public void addFormulario(Formulario formulario) {
+		this.formularios.add(formulario);
 	}
 
-	public Formulario removeFormulario(Formulario formulario) {
-		getFormularios().remove(formulario);
-		formulario.setModulo(null);
-
-		return formulario;
+	public void removeFormulario(Formulario formulario) {
+		this.formularios.remove(formulario);
 	}
 
 }

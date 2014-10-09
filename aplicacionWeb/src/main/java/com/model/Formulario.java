@@ -30,7 +30,6 @@ public class Formulario implements Serializable {
 
 	//bi-directional many-to-one association to Modulo
 	@ManyToOne
-	@JoinColumn(name="id_modulo")
 	private Modulo modulo;
 
 	//bi-directional many-to-many association to Permiso
@@ -46,7 +45,7 @@ public class Formulario implements Serializable {
 		)
 	private List<Permiso> permisos;
 
-	//bi-directional many-to-one association to Perfile
+	//bi-directional many-to-one association to Perfil
 	@OneToMany(mappedBy="formulario")
 	private List<Perfil> perfiles;
 
