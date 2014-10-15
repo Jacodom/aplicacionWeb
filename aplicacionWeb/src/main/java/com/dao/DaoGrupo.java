@@ -1,0 +1,102 @@
+package com.dao;
+
+import java.util.List;
+
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import com.hibernate.HibernateUtil;
+import com.model.Grupo;
+
+
+public class DaoGrupo implements DaoBase<Grupo>{
+
+	private Session sesion;
+	private Transaction transaccion;
+		
+	
+	private void iniciarOperacion() throws HibernateException 
+    { 
+        sesion = HibernateUtil.obtenerInstanciaSesion().openSession();
+        transaccion = sesion.beginTransaction(); 
+    }  
+
+    private void manejarExcepcion(HibernateException he) throws HibernateException 
+    { 
+        transaccion.rollback(); 
+        throw new HibernateException("Ocurrió un error en la capa de acceso a datos", he); 
+    }
+
+    @SuppressWarnings("unchecked")
+	public List<Grupo> obtener(){
+    	try{
+    		iniciarOperacion();
+    		org.hibernate.Query query = sesion.createQuery("FROM Grupo g"); 
+    		List<Grupo> listaGrupos = query.list();
+    		return listaGrupos;
+    	}catch(HibernateException he)
+    	{
+    		manejarExcepcion(he);
+    		throw he;
+    	}finally{
+    		if(sesion!=null)
+    			sesion.close();
+    	}
+    }
+
+	public Boolean agregar(Grupo grupo) {
+		try{ 
+	        iniciarOperacion(); 
+	        sesion.save(grupo);
+	        transaccion.commit(); 
+	 }catch(HibernateException he) 
+	    { 
+	        manejarExcepcion(he);
+	        throw he; 
+	    }finally 
+	    {
+	    	if(sesion!=null)
+	    		sesion.close(); 
+	    }  
+	 
+	 return true;
+	}
+
+	public Boolean modificar(Grupo grupo) {
+		try
+		{
+			iniciarOperacion();
+			sesion.update(grupo);
+			transaccion.commit();
+		}catch(HibernateException he)
+		{
+			manejarExcepcion(he);
+			throw he;
+		}finally
+		{
+			if(sesion!=null)
+				sesion.close();
+		}
+		return true;
+	}
+
+	public Boolean eliminar(Grupo grupo) {
+		try
+		{
+			iniciarOperacion();
+			sesion.delete(grupo);
+			transaccion.commit();
+		}catch(HibernateException he)
+		{
+			manejarExcepcion(he);
+			throw he;
+		}finally
+		{
+			if(sesion!=null)
+				sesion.close();
+		}
+		return true;
+	}
+    
+}
