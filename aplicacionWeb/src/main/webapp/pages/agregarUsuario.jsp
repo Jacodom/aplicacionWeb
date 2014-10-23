@@ -1,12 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
         <title>Login MCGA</title>
         <link rel="shotcut  icon" href="img/shortcut-icon.ico">
-        <link rel="stylesheet" href="css/bootstrap.css">
-        <link rel="stylesheet" href="css/bootstrap-theme.css">
-        <link rel="stylesheet" href="css/modificacion.css">
+        <link rel="stylesheet" href="CSS/Bootstrap/bootstrap.css">
+        <link rel="stylesheet" href="CSS/Bootstrap/bootstrap-theme.css">
+        <link rel="stylesheet" href="CSS/Bootstrap/modificacion.css">
         <script src="js/bootstrap.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
@@ -55,13 +57,13 @@
         <br>
         <div class="container">
     <div class="row">
-        <form role="form">
+        <form:form role="form" action="agregarUsuario" method="post" commandName="userForms">
             <div class="col-lg-6">
                 <div class="well well-sm"><strong><span class="glyphicon glyphicon-asterisk"></span>Campos requeridos</strong></div>
                 <div class="form-group">
                     <label for="InputName">Nombre</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" name="InputName" id="InputName" placeholder="Ingresar Name" required>
+                        <input type="text" class="form-control" name="InputName" id="InputName" placeholder="Ingresar Nombre" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                     </div>
                 </div>
@@ -75,13 +77,13 @@
                 <div class="form-group">
                     <label for="InputEmail">Confirm Email</label>
                     <div class="input-group">
-                        <input type="email" class="form-control" id="InputEmailSecond" name="InputEmail" placeholder="Confirm Email" required>
+                        <input type="email" class="form-control" id="InputEmailSecond" name="InputEmail" placeholder="Confirmar Email" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                     </div>
                 </div>
-                <input type="submit" name="submit" id="submit" value="Submit" class="btn btn-info pull-right">
+                <input type="submit" name="submit" id="submit" value="Registrar" class="btn btn-info pull-right">
             </div>
-        </form>
+        </form:form>
         <div class="col-lg-5 col-md-push-1">
             <div class="col-md-12">
                 <div class="alert alert-success">
