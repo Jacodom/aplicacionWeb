@@ -63,18 +63,6 @@ public class DaoPerfil implements DaoBase<Perfil> {
 	}
 	
 	public Boolean modificar(Perfil perfil){
-		try{
-			iniciarOperacion();
-			sesion.update(perfil);
-			transaccion.commit();
-		}catch(HibernateException he){
-			manejarExcepcion(he);
-			throw he;
-		}finally{
-			if(sesion!=null)
-				sesion.close();
-		}
-		
 		return true;
 	}
 

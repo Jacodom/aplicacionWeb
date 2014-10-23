@@ -13,9 +13,9 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.hibernate.HibernateUtil;
-import com.model.Usuario;
+import com.model.Permiso;
 
-public class DaoPermiso implements DaoBase<Usuario> {
+public class DaoPermiso implements DaoBase<Permiso> {
 	
 	private Session sesion;
 	private Transaction transaccion;
@@ -35,12 +35,12 @@ public class DaoPermiso implements DaoBase<Usuario> {
 
 
     @SuppressWarnings("unchecked")
-	public List<Usuario> obtener(){
+	public List<Permiso> obtener(){
     	try{
     		iniciarOperacion();
-    		org.hibernate.Query query = sesion.createQuery("FROM Usuario u"); 
-    		List<Usuario> listaUsuarios = query.list();
-    		return listaUsuarios;
+    		org.hibernate.Query query = sesion.createQuery("FROM Permiso u"); 
+    		List<Permiso> listaPermisos = query.list();
+    		return listaPermisos;
     	}catch(HibernateException he)
     	{
     		manejarExcepcion(he);
@@ -51,10 +51,10 @@ public class DaoPermiso implements DaoBase<Usuario> {
     	}
     }
     
-	public Boolean agregar(Usuario usuario) {
+	public Boolean agregar(Permiso permiso) {
 		 try{ 
 		        iniciarOperacion(); 
-		        sesion.save(usuario);
+		        sesion.save(permiso);
 		        transaccion.commit(); 
 		 }catch(HibernateException he) 
 		    { 
@@ -69,10 +69,10 @@ public class DaoPermiso implements DaoBase<Usuario> {
 		 return true;
 	}
 	
-	public Boolean modificar(Usuario usuario){
+	public Boolean modificar(Permiso permiso){
 		try{
 			iniciarOperacion();
-			sesion.update(usuario);
+			sesion.update(permiso);
 			transaccion.commit();
 		}catch(HibernateException he){
 			manejarExcepcion(he);
@@ -85,10 +85,10 @@ public class DaoPermiso implements DaoBase<Usuario> {
 		return true;
 	}
 
-	public Boolean eliminar(Usuario usuario){
+	public Boolean eliminar(Permiso permiso){
 		try{
 			iniciarOperacion();
-			sesion.delete(usuario);
+			sesion.delete(permiso);
 			transaccion.commit();
 		}catch(HibernateException he){
 			manejarExcepcion(he);
