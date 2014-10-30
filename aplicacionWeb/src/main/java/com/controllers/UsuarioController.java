@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping(value = "/Usuarios")
 public class UsuarioController {
 
-    @RequestMapping(value = "/verifyUsuario",method = RequestMethod.POST)
-    @ResponseBody public boolean verificarUsername(@RequestBody String username){
-        UsuarioService userService = new UsuarioService();
+    private UsuarioService userService = new UsuarioService();
 
+    @RequestMapping(value = "/verifyUsuario.htm",method = RequestMethod.POST)
+    @ResponseBody public boolean verificarUsername(@RequestBody String username){
         if(userService.verificarUsername(username)){
            return true;
         }
@@ -31,8 +31,6 @@ public class UsuarioController {
 
     @RequestMapping(value = "/verifyEmail",method = RequestMethod.POST)
     @ResponseBody public boolean verificarEmail(@RequestBody String email){
-        UsuarioService userService = new UsuarioService();
-
         if (userService.verificarEmail(email)) {
             return true;
         } else {
@@ -40,11 +38,13 @@ public class UsuarioController {
         }
     }
 
-
-    //terminar
     @RequestMapping(value = "/addUsuario",method = RequestMethod.POST)
-    @ResponseBody public Usuario agregarUsuario(@RequestBody Usuario usuario){
-        return usuario;
+    @ResponseBody public boolean agregarUsuario(@RequestBody Usuario usuario) throws Exception {
+        if (userService.agregarUsuario(usuario)){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 }

@@ -4,15 +4,12 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Login MCGA</title>
-        <link rel="shotcut  icon" href="img/shortcut-icon.ico">
+        <title>::. Agregar Usuario</title>
         <link rel="stylesheet" href="CSS/Bootstrap/bootstrap.css">
         <link rel="stylesheet" href="CSS/Bootstrap/bootstrap-theme.css">
         <link rel="stylesheet" href="CSS/Bootstrap/modificacion.css">
-        <script src="js/bootstrap.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-transition.js"></script>
+        <script src="/js/jquery-1.11.1.js"></script>
+
     </head>
     <body>
         <div class="nvar navbar-inverse navbar-fixed-top"> 
@@ -39,7 +36,7 @@
                             <a href="#Help">Help</a>
                         </li> 
                     </ul>
-                        <form class="navbar-form navbar-right" role="form">
+                        <form class="navbar-form navbar-right">
                             <div class="form-group">
                                 <input type="text" placeholder="Email" class="form-control-own">
                             </div>
@@ -55,46 +52,63 @@
         <br>
         <br>
         <br>
-        <div class="container">
-    <div class="row">
-        <form:form role="form" action="agregarUsuario" method="post" commandName="userForms">
-            <div class="col-lg-6">
-                <div class="well well-sm"><strong><span class="glyphicon glyphicon-asterisk"></span>Campos requeridos</strong></div>
-                <div class="form-group">
-                    <label for="InputName">Nombre</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="InputName" id="InputName" placeholder="Ingresar Nombre" required>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+    <div class="container">
+        <div class="row">
+            <form:form role="form" id="addUsuarioForm" action="${pageContext.request.contextPath}/Usuarios/addUsuario" method="POST" commandName="userForm">
+                <div class="col-lg-6">
+                    <div class="well well-sm">
+                        <strong><span class="glyphicon glyphicon-asterisk"></span> Campos Requeridos</strong>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="InputEmail">Email</label>
-                    <div class="input-group">
-                        <input type="email" class="form-control" id="InputEmailFirst" name="InputEmail" placeholder="Ingresar Email" required>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+
+                    <div class="form-group">
+                        <label for="nombreInput">Nombre</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="nombreInput" id="nombreInput" placeholder="Username" required>
+                            <span class="input-group-addon"><span id="iconoNombre" class="glyphicon glyphicon-asterisk"></span></span>
+                        </div>
+                        <div class="error-ingreso" id="errorDisplayNombre"></div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="InputEmail">Confirm Email</label>
-                    <div class="input-group">
-                        <input type="email" class="form-control" id="InputEmailSecond" name="InputEmail" placeholder="Confirmar Email" required>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+
+                    <div class="form-group">
+                        <label for="primerEmail">Email</label>
+                        <div class="input-group">
+                            <input type="email" class="form-control" id="primerEmail" name="primerEmail" placeholder="Email" required>
+                            <span class="input-group-addon"><span id="iconoEmail" class="glyphicon glyphicon-asterisk"></span></span>
+                        </div>
+                        <div class="error-ingreso" id="errorDisplayPrimerEmail"></div>
                     </div>
+
+                    <div class="form-group">
+                        <label for="segundoEmail">Confirm Email</label>
+                        <div class="input-group">
+                            <input type="email" class="form-control" id="segundoEmail" name="segundoEmail" placeholder="Confirmar Email" required>
+                            <span class="input-group-addon"><span id="iconoSegundoEmail" class="glyphicon glyphicon-asterisk"></span></span>
+                        </div>
+                        <div class="error-ingreso" id="errorDisplaySegundoEmail"></div>
+                    </div>
+
+                    <input type="submit" name="submit" id="submit" value="Registrar" class="btn btn-info pull-left">
+
                 </div>
-                <input type="submit" name="submit" id="submit" value="Registrar" class="btn btn-info pull-right">
-            </div>
-        </form:form>
-        <div class="col-lg-5 col-md-push-1">
-            <div class="col-md-12">
-                <div class="alert alert-success">
-                    <strong><span class="glyphicon glyphicon-ok"></span> Success! Message sent.</strong>
-                </div>
-                <div class="alert alert-danger">
-                    <span class="glyphicon glyphicon-remove"></span><strong> Error! Please check all page inputs.</strong>
+            </form:form>
+
+
+            <div class="col-lg-5 col-md-push-1">
+                <div class="col-md-12">
+                    <div class="alert alert-success">
+                        <strong><span class="glyphicon glyphicon-ok"></span> Success! Message sent.</strong>
+                    </div>
+                    <div class="alert alert-danger">
+                        <span class="glyphicon glyphicon-remove"></span><strong> Error! Please check all page inputs.</strong>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+
+        <script src="/js/agregarUsuario.js"></script>
+
+
     </body>
 </html>

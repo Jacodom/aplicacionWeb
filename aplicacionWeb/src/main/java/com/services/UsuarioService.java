@@ -12,7 +12,7 @@ public class UsuarioService {
 
     public boolean verificarUsername(String username){
         for(Usuario user : daoUsuario.obtener()){
-            if(username==user.getNombreUsuario())
+            if(username==user.getIdUsuario())
                 //Falso cuando existe uno que tiene ese nombre
                 return false;
         }
@@ -34,7 +34,7 @@ public class UsuarioService {
 
     public boolean agregarUsuario(Usuario usuario) throws Exception {
         try{
-            if(this.verificarUsername(usuario.getNombreUsuario())&&this.verificarEmail(usuario.getEmailUsuario())){
+            if(this.verificarUsername(usuario.getIdUsuario())&&this.verificarEmail(usuario.getEmailUsuario())){
                 daoUsuario.agregar(usuario);
                 return  true;
             }
