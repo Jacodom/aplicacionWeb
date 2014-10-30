@@ -67,6 +67,10 @@ public class PruebaRelaciones {
 		user.addGrupo(grupo2);
 		
 		daouser.modificar(user);
+
+
+
+
 		
 	}
 
