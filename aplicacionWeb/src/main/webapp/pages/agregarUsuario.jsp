@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="CSS/Bootstrap/bootstrap.css">
         <link rel="stylesheet" href="CSS/Bootstrap/bootstrap-theme.css">
         <link rel="stylesheet" href="CSS/Bootstrap/modificacion.css">
-        <script src="/js/jquery-1.11.1.js"></script>
+        <script src="${pageContext.request.contextPath}../js/jquery-1.11.1.js"></script>
 
     </head>
     <body>
@@ -107,7 +107,7 @@
     </div>
 
 
-        <script src="/js/agregarUsuario.js"></script>
+        <script src="${pageContext.request.contextPath}../js/agregarUsuario.js"></script>
 
 
     </body>

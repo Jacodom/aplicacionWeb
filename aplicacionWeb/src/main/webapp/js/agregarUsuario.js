@@ -14,11 +14,14 @@ $(document).ready(function(){
         if (userName.length < 6) {
             $('#errorDisplayNombre').text("El username debe contener al menos 6 caracteres");
         } else {
+
+            var jsonName = {"username":userName};
+
             $.ajax({
-                type:"POST",
-                url:"/Usuarios/verifyUsuario.htm",
-                data:"{\"username\":\"" + userName + "\"}",
-                //dataType:"json",
+                type:"GET",
+                url:'/Usuario/verifyUsuario',
+                data:JSON.stringify(jsonName),
+                dataType:"json",
                 contentType:"application/json",
                 success: function (response) {
                 if (response == true) {
@@ -37,7 +40,8 @@ $(document).ready(function(){
 
                     $('#errorDisplayNombre').text("funca2");
                     }
-                }
+                },
+                error:function(e){alert("Error: "+e)}
                 }
 
             )
