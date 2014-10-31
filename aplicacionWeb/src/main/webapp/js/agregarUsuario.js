@@ -18,7 +18,7 @@ $(document).ready(function(){
             var jsonName = {"username":userName};
 
             $.ajax({
-                type:"GET",
+                type:"POST",
                 url:'/Usuario/verifyUsuario',
                 data:JSON.stringify(jsonName),
                 dataType:"json",
