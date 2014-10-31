@@ -12,7 +12,7 @@ public class UsuarioService {
 
     public boolean verificarUsername(String username){
         for(Usuario user : daoUsuario.obtener()){
-            if(username==user.getIdUsuario())
+            if(username.equals(user.getIdUsuario()))
                 //Falso cuando existe uno que tiene ese nombre
                 return false;
         }
@@ -23,7 +23,7 @@ public class UsuarioService {
 
     public  boolean verificarEmail(String email){
         for(Usuario user : daoUsuario.obtener()){
-            if(email==user.getEmailUsuario())
+            if(email.equals(user.getEmailUsuario()))
                 //Falso cuando existe uno que tiene ese email
                 return false;
         }

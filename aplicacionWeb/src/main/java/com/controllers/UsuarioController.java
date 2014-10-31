@@ -19,7 +19,7 @@ public class UsuarioController {
 
     private UsuarioService userService = new UsuarioService();
 
-    @RequestMapping(value = "/verifyUsuario",method = RequestMethod.POST)
+    @RequestMapping(value = "/verifyUsuario.htm",method = RequestMethod.POST)
     @ResponseBody public boolean verificarUsername(@RequestBody String username){
         if(userService.verificarUsername(username)){
            return true;
