@@ -61,9 +61,9 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="nombreInput">Nombre</label>
+                        <label class="control-label" for="nombreInput">Nombre: </label>
                         <div class="input-group">
-                            <input type="text" class="form-control" name="nombreInput" id="nombreInput" placeholder="Username" required>
+                            <input type="text" class="form-control" name="nombreInput" id="nombreInput" required>
                             <span class="input-group-addon"><span id="iconoNombre" class="glyphicon glyphicon-asterisk"></span></span>
                         </div>
                         <div class="error-ingreso" id="errorDisplayNombre"></div>

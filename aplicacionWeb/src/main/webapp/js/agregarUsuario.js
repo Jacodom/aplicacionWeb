@@ -16,12 +16,13 @@ $(document).ready(function(){
         } else {
             $.ajax({
                 type:"POST",
-                url:'/Usuarios/verifyUsuario.htm',
+                url:'/Usuarios/verifyUsuario.do',
                 data:userName,
-                //dataType:"String",
-                //contentType:"application/json",
+                dataType:"json",
+                contentType:"application/json",
                 success: function (response) {
                 if (response == true) {
+                    alert(response);
                     $('#nombreInput').css.addClass(".has-success");
                     $('#iconoNombre').css.removeClass(".glyphicon-asterisk");
                     $('#iconoNombre').css.addClass(".glyphicon-ok");
@@ -30,12 +31,9 @@ $(document).ready(function(){
 
 
                 } else {
-                    $('#nombreInput').css.addClass(".has-error");
-                    $('#iconoNombre').css.removeClass(".glyphicon-asterisk");
-                    $('#icono').css.addClass(".glyphicon-remove");
-
-
-                    $('#errorDisplayNombre').text("funca2");
+                    $('#nombreInput').closest('.form-group').addClass('has-error');
+                    $('#iconoNombre').removeClass('glyphicon-asterisk').addClass('glyphicon-remove');
+                    $('#errorDisplayNombre').text('Ya existe un usuario con ese username');
                     }
                 },
                 error:function(e){alert("Error: "+e)}

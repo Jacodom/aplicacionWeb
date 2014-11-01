@@ -3,6 +3,8 @@ package com.services;
 import com.dao.DaoUsuario;
 import com.model.Usuario;
 
+import java.util.List;
+
 /**
  * Created by Jacobo on 30/10/14.
  */
@@ -11,7 +13,8 @@ public class UsuarioService {
     DaoUsuario daoUsuario = new DaoUsuario();
 
     public boolean verificarUsername(String username){
-        for(Usuario user : daoUsuario.obtener()){
+        List<Usuario> listaUsuarios = daoUsuario.obtener();
+        for(Usuario user : listaUsuarios){
             if(username.equals(user.getIdUsuario()))
                 //Falso cuando existe uno que tiene ese nombre
                 return false;
@@ -22,7 +25,8 @@ public class UsuarioService {
     }
 
     public  boolean verificarEmail(String email){
-        for(Usuario user : daoUsuario.obtener()){
+        List<Usuario> listaUsuarios = daoUsuario.obtener();
+        for(Usuario user : listaUsuarios){
             if(email.equals(user.getEmailUsuario()))
                 //Falso cuando existe uno que tiene ese email
                 return false;

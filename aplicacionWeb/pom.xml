@@ -15,7 +15,17 @@
   <dependencies>
   		
   		<!-- DEPENDENCIAS DE SPRING MVC -->
-  		
+          <dependency>
+              <groupId>org.springframework</groupId>
+              <artifactId>spring-context</artifactId>
+              <version>${spring.version}</version>
+          </dependency>
+
+      <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-orm</artifactId>
+          <version>${spring.version}</version>
+      </dependency>
 	    	<dependency>
 	 			<groupId>org.springframework</groupId>
 	 			<artifactId>spring-core</artifactId>
@@ -108,6 +118,16 @@
 
 
       <!-- DEPENDENCIA JACKSON: libreria para Json -->
+      <!--<dependency>-->
+          <!--<groupId>org.codehaus.jackson</groupId>-->
+          <!--<artifactId>jackson-mapper-asl</artifactId>-->
+          <!--<version>1.9.2</version>-->
+      <!--</dependency>-->
+      <!--<dependency>-->
+          <!--<groupId>org.codehaus.jackson</groupId>-->
+          <!--<artifactId>jackson-core-asl</artifactId>-->
+          <!--<version>1.9.2</version>-->
+      <!--</dependency>-->
               <dependency>
                   <groupId>com.fasterxml.jackson.core</groupId>
                   <artifactId>jackson-annotations</artifactId>

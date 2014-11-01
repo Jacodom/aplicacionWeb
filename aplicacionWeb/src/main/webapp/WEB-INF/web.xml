@@ -21,7 +21,7 @@
 
     <servlet-mapping>
         <servlet-name>frontController</servlet-name>
-        <url-pattern>*.htm</url-pattern>
+        <url-pattern>*.do</url-pattern>
     </servlet-mapping>
 
     <welcome-file-list>

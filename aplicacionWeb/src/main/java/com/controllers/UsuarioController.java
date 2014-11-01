@@ -19,7 +19,7 @@ public class UsuarioController {
 
     private UsuarioService userService = new UsuarioService();
 
-    @RequestMapping(value = "/verifyUsuario.htm",method = RequestMethod.POST)
+    @RequestMapping(value = "/verifyUsuario.do",method = RequestMethod.POST, produces = "application/json")
     @ResponseBody public boolean verificarUsername(@RequestBody String username){
         if(userService.verificarUsername(username)){
            return true;
@@ -29,7 +29,7 @@ public class UsuarioController {
         }
     }
 
-    @RequestMapping(value = "/verifyEmail",method = RequestMethod.POST)
+    @RequestMapping(value = "/verifyEmail.htm",method = RequestMethod.POST)
     @ResponseBody public boolean verificarEmail(@RequestBody String email){
         if (userService.verificarEmail(email)) {
             return true;
@@ -38,7 +38,7 @@ public class UsuarioController {
         }
     }
 
-    @RequestMapping(value = "/addUsuario",method = RequestMethod.POST)
+    @RequestMapping(value = "/addUsuario.htm",method = RequestMethod.POST)
     @ResponseBody public boolean agregarUsuario(@RequestBody Usuario usuario) throws Exception {
         if (userService.agregarUsuario(usuario)){
             return true;
