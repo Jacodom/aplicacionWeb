@@ -9,8 +9,6 @@ $(document).ready(function(){
     function verificarUsername() {
         var userName = $(this).val();
 
-        $('.error-ingreso').css("color", "red");
-
         if (userName.length < 6) {
             $('#errorDisplayNombre').text("El username debe contener al menos 6 caracteres");
         } else {
@@ -22,17 +20,13 @@ $(document).ready(function(){
                 contentType:"application/json",
                 success: function (response) {
                 if (response == true) {
-                    alert(response);
-                    $('#nombreInput').css.addClass(".has-success");
-                    $('#iconoNombre').css.removeClass(".glyphicon-asterisk");
-                    $('#iconoNombre').css.addClass(".glyphicon-ok");
-
-                    $('#errorDisplayNombre').text("funca");
-
+                    $('#nombreInput').closest('.form-group').removeClass('has-error').addClass('has-success');
+                    $('#iconoNombre').removeClass('glyphicon-asterisk glyphicon-remove').addClass('glyphicon-ok');
+                    $('#errorDisplayNombre').text('');
 
                 } else {
-                    $('#nombreInput').closest('.form-group').addClass('has-error');
-                    $('#iconoNombre').removeClass('glyphicon-asterisk').addClass('glyphicon-remove');
+                    $('#nombreInput').closest('.form-group').removeClass('has-success').addClass('has-error');
+                    $('#iconoNombre').removeClass('glyphicon-asterisk glyphicon-ok').addClass('glyphicon-remove');
                     $('#errorDisplayNombre').text('Ya existe un usuario con ese username');
                     }
                 },

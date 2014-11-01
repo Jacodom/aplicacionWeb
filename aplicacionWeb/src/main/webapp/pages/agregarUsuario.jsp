@@ -66,7 +66,7 @@
                             <input type="text" class="form-control" name="nombreInput" id="nombreInput" required>
                             <span class="input-group-addon"><span id="iconoNombre" class="glyphicon glyphicon-asterisk"></span></span>
                         </div>
-                        <div class="error-ingreso" id="errorDisplayNombre"></div>
+                        <div class="error-ingreso help-block" id="errorDisplayNombre"></div>
                     </div>
 
                     <div class="form-group">
@@ -75,7 +75,7 @@
                             <input type="email" class="form-control" id="primerEmail" name="primerEmail" placeholder="Email" required>
                             <span class="input-group-addon"><span id="iconoEmail" class="glyphicon glyphicon-asterisk"></span></span>
                         </div>
-                        <div class="error-ingreso" id="errorDisplayPrimerEmail"></div>
+                        <div class="error-ingreso help-block" id="errorDisplayPrimerEmail"></div>
                     </div>
 
                     <div class="form-group">
@@ -84,7 +84,7 @@
                             <input type="email" class="form-control" id="segundoEmail" name="segundoEmail" placeholder="Confirmar Email" required>
                             <span class="input-group-addon"><span id="iconoSegundoEmail" class="glyphicon glyphicon-asterisk"></span></span>
                         </div>
-                        <div class="error-ingreso" id="errorDisplaySegundoEmail"></div>
+                        <div class="error-ingreso help-block" id="errorDisplaySegundoEmail"></div>
                     </div>
 
                     <input type="submit" name="submit" id="submit" value="Registrar" class="btn btn-info pull-left">

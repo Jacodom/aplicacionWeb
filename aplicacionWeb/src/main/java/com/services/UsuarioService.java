@@ -10,9 +10,10 @@ import java.util.List;
  */
 public class UsuarioService {
 
-    DaoUsuario daoUsuario = new DaoUsuario();
+    DaoUsuario daoUsuario;
 
     public boolean verificarUsername(String username){
+        daoUsuario= new DaoUsuario();
         List<Usuario> listaUsuarios = daoUsuario.obtener();
         for(Usuario user : listaUsuarios){
             if(username.equals(user.getIdUsuario()))
@@ -25,6 +26,7 @@ public class UsuarioService {
     }
 
     public  boolean verificarEmail(String email){
+        daoUsuario= new DaoUsuario();
         List<Usuario> listaUsuarios = daoUsuario.obtener();
         for(Usuario user : listaUsuarios){
             if(email.equals(user.getEmailUsuario()))
@@ -37,6 +39,7 @@ public class UsuarioService {
     }
 
     public boolean agregarUsuario(Usuario usuario) throws Exception {
+        daoUsuario= new DaoUsuario();
         try{
             if(this.verificarUsername(usuario.getIdUsuario())&&this.verificarEmail(usuario.getEmailUsuario())){
                 daoUsuario.agregar(usuario);
@@ -50,6 +53,7 @@ public class UsuarioService {
     }
 
     public boolean eliminarUsuario(Usuario usuario) throws Exception {
+        daoUsuario= new DaoUsuario();
         try{
             daoUsuario.eliminar(usuario);
         }catch(Exception ex){
@@ -60,6 +64,7 @@ public class UsuarioService {
     }
 
     public boolean modificarUsuario(Usuario usuario) throws Exception {
+        daoUsuario= new DaoUsuario();
         try{
             if(this.verificarEmail(usuario.getEmailUsuario())){
                 daoUsuario.modificar(usuario);

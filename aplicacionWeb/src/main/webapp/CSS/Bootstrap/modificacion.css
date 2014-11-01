@@ -28,3 +28,7 @@
   width:100%;
   max-height: 450px !important;
 }
+
+.error-ingreso{
+    color: #B94A48;
+}
