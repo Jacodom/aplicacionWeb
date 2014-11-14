@@ -7,99 +7,97 @@
         <title>::. Agregar Usuario</title>
         <link rel="stylesheet" href="CSS/Bootstrap/bootstrap.css">
         <link rel="stylesheet" href="CSS/Bootstrap/bootstrap-theme.css">
-        <link rel="stylesheet" href="CSS/Bootstrap/modificacion.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/font-awesome/font-awesome.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/Bootstrap/modificacion.css">
         <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.js"></script>
+        <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
 
     </head>
     <body>
-        <div class="nvar navbar-inverse navbar-fixed-top"> 
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="container">
-                <div class="navbar-header">                    
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                        <span class="sr-only">Responsive</span>
+                <div class="navbar-header">
+                    <button type="button" data-target="#navBarCollapse" data-toggle="collapse" class="navbar-toggle">
+                        <span class="sr-only">Toggle Navigation</span>
                         <span class="icon-bar"></span>
-                        <span class ="icon-bar"></span>
-                        <span class ="icon-bar"></span>
-                    </button> 
-                    
-                    <a class="navbar-brand" href="#">Login</a>                    
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="#" class="navbar-brand">Modulo Seguridad</a>
                 </div>
-                <div class="navbar-collapse collapse navbar-ex1-collapse">
+                <div id="navBarCollapse" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active">
-                            <a href="#Usuarios">Usuario</a>
-                        </li>
-                        <li>
-                            <a href="#Grupos">Grupos</a>
-                        </li>
-                        <li>
-                            <a href="#Help">Help</a>
-                        </li> 
+                        <li class="active"><a href="#">Usuarios</a></li>
+                        <li><a href="#">Grupos</a></li>
                     </ul>
-                        <form class="navbar-form navbar-right">
-                            <div class="form-group">
-                                <input type="text" placeholder="Email" class="form-control-own">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" placeholder="Password" class="form-control">
-                            </div>
-                            <button type="submit" class="btn btn-success">Login</button>
-                        </form>
-                    </div>
                 </div>
             </div>
+        </div>
         <hr>
         <br>
         <br>
         <br>
     <div class="container">
         <div class="row">
-            <form:form role="form" id="addUsuarioForm" action="${pageContext.request.contextPath}/Usuarios/addUsuario" method="POST" commandName="userForm">
-                <div class="col-lg-6">
-                    <div class="well well-sm">
+            <div class="col-lg-offset-2 col-md-8 col-xs-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <strong>Datos de Nuevo Usuario</strong>
+                    </div>
+
+                    <div class="panel-body">
+                        <form:form role="form" id="addUsuarioForm" action="${pageContext.request.contextPath}/Usuarios/addUsuario.do" method="POST" commandName="userForm">
+                            <div>
+                                <!-- Nombre -->
+                                <div class="form-group">
+                                    <label class="control-label" for="userNameInput">Nombre </label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="nameInput" id="nameInput">
+                                        <span class="input-group-addon"><span id="iconoNombre" class="glyphicon glyphicon-asterisk"></span></span>
+
+                                    </div>
+
+                                    <div class="error-ingreso help-block" id="errorDisplayNombre"></div>
+                                </div>
+
+
+                                <!-- Username -->
+                                <div class="form-group">
+                                    <label class="control-label" for="userNameInput">Username </label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="userNameInput" id="userNameInput">
+                                        <span class="input-group-addon"><span id="iconoUserName" class="glyphicon glyphicon-asterisk"></span></span>
+                                    </div>
+                                    <div class="error-ingreso help-block" id="errorDisplayUserName"></div>
+                                </div>
+
+                                <!-- mail -->
+                                <div class="form-group">
+                                    <label for="emailUser">Email</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="emailUser" name="emailUser" placeholder="ejemplo@ejemplo.com">
+                                        <span class="input-group-addon"><span id="iconoEmail" class="glyphicon glyphicon-asterisk"></span></span>
+                                    </div>
+                                    <div class="error-ingreso help-block" id="errorDisplayEmail"></div>
+                                </div>
+
+                                <!-- Password -->
+                                <div class="form-group">
+                                    <label for="passwordUser">Password</label>
+                                    <div class="input-group">
+                                        <input type="password" class="form-control" id="passwordUser" name="passwordUser" >
+                                        <span class="input-group-addon"><span id="iconoPassword" class="glyphicon glyphicon-asterisk"></span></span>
+                                    </div>
+                                    <div class="error-ingreso help-block" id="errorDisplayPassword"></div>
+                                </div>
+
+                                <input type="submit" name="btnRegistrar" id="btnRegistrar" value="Registrar" class="btn btn-info center-block">
+
+                            </div>
+                        </form:form>
+                    </div>
+                    <div class="panel-footer">
                         <strong><span class="glyphicon glyphicon-asterisk"></span> Campos Requeridos</strong>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label" for="nombreInput">Nombre: </label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="nombreInput" id="nombreInput" required>
-                            <span class="input-group-addon"><span id="iconoNombre" class="glyphicon glyphicon-asterisk"></span></span>
-                        </div>
-                        <div class="error-ingreso help-block" id="errorDisplayNombre"></div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="primerEmail">Email</label>
-                        <div class="input-group">
-                            <input type="email" class="form-control" id="primerEmail" name="primerEmail" placeholder="Email" required>
-                            <span class="input-group-addon"><span id="iconoEmail" class="glyphicon glyphicon-asterisk"></span></span>
-                        </div>
-                        <div class="error-ingreso help-block" id="errorDisplayPrimerEmail"></div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="segundoEmail">Confirm Email</label>
-                        <div class="input-group">
-                            <input type="email" class="form-control" id="segundoEmail" name="segundoEmail" placeholder="Confirmar Email" required>
-                            <span class="input-group-addon"><span id="iconoSegundoEmail" class="glyphicon glyphicon-asterisk"></span></span>
-                        </div>
-                        <div class="error-ingreso help-block" id="errorDisplaySegundoEmail"></div>
-                    </div>
-
-                    <input type="submit" name="submit" id="submit" value="Registrar" class="btn btn-info pull-left">
-
-                </div>
-            </form:form>
-
-
-            <div class="col-lg-5 col-md-push-1">
-                <div class="col-md-12">
-                    <div class="alert alert-success">
-                        <strong><span class="glyphicon glyphicon-ok"></span> Success! Message sent.</strong>
-                    </div>
-                    <div class="alert alert-danger">
-                        <span class="glyphicon glyphicon-remove"></span><strong> Error! Please check all page inputs.</strong>
                     </div>
                 </div>
             </div>

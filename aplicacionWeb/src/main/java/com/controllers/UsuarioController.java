@@ -40,7 +40,7 @@ public class UsuarioController {
         }
     }
 
-    @RequestMapping(value = "/addUsuario.do",method = RequestMethod.POST)
+    @RequestMapping(value = "/addUsuario.do",method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
     @ResponseBody public boolean agregarUsuario(@RequestBody Usuario usuario) throws Exception {
         userService=new UsuarioService();
         if (userService.agregarUsuario(usuario)){
