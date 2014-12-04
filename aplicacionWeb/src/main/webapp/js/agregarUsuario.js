@@ -6,7 +6,7 @@ $(document).ready(function(){
     //eventos
     $('#userNameInput').focusout(verificarUsername);
     $('#emailUser').focusout(verificarEmail);
-    $('#addUsuarioForm').submit(addUsuario);
+    //$('#btnRegistrar').click(addUsuario);
 
     //funciones
     function verificarUsername() {
@@ -51,6 +51,27 @@ $(document).ready(function(){
             return false;
     }
 
+    function verificarCampos(){
+        if($('#nameInput').val()==''){
+            return false;
+        }
+
+        if($('userNameInput').val()==''){
+            return false;
+        }
+
+        if($('emailUser').val()==''){
+            return false;
+        }
+
+        if($('passwordUser').val()==''){
+            return false;
+        }
+
+        return true;
+
+    }
+
     function verificarEmail(){
         $('#errorDisplayEmail').text("");
         var emailUser = $(this).val();
@@ -88,7 +109,7 @@ $(document).ready(function(){
         }
     }
 
-    function addUsuario(){
+    /*function addUsuario(){
         var jNombre = $('#nameInput').val();
         var jUserName= $('#userNameInput').val();
         var jEmail= $('#emailUser').val();
@@ -102,23 +123,34 @@ $(document).ready(function(){
             'nombreUsuario':jNombre
         };
 
-        //$('#btnRegistrar').value('');
+        if(verificarCampos()==false)
+        {
+            $('#errorDisplayAgregar').text('Debe completar los campos vacios!');
+        }else{
+            if($('#userNameInput').hasClass('has-error')||$('#emailUser').hasClass('has-error')){
+                $('#errorDisplayAgregar').text('No puede agregar un usuario con Username o Email existente');
+            }else{
+                $('#btnRegistrar').prop('value','');
+                $('#btnRegistrar').addClass('fa fa-circle-o-notch fa-spin');
 
+                $.ajax({
+                        type:"POST",
+                        url:$('#addUsuarioForm').attr('action'),
+                        data: JSON.stringify(jUser),
+                        dataType:"json",
+                        contentType:"application/json",
+                        success:function(response){
+                            if(response==true)
+                                window.location("usuarioAgregado.jsp");
 
-        alert(jUser);
-
-        $.ajax({
-            type:"POST",
-            url:$('#addUsuarioForm').attr('action'),
-            data:jUser,
-            dataType:"json",
-            contentType:"application/json",
-            success:function(response){
-                if(response==true)
-                $('#btnRegistrar').removeClass().addClass('alert alert-success alert-dismissible').text("Usuario agregado con éxito!!");
-
+                        }
+                    }
+                )
             }
-            }
-        )
-    }
+
+
+        }
+
+
+    }*/
 });

@@ -5,8 +5,8 @@
     <head>
         <meta charset="utf-8">
         <title>::. Agregar Usuario</title>
-        <link rel="stylesheet" href="CSS/Bootstrap/bootstrap.css">
-        <link rel="stylesheet" href="CSS/Bootstrap/bootstrap-theme.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/Bootstrap/bootstrap.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/Bootstrap/bootstrap-theme.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/font-awesome/font-awesome.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/Bootstrap/modificacion.css">
         <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.js"></script>
@@ -46,13 +46,13 @@
                     </div>
 
                     <div class="panel-body">
-                        <form:form role="form" id="addUsuarioForm" action="${pageContext.request.contextPath}/Usuarios/addUsuario.do" method="POST" commandName="userForm">
+                        <form:form role="form" id="addUsuarioForm" action="${pageContext.request.contextPath}/Usuarios/addUsuario.do" method="post" modelAttribute="usuario">
                             <div>
                                 <!-- Nombre -->
                                 <div class="form-group">
                                     <label class="control-label" for="userNameInput">Nombre </label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" name="nameInput" id="nameInput">
+                                        <form:input path="idUsuario" class="form-control" id="nameInput"/>
                                         <span class="input-group-addon"><span id="iconoNombre" class="glyphicon glyphicon-asterisk"></span></span>
 
                                     </div>
@@ -65,7 +65,7 @@
                                 <div class="form-group">
                                     <label class="control-label" for="userNameInput">Username </label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" name="userNameInput" id="userNameInput">
+                                        <form:input path="nombreUsuario" class="form-control" id="userNameInput"/>
                                         <span class="input-group-addon"><span id="iconoUserName" class="glyphicon glyphicon-asterisk"></span></span>
                                     </div>
                                     <div class="error-ingreso help-block" id="errorDisplayUserName"></div>
@@ -75,7 +75,7 @@
                                 <div class="form-group">
                                     <label for="emailUser">Email</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="emailUser" name="emailUser" placeholder="ejemplo@ejemplo.com">
+                                        <form:input path="emailUsuario" type="text" class="form-control" id="emailUser" name="emailUser" placeholder="ejemplo@ejemplo.com"/>
                                         <span class="input-group-addon"><span id="iconoEmail" class="glyphicon glyphicon-asterisk"></span></span>
                                     </div>
                                     <div class="error-ingreso help-block" id="errorDisplayEmail"></div>
@@ -85,12 +85,13 @@
                                 <div class="form-group">
                                     <label for="passwordUser">Password</label>
                                     <div class="input-group">
-                                        <input type="password" class="form-control" id="passwordUser" name="passwordUser" >
+                                        <form:input path="claveUsuario" type="password" class="form-control" id="passwordUser" />
                                         <span class="input-group-addon"><span id="iconoPassword" class="glyphicon glyphicon-asterisk"></span></span>
                                     </div>
                                     <div class="error-ingreso help-block" id="errorDisplayPassword"></div>
                                 </div>
 
+                                <div class="error-ingreso help-block" id="errorDisplayAgregar"></div>
                                 <input type="submit" name="btnRegistrar" id="btnRegistrar" value="Registrar" class="btn btn-info center-block">
 
                             </div>

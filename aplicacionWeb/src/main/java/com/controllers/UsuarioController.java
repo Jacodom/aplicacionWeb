@@ -3,10 +3,8 @@ package com.controllers;
 import com.model.Usuario;
 import com.services.UsuarioService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Created by Jacobo on 25/10/14.
@@ -14,12 +12,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
-@RequestMapping(value = "/Usuarios")
 public class UsuarioController {
 
     private UsuarioService userService;
 
-    @RequestMapping(value = "/verifyUsuario.do",method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(value = "/Usuarios/agregarUsuario",method = RequestMethod.GET)
+    public ModelAndView mostrarPagina(){
+        return new ModelAndView("agregarUsuario","usuario",new Usuario());
+    }
+
+
+    @RequestMapping(value = "/Usuarios/verifyUsuario.do",method = RequestMethod.POST, produces = "application/json")
     @ResponseBody public boolean verificarUsername(@RequestBody String username){
         userService=new UsuarioService();
         if(userService.verificarUsername(username)){
@@ -30,7 +33,7 @@ public class UsuarioController {
         }
     }
 
-    @RequestMapping(value = "/verifyEmail.do",method = RequestMethod.POST)
+    @RequestMapping(value = "/Usuarios/verifyEmail.do",method = RequestMethod.POST)
     @ResponseBody public boolean verificarEmail(@RequestBody String email){
         userService=new UsuarioService();
         if (userService.verificarEmail(email)) {
@@ -40,14 +43,23 @@ public class UsuarioController {
         }
     }
 
-    @RequestMapping(value = "/addUsuario.do",method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
-    @ResponseBody public boolean agregarUsuario(@RequestBody Usuario usuario) throws Exception {
+    @RequestMapping(value = "/Usuarios/addUsuario.do",method = RequestMethod.POST)
+    public ModelAndView agregarUsuario(@ModelAttribute("usuario") Usuario usuario) throws Exception {
         userService=new UsuarioService();
+
+        ModelAndView mav = new ModelAndView();
+
+
         if (userService.agregarUsuario(usuario)){
-            return true;
+            System.out.println("llegue 1");
+            mav.setViewName("usuarioAgregado");
+            return mav;
         }else{
-            return false;
+            System.out.println("llegue 2");
+            mav.setViewName("errorAgregarUsuario");
+            return mav;
         }
     }
+
 
 }

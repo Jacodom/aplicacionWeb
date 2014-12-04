@@ -13,7 +13,14 @@
   </properties>  
   
   <dependencies>
-  		
+
+      <!-- Dependencias de java servlet -->
+      <dependency>
+          <groupId>javax.servlet</groupId>
+          <artifactId>javax.servlet-api</artifactId>
+          <version>3.1.0</version>
+      </dependency>
+
   		<!-- DEPENDENCIAS DE SPRING MVC -->
           <dependency>
               <groupId>org.springframework</groupId>

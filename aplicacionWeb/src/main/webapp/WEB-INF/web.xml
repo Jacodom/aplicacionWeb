@@ -25,14 +25,21 @@
     </servlet-mapping>
 
     <welcome-file-list>
-        <welcome-file>/pages/agregarUsuario.jsp</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 
 
+    <!--filtro -->
 
+    <filter>
+        <filter-name>AccessFilter</filter-name>
+        <filter-class>com.filter.AccessFilter</filter-class>
+    </filter>
 
-
-
+    <filter-mapping>
+        <filter-name>AccessFilter</filter-name>
+        <url-pattern>*.do</url-pattern>
+    </filter-mapping>
 
 
 
