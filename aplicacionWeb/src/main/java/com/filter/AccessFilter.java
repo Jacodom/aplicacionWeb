@@ -1,8 +1,6 @@
 package com.filter;
 
 
-import com.model.Formulario;
-import com.model.Permiso;
 import com.model.Usuario;
 
 import javax.servlet.*;
@@ -25,15 +23,39 @@ public class AccessFilter implements Filter {
 
         Usuario user = new Usuario();
         user= (Usuario)httpReq.getAttribute("usuario");
+        System.out.println(urlEntera);
+        System.out.println(url);
 
-        if(url.equals("login.do")){
+        if(url.equals("agregarUsuario.do")){
+            filterChain.doFilter(servletRequest,servletResponse);
+        }
+
+        if(isAjax(httpReq)){
+            System.out.println("es ajax!");
+            filterChain.doFilter(servletRequest,servletResponse);
+        }
+
+        if(url.equals("addUsuario.do")){
+            System.out.println("se llegó al addusuario");
+            filterChain.doFilter(servletRequest,servletResponse);
+        }
+
+        if(url.equals("login.do"))
+            filterChain.doFilter(servletRequest,servletResponse);
+/*        if(url.equals("login.do")){
             System.out.println("llegue al login");
             filterChain.doFilter(servletRequest,servletResponse);
         }else if(user==null){
             httpRes.sendRedirect("/login.do");
         } else {
-            filterChain.doFilter(servletRequest,servletResponse);
-        }
+            if(user.getIdUsuario().equals("jacodom"))
+                filterChain.doFilter(servletRequest,servletResponse);
+        }*/
+    }
+
+
+    public static boolean isAjax(HttpServletRequest request) {
+        return "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
     }
 
     @Override

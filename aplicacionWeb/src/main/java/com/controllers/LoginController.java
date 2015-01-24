@@ -12,8 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class LoginController {
 
-    @RequestMapping(value = "/login.do",method = RequestMethod.GET)
+    @RequestMapping(value = "/Usuarios/login.do",method = RequestMethod.GET)
     public ModelAndView mostrarPagina(){
-        return new ModelAndView("login","usuario",new Usuario());
+        return new ModelAndView("login","usuarioLogin",new Usuario());
     }
 }
