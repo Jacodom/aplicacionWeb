@@ -1,6 +1,8 @@
 package com.services;
 
+import com.dao.DaoGrupo;
 import com.dao.DaoUsuario;
+import com.model.Grupo;
 import com.model.Usuario;
 
 import java.util.List;
@@ -36,6 +38,30 @@ public class UsuarioService {
 
         //Verdadero cuando no existe un usuario con ese email
         return true;
+    }
+
+    public List<Usuario> obtenerUsuarios() {
+        daoUsuario = new DaoUsuario();
+        List<Usuario> listaUsuarios = daoUsuario.obtener();
+        return listaUsuarios;
+    }
+
+    public Usuario obtenerUsuario(String username){
+        daoUsuario = new DaoUsuario();
+        for(Usuario user : daoUsuario.obtener())
+            if(user.getIdUsuario().equals(username))
+                return user;
+
+        return null;
+    }
+
+    public boolean verificarPassword(Usuario user){
+        daoUsuario = new DaoUsuario();
+
+        if(obtenerUsuario(user.getIdUsuario()).getClaveUsuario().equals(user.getClaveUsuario()))
+            return true;
+        else
+            return false;
     }
 
     public boolean agregarUsuario(Usuario usuario) throws Exception {
@@ -77,4 +103,8 @@ public class UsuarioService {
         return false;
     }
 
+    public List<Grupo> obtenerGruposUsuario(Usuario usuario){
+        daoUsuario = new DaoUsuario();
+        return daoUsuario.obtenerGruposUsuario(usuario);
+    }
 }

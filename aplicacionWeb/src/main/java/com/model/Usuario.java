@@ -22,6 +22,27 @@ public class Usuario implements Serializable {
 	@Id
 	@Column(name="id_usuario",unique=true,updatable=false)
 	private String idUsuario;
+
+	@Column(name="clave_usuario")
+	private String claveUsuario;
+
+	@Column(name="email_usuario")
+	private String emailUsuario;
+
+	@Column(name="estado_usuario")
+	private boolean estadoUsuario;
+
+	@Column(name="nombre_usuario")
+	private String nombreUsuario;
+
+	//bi-directional many-to-many association to Grupo
+	@ManyToMany(fetch=FetchType.EAGER,cascade = CascadeType.ALL)
+	private Set<Grupo> grupos=new HashSet<Grupo>();
+
+
+	//bi-directional many-to-one association to Perfil
+	@OneToMany(mappedBy="usuario")
+	private Set<Perfil> perfiles= new HashSet<Perfil>();
 	
 	public String getIdUsuario() {
 		return this.idUsuario;
@@ -30,9 +51,6 @@ public class Usuario implements Serializable {
 	public void setIdUsuario(String idUsuario) {
 		this.idUsuario = idUsuario;
 	}
-
-	@Column(name="clave_usuario")
-	private String claveUsuario;
 	
 	public String getClaveUsuario() {
 		return this.claveUsuario;
@@ -42,9 +60,6 @@ public class Usuario implements Serializable {
 		this.claveUsuario = claveUsuario;
 	}
 
-	@Column(name="email_usuario")
-	private String emailUsuario;
-	
 	public String getEmailUsuario() {
 		return this.emailUsuario;
 	}
@@ -53,9 +68,6 @@ public class Usuario implements Serializable {
 		this.emailUsuario = emailUsuario;
 	}
 
-	@Column(name="estado_usuario")
-	private boolean estadoUsuario;
-
 	public boolean getEstadoUsuario() {
 		return this.estadoUsuario;
 	}
@@ -63,10 +75,7 @@ public class Usuario implements Serializable {
 	public void setEstadoUsuario(boolean estadoUsuario) {
 		this.estadoUsuario = estadoUsuario;
 	}
-	
-	@Column(name="nombre_usuario")
-	private String nombreUsuario;
-	
+
 	public String getNombreUsuario() {
 		return this.nombreUsuario;
 	}
@@ -74,10 +83,6 @@ public class Usuario implements Serializable {
 	public void setNombreUsuario(String nombreUsuario) {
 		this.nombreUsuario = nombreUsuario;
 	}
-
-	//bi-directional many-to-many association to Grupo
-	@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-	private Set<Grupo> grupos=new HashSet<Grupo>();
 
 	Set<Grupo> getGrupos() {
 		return this.grupos;
@@ -102,11 +107,7 @@ public class Usuario implements Serializable {
 	
 	public Usuario() {
 	}
-	
-	//bi-directional many-to-one association to Perfil
-	@OneToMany(mappedBy="usuario")
-	private Set<Perfil> perfiles= new HashSet<Perfil>();
-	
+
 	Set<Perfil> getPerfiles(){
 		return this.perfiles;
 	}

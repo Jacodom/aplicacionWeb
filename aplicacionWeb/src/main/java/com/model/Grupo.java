@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,6 +22,20 @@ public class Grupo implements Serializable {
 	@Id
 	@Column(name="id_grupo")
 	private String idGrupo;
+
+	@Column(name="descripcion_grupo")
+	private String descripcionGrupo;
+
+	@Column(name="estado_grupo")
+	private boolean estadoGrupo;
+
+	//bi-directional many-to-one association to Perfil
+	@OneToMany(mappedBy="grupo")
+	private Set<Perfil> perfiles= new HashSet<Perfil>();
+
+	//bi-directional many-to-many association to Usuario
+	@ManyToMany(mappedBy="grupos",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	private Set<Usuario> usuarios= new HashSet<Usuario>();
 	
 	public String getIdGrupo() {
 		return this.idGrupo;
@@ -30,9 +45,6 @@ public class Grupo implements Serializable {
 		this.idGrupo = idGrupo;
 	}
 
-	@Column(name="descripcion_grupo")
-	private String descripcionGrupo;
-	
 	public String getDescripcionGrupo() {
 		return this.descripcionGrupo;
 	}
@@ -41,9 +53,6 @@ public class Grupo implements Serializable {
 		this.descripcionGrupo = descripcionGrupo;
 	}
 
-	@Column(name="estado_grupo")
-	private boolean estadoGrupo;
-	
 	public boolean getEstadoGrupo() {
 		return this.estadoGrupo;
 	}
@@ -52,10 +61,6 @@ public class Grupo implements Serializable {
 		this.estadoGrupo = estadoGrupo;
 	}
 
-	//bi-directional many-to-one association to Perfil
-	@OneToMany(mappedBy="grupo")
-	private Set<Perfil> perfiles= new HashSet<Perfil>();
-	
 	Set<Perfil> getPerfiles() {
 		return this.perfiles;
 	}
@@ -71,11 +76,12 @@ public class Grupo implements Serializable {
 	public void removePerfil(Perfil perfil) {
 		this.perfiles.remove(perfil);
 	}
-	
-	//bi-directional many-to-many association to Usuario
-	@ManyToMany(mappedBy="grupos")
-	private Set<Usuario> usuarios= new HashSet<Usuario>();
-	
+
+	//usuarios visibles
+	public Set<Usuario>getColeccionUsuarios(){
+		return Collections.unmodifiableSet(usuarios);
+	}
+
 	Set<Usuario> getUsuarios() {
 		return this.usuarios;
 	}
@@ -93,7 +99,6 @@ public class Grupo implements Serializable {
 		this.usuarios.remove(usuario);
 		usuario.delGrupo(this);
 	}
-	
 
 	public Grupo() {
 	}

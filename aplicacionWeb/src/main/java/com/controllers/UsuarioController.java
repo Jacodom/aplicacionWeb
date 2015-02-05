@@ -51,11 +51,9 @@ public class UsuarioController {
 
 
         if (userService.agregarUsuario(usuario)){
-            System.out.println("llegue 1");
             mav.setViewName("usuarioAgregado");
             return mav;
         }else{
-            System.out.println("llegue 2");
             mav.setViewName("errorAgregarUsuario");
             return mav;
         }

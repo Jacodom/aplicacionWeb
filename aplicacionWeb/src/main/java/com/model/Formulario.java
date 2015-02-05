@@ -22,6 +22,27 @@ public class Formulario implements Serializable {
 	@Column(name="id_formulario")
 	private String idFormulario;
 
+	@Column(name="descripcion_formulario")
+	private String descripcionFormulario;
+
+	@Column(name="estado_formulario")
+	private boolean estadoFormulario;
+
+	@Column(name="nombre_formulario")
+	private String nombreFormulario;
+
+	//bi-directional many-to-one association to Modulo
+	@ManyToOne
+	private Modulo modulo;
+
+	//bi-directional many-to-many association to Permiso
+	@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	private Set<Permiso> permisos= new HashSet<Permiso>();
+
+	//bi-directional many-to-one association to Perfil
+	@OneToMany(mappedBy="formulario")
+	private Set<Perfil> perfiles= new HashSet<Perfil>();
+
 	public String getIdFormulario() {
 		return this.idFormulario;
 	}
@@ -29,9 +50,6 @@ public class Formulario implements Serializable {
 	public void setIdFormulario(String idFormulario) {
 		this.idFormulario = idFormulario;
 	}
-	
-	@Column(name="descripcion_formulario")
-	private String descripcionFormulario;
 
 	public String getDescripcionFormulario() {
 		return this.descripcionFormulario;
@@ -41,9 +59,6 @@ public class Formulario implements Serializable {
 		this.descripcionFormulario = descripcionFormulario;
 	}
 	
-	@Column(name="estado_formulario")
-	private boolean estadoFormulario;
-	
 	public boolean getEstadoFormulario() {
 		return this.estadoFormulario;
 	}
@@ -52,9 +67,6 @@ public class Formulario implements Serializable {
 		this.estadoFormulario = estadoFormulario;
 	}
 
-	@Column(name="nombre_formulario")
-	private String nombreFormulario;
-
 	public String getNombreFormulario() {
 		return this.nombreFormulario;
 	}
@@ -62,11 +74,7 @@ public class Formulario implements Serializable {
 	public void setNombreFormulario(String nombreFormulario) {
 		this.nombreFormulario = nombreFormulario;
 	}
-	
-	//bi-directional many-to-one association to Modulo
-	@ManyToOne
-	private Modulo modulo;
-	
+
 	public Modulo getModulo() {
 		return this.modulo;
 	}
@@ -74,10 +82,6 @@ public class Formulario implements Serializable {
 	public void setModulo(Modulo modulo) {
 		this.modulo = modulo;
 	}
-
-	//bi-directional many-to-many association to Permiso
-	@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-	private Set<Permiso> permisos= new HashSet<Permiso>();
 
 	Set<Permiso> getPermisos() {
 		return this.permisos;
@@ -90,10 +94,6 @@ public class Formulario implements Serializable {
 	public void addPermiso(Permiso permiso){
 		this.permisos.add(permiso);
 	}
-	
-	//bi-directional many-to-one association to Perfil
-	@OneToMany(mappedBy="formulario")
-	private Set<Perfil> perfiles= new HashSet<Perfil>();
 
 	Set<Perfil> getPerfiles() {
 		return this.perfiles;

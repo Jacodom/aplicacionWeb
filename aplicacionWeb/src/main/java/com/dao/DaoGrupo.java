@@ -2,6 +2,7 @@ package com.dao;
 
 import java.util.List;
 
+import com.model.Usuario;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -25,7 +26,7 @@ public class DaoGrupo implements DaoBase<Grupo>{
     private void manejarExcepcion(HibernateException he) throws HibernateException 
     { 
         transaccion.rollback(); 
-        throw new HibernateException("Ocurrió un error en la capa de acceso a datos", he); 
+        throw new HibernateException("Ocurriï¿½ un error en la capa de acceso a datos", he); 
     }
 
     @SuppressWarnings("unchecked")

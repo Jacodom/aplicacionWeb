@@ -3,11 +3,7 @@ package com.dao;
 import java.util.List;
 
 
-
-
-
-
-
+import com.model.Grupo;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -30,7 +26,7 @@ public class DaoUsuario implements DaoBase<Usuario> {
     private void manejarExcepcion(HibernateException he) throws HibernateException 
     { 
         transaccion.rollback(); 
-        throw new HibernateException("Ocurrió un error en la capa de acceso a datos", he); 
+        throw new HibernateException("Ocurriï¿½ un error en la capa de acceso a datos", he); 
     }
 
 
@@ -101,5 +97,18 @@ public class DaoUsuario implements DaoBase<Usuario> {
 		return true;
 		
 	}
-	
+
+	public List<Grupo> obtenerGruposUsuario(Usuario usuario){
+		try {
+			iniciarOperacion();
+			List<Grupo> listaGrupos = sesion.createQuery("SELECT grupos FROM Usuario u where u.idUsuario= :idUsuario").setParameter("idUsuario", usuario.getIdUsuario()).list();
+			return listaGrupos;
+		}catch(HibernateException he){
+			manejarExcepcion(he);
+			throw he;
+		}finally {
+			if(sesion!=null)
+				sesion.close();
+		}
+	}
 }

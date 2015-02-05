@@ -22,6 +22,17 @@ public class Permiso implements Serializable {
 	@Column(name="id_permiso")
 	private String idPermiso;
 
+	@Column(name="descripcion_permiso")
+	private String descripcionPermiso;
+
+	//bi-directional many-to-many association to Formulario
+	@ManyToMany(mappedBy="permisos")
+	private Set<Formulario> formularios=new HashSet<Formulario>();
+
+	//bi-directional many-to-one association to Perfiles
+	@OneToMany(mappedBy="permiso")
+	private Set<Perfil> perfiles =  new HashSet<Perfil>();
+
 	public String getIdPermiso() {
 		return this.idPermiso;
 	}
@@ -29,9 +40,6 @@ public class Permiso implements Serializable {
 	public void setIdPermiso(String idPermiso) {
 		this.idPermiso = idPermiso;
 	}
-	
-	@Column(name="descripcion_permiso")
-	private String descripcionPermiso;
 
 	public String getDescripcionPermiso() {
 		return this.descripcionPermiso;
@@ -40,10 +48,6 @@ public class Permiso implements Serializable {
 	public void setDescripcionPermiso(String descripcionPermiso) {
 		this.descripcionPermiso = descripcionPermiso;
 	}
-	
-	//bi-directional many-to-many association to Formulario
-	@ManyToMany(mappedBy="permisos")
-	private Set<Formulario> formularios=new HashSet<Formulario>();
 
 	Set<Formulario> getFormularios() {
 		return this.formularios;
@@ -57,12 +61,7 @@ public class Permiso implements Serializable {
 		this.formularios.add(formulario);
 		formulario.addPermiso(this);
 	}
-	
-	//bi-directional many-to-one association to Perfiles
-	@OneToMany(mappedBy="permiso")
-	private Set<Perfil> perfiles =  new HashSet<Perfil>();
 
-	
 	Set<Perfil> getPerfiles() {
 		return this.perfiles;
 	}

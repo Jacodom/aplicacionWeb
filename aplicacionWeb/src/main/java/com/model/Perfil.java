@@ -22,7 +22,26 @@ public class Perfil implements Serializable {
 	@Column(name="id_perfil")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idPerfil;
-	
+
+	@Column(name="fecha_auditoria")
+	private Date fechaAuditoria;
+
+	//bi-directional one-to-many association to Usuario
+	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	private Usuario usuario;
+
+	//bi-directional many-to-one association to Formulario
+	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	private Formulario formulario;
+
+	//bi-directional many-to-one association to Grupo
+	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	private Grupo grupo;
+
+	//bi-directional many-to-one association to Permiso
+	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	private Permiso permiso;
+
 	public int getIdPerfil() {
 		return this.idPerfil;
 	}
@@ -37,9 +56,6 @@ public class Perfil implements Serializable {
 		this.accion = accion;
 	}
 
-	@Column(name="fecha_auditoria")
-	private Date fechaAuditoria;
-	
 	public Date getFechaAuditoria() {
 		return this.fechaAuditoria;
 	}
@@ -48,10 +64,6 @@ public class Perfil implements Serializable {
 		this.fechaAuditoria = fechaAuditoria;
 	}
 
-	//bi-directional one-to-many association to Usuario
-	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-	private Usuario usuario;
-	
 	public Usuario getUsuario(){
 		return this.usuario;
 	}
@@ -60,10 +72,6 @@ public class Perfil implements Serializable {
 		this.usuario=usuario;
 	}
 
-	//bi-directional many-to-one association to Formulario
-	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-	private Formulario formulario;
-	
 	public Formulario getFormulario() {
 		return this.formulario;
 	}
@@ -72,10 +80,6 @@ public class Perfil implements Serializable {
 		this.formulario = formulario;
 	}
 
-	//bi-directional many-to-one association to Grupo
-	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-	private Grupo grupo;
-	
 	public Grupo getGrupo() {
 		return this.grupo;
 	}
@@ -84,10 +88,6 @@ public class Perfil implements Serializable {
 		this.grupo = grupo;
 	}
 
-	//bi-directional many-to-one association to Permiso
-	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-	private Permiso permiso;
-	
 	public Permiso getPermiso() {
 		return this.permiso;
 	}

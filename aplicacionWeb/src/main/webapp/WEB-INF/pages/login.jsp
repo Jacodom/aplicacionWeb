@@ -1,11 +1,11 @@
-<%--
+﻿<%--
   Created by IntelliJ IDEA.
   User: Jacobo
   Date: 27/11/14
   Time: 11:21
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
@@ -41,6 +41,7 @@
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                             <form:input path="idUsuario" class="form-control" id="inputUsername"/>
                                         </div>
+                                        <div class="error-ingreso help-block" id="errorDisplayUserName">${errorUsername}</div>
                                     </div>
                                 </div>
 
@@ -48,8 +49,9 @@
                                     <div class="form-group" style="margin-bottom: 25px">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                            <form:input path="claveUsuario" class="form-control" id="pswUser"/>
+                                            <form:input path="claveUsuario" class="form-control" type="password" id="pswUser"/>
                                         </div>
+                                        <div class="error-ingreso help-block" id="errorDisplayPassword">${errorPassword}</div>
                                     </div>
                                 </div>
 
@@ -57,9 +59,6 @@
 
                             </form:form>
                         </div>
-
-                        <h1>holaaaa!!</h1>
-
                     </div>
                 </div>
             </div>

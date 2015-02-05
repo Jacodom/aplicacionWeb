@@ -21,7 +21,14 @@ public class Modulo implements Serializable {
 	@Id
 	@Column(name="id_modulo")
 	private String idModulo;
-	
+
+	@Column(name="descripcion_modulo")
+	private String descripcionModulo;
+
+	//bi-directional many-to-one association to Formulario
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER, mappedBy="modulo")
+	private Set<Formulario> formularios=new HashSet<Formulario>();
+
 	public String getIdModulo() {
 		return this.idModulo;
 	}
@@ -30,9 +37,6 @@ public class Modulo implements Serializable {
 		this.idModulo = idModulo;
 	}
 
-	@Column(name="descripcion_modulo")
-	private String descripcionModulo;
-	
 	public String getDescripcionModulo() {
 		return this.descripcionModulo;
 	}
@@ -40,11 +44,7 @@ public class Modulo implements Serializable {
 	public void setDescripcionModulo(String descripcionModulo) {
 		this.descripcionModulo = descripcionModulo;
 	}
-
-	//bi-directional many-to-one association to Formulario
-	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER, mappedBy="modulo")
-	private Set<Formulario> formularios=new HashSet<Formulario>();
-
+	
 	Set<Formulario> getFormularios() {
 		return this.formularios;
 	}
