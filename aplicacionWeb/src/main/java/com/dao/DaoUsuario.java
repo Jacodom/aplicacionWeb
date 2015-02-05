@@ -101,7 +101,8 @@ public class DaoUsuario implements DaoBase<Usuario> {
 	public List<Grupo> obtenerGruposUsuario(Usuario usuario){
 		try {
 			iniciarOperacion();
-			List<Grupo> listaGrupos = sesion.createQuery("SELECT grupos FROM Usuario u where u.idUsuario= :idUsuario").setParameter("idUsuario", usuario.getIdUsuario()).list();
+			List<Grupo> listaGrupos = sesion.createQuery("SELECT grupos FROM Usuario u " +
+					"where u.idUsuario= :idUsuario").setParameter("idUsuario", usuario.getIdUsuario()).list();
 			return listaGrupos;
 		}catch(HibernateException he){
 			manejarExcepcion(he);

@@ -1,13 +1,11 @@
 package aplicacionWeb;
 
-import com.dao.DaoGrupo;
 import com.model.Grupo;
-import com.model.Usuario;
-import com.services.UsuarioService;
-import org.apache.commons.collections.set.UnmodifiableSet;
 
-import java.util.List;
-import java.util.Set;
+import com.model.Usuario;
+import com.services.GrupoService;
+import com.services.UsuarioService;
+
 
 /**
  * Created by Jacobo on 05/02/2015.
@@ -15,32 +13,16 @@ import java.util.Set;
 public class formulariosTest {
 
     public static void main(String[] args) throws Exception{
+        GrupoService grupoService = new GrupoService();
+        Grupo grupo1 = grupoService.obtenerGrupo("ADM");
 
-        Grupo grupo1 = new Grupo();
+        for(Usuario user : grupoService.obtenerUsuariosGrupo(grupo1))
+            System.out.println(user.getIdUsuario());
 
-        grupo1.setIdGrupo("ADM");
-        grupo1.setDescripcionGrupo("ADMINISTRADORES");
-        grupo1.setEstadoGrupo(true);
+        UsuarioService usuarioService =  new UsuarioService();
+        Usuario user1 = usuarioService.obtenerUsuario("jacodom");
 
-        UsuarioService userService = new UsuarioService();
-        Usuario user = userService.obtenerUsuario("jacodom");
-
-        grupo1.addUsuario(user);
-
-
-        DaoGrupo daoGrupo = new DaoGrupo();
-
-        daoGrupo.agregar(grupo1);
-        userService.modificarUsuario(user);
-
-        for (Grupo grup : daoGrupo.obtener())
-        {
-            System.out.println(grup.getDescripcionGrupo());
-
-        }
-
-        for(Grupo grupon : userService.obtenerGruposUsuario(user)){
-            System.out.println(grupon.getIdGrupo());
-        }
+        for(Grupo group : usuarioService.obtenerGruposUsuario(user1))
+            System.out.println(group.getDescripcionGrupo());
     }
 }
