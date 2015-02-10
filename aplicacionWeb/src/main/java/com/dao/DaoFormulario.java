@@ -25,7 +25,7 @@ public class DaoFormulario implements DaoBase<Formulario>{
     private void manejarExcepcion(HibernateException he) throws HibernateException 
     { 
         transaccion.rollback(); 
-        throw new HibernateException("Ocurrió un error en la capa de acceso a datos", he); 
+        throw new HibernateException("Ocurrio un error en la capa de acceso a datos", he);
     }
 
     @SuppressWarnings("unchecked")

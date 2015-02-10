@@ -26,7 +26,7 @@ public class DaoUsuario implements DaoBase<Usuario> {
     private void manejarExcepcion(HibernateException he) throws HibernateException 
     { 
         transaccion.rollback(); 
-        throw new HibernateException("Ocurri� un error en la capa de acceso a datos", he); 
+        throw new HibernateException("Ocurrio un error en la capa de acceso a datos", he);
     }
 
 
