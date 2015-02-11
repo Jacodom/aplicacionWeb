@@ -2,6 +2,7 @@ package com.dao;
 
 import java.util.List;
 
+import com.model.Perfil;
 import com.model.Usuario;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -115,6 +116,19 @@ public class DaoGrupo implements DaoBase<Grupo>{
 		}
 	}
 
-
+	public List<Perfil> obtenerPerfilesGrupo(Grupo grupo){
+		try{
+			iniciarOperacion();
+			List<Perfil> listaPerfiles = sesion.createQuery("SELECT perfiles from Grupo g where g.idGrupo = :idGrupo")
+					.setParameter("idGrupo",grupo.getIdGrupo()).list();
+			return listaPerfiles;
+		}catch (HibernateException he){
+			manejarExcepcion(he);
+			throw he;
+		}finally {
+			if(sesion!=null)
+				sesion.close();
+		}
+	}
     
 }

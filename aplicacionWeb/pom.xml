@@ -123,8 +123,16 @@
 		      <scope>test</scope>
 		    </dependency>
 
+	  <!--DEPENDENCIA JSTL-->
+	  <dependency>
+		  <groupId>jstl</groupId>
+		  <artifactId>jstl</artifactId>
+		  <version>1.2</version>
+	  </dependency>
 
-      <!-- DEPENDENCIA JACKSON: libreria para Json -->
+
+
+	  <!-- DEPENDENCIA JACKSON: libreria para Json -->
       <!--<dependency>-->
           <!--<groupId>org.codehaus.jackson</groupId>-->
           <!--<artifactId>jackson-mapper-asl</artifactId>-->

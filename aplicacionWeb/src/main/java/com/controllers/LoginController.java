@@ -31,7 +31,8 @@ public class LoginController {
             mav.addObject("errorUsername", "El usuario ingresado no existe!");
         }else{
             if(userService.verificarPassword(usuario)) {
-                mav.setViewName("loginSuccess");
+                usuario =userService.obtenerUsuario(usuario.getIdUsuario());
+                mav.setViewName("usuario");
                 mav.addObject("usuarioLogin",usuario);
             }else{
                 mav.setViewName("login");
@@ -41,4 +42,5 @@ public class LoginController {
 
         return mav;
     }
+
 }

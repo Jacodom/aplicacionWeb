@@ -14,7 +14,11 @@
 
     </head>
     <body>
-        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+
+        <!--prueba insercion jsp-->
+        <jsp:include page="panelUsuario.jsp"></jsp:include>
+
+        <%--<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" data-target="#navBarCollapse" data-toggle="collapse" class="navbar-toggle">
@@ -32,7 +36,7 @@
                     </ul>
                 </div>
             </div>
-        </div>
+        </div>--%>
         <hr>
         <br>
         <br>

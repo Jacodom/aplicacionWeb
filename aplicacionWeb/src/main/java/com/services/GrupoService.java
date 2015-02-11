@@ -2,6 +2,7 @@ package com.services;
 
 import com.dao.DaoGrupo;
 import com.model.Grupo;
+import com.model.Perfil;
 import com.model.Usuario;
 
 import java.util.List;
@@ -59,5 +60,10 @@ public class GrupoService {
     public List<Usuario> obtenerUsuariosGrupo(Grupo grupo)throws Exception{
         daoGrupo = new DaoGrupo();
         return daoGrupo.obtenerUsuariosGrupo(grupo);
+    }
+
+    public List<Perfil> obtenerPerfilesGrupo(Grupo grupo)throws Exception{
+        daoGrupo =  new DaoGrupo();
+        return daoGrupo.obtenerPerfilesGrupo(grupo);
     }
 }
