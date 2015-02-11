@@ -2,15 +2,11 @@ package com.dao;
 
 import java.util.List;
 
+	import com.model.Formulario;
+	import org.hibernate.HibernateException;
+	import org.hibernate.Session;
+	import org.hibernate.Transaction;
 
-
-
-
-
-
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import com.hibernate.HibernateUtil;
 import com.model.Modulo;
@@ -30,7 +26,7 @@ public class DaoModulo implements DaoBase<Modulo> {
     private void manejarExcepcion(HibernateException he) throws HibernateException 
     { 
         transaccion.rollback(); 
-        throw new HibernateException("Ocurrió un error en la capa de acceso a datos", he); 
+        throw new HibernateException("Ocurriï¿½ un error en la capa de acceso a datos", he); 
     }
 
 
@@ -100,6 +96,20 @@ public class DaoModulo implements DaoBase<Modulo> {
 		
 		return true;
 		
+	}
+	public List<Formulario> ObtenerFormulariosModulos(Modulo modulo){
+		try{
+			iniciarOperacion();
+			List<Formulario> listaFormularios = sesion.createQuery("SELECT Formulario FROM Modulo g where g.idModulo= :idModulo")
+					.setParameter("idModulo",modulo.getIdModulo()).list();
+			return listaFormularios;
+		}catch (HibernateException he){
+			manejarExcepcion(he);
+			throw he;
+		}finally {
+			if(sesion!=null)
+				sesion.close();
+		}
 	}
 	
 }

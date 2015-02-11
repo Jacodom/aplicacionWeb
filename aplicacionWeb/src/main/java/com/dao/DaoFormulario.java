@@ -6,8 +6,11 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+
 import com.hibernate.HibernateUtil;
 import com.model.Formulario;
+import com.model.Perfil;
+import com.model.Permiso;
 
 
 public class DaoFormulario implements DaoBase<Formulario>{
@@ -98,5 +101,32 @@ public class DaoFormulario implements DaoBase<Formulario>{
 		}
 		return true;
 	}
-    
+	public List<Permiso> ObtenerPermisosFormulario(Formulario formulario){
+		try{
+			iniciarOperacion();
+			List<Permiso> listaPermisos = sesion.createQuery("SELECT Permiso FROM Formulario g where g.idFormulario = :idFormulario")
+					.setParameter("idFormulario", formulario.getIdFormulario()).list();
+			return listaPermisos;
+		}catch (HibernateException he){
+			manejarExcepcion(he);
+			throw he;
+		}finally {
+			if(sesion!=null)
+				sesion.close();
+		}
+	}
+	public List<Perfil> ObtenerPerfilesFormulario(Formulario formulario){
+		try{
+			iniciarOperacion();
+			List<Perfil> listaPerfiles = sesion.createQuery("SELECT Perfil FROM Formulario g where g.idFormulario = :idFormulario")
+					.setParameter("idFormulario",formulario.getIdFormulario()).list();
+			return listaPerfiles;
+		}catch (HibernateException he){
+			manejarExcepcion(he);
+			throw he;
+		}finally {
+			if(sesion!=null)
+				sesion.close();
+		}
+	}
 }
