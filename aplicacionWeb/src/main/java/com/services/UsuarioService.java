@@ -2,9 +2,9 @@ package com.services;
 
 import com.dao.DaoGrupo;
 import com.dao.DaoUsuario;
-import com.model.Grupo;
-import com.model.Usuario;
+import com.model.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -106,5 +106,40 @@ public class UsuarioService {
     public List<Grupo> obtenerGruposUsuario(Usuario usuario){
         daoUsuario = new DaoUsuario();
         return daoUsuario.obtenerGruposUsuario(usuario);
+    }
+
+    public List<Perfil> obtenerPerfilesUsuario(Usuario usuario){
+        daoUsuario = new DaoUsuario();
+        DaoGrupo daoGrupo = new DaoGrupo();
+
+        List<Grupo> listaGrupos = daoUsuario.obtenerGruposUsuario(usuario);
+        List<Perfil> listaPerfiles = new ArrayList<Perfil>();
+
+        for(Grupo grupo : listaGrupos){
+                for(Perfil perfil : daoGrupo.obtenerPerfilesGrupo(grupo)){
+                    listaPerfiles.add(perfil);
+                }
+        }
+
+        return listaPerfiles;
+    }
+
+    public List<Modulo> obtenerModulosUsuario(Usuario usuario) {
+        daoUsuario = new DaoUsuario();
+        ModuloService moduloService = new ModuloService();
+
+        List<Modulo> listaModulos = new ArrayList<Modulo>();
+
+        for(Modulo modulo : moduloService.obtenerModulos()){
+            for(Formulario formulario : modulo.getFormularios()){
+                for(Perfil perfil : obtenerPerfilesUsuario(usuario)){
+                    if(perfil.getFormulario().getIdFormulario().equals(formulario.getIdFormulario())){
+                        listaModulos.add(modulo);
+                    }
+                }
+            }
+        }
+
+        return listaModulos;
     }
 }

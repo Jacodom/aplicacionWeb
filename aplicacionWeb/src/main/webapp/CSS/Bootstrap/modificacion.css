@@ -73,6 +73,9 @@
     color: #ffffff;
 }
 
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus{
+    background-color: #7F87B7;
+}
 
 .error-ingreso{
     color: #B94A48;

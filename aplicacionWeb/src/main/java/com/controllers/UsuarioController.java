@@ -12,13 +12,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
+@SessionAttributes("usuarioSession")
 public class UsuarioController {
 
     private UsuarioService userService;
 
     @RequestMapping(value = "/Usuarios/agregarUsuario",method = RequestMethod.GET)
-    public ModelAndView mostrarPagina(){
-        return new ModelAndView("agregarUsuario","usuario",new Usuario());
+    public String mostrarPagina(@ModelAttribute("usuario")Usuario usuario,
+                                      @ModelAttribute("usuarioSession") Usuario usuarioSession){
+
+        return "agregarUsuario";
     }
 
 

@@ -104,7 +104,7 @@ public class DaoFormulario implements DaoBase<Formulario>{
 	public List<Permiso> ObtenerPermisosFormulario(Formulario formulario){
 		try{
 			iniciarOperacion();
-			List<Permiso> listaPermisos = sesion.createQuery("SELECT Permiso FROM Formulario g where g.idFormulario = :idFormulario")
+			List<Permiso> listaPermisos = sesion.createQuery("SELECT permisos FROM Formulario f where f.idFormulario = :idFormulario")
 					.setParameter("idFormulario", formulario.getIdFormulario()).list();
 			return listaPermisos;
 		}catch (HibernateException he){
@@ -118,7 +118,7 @@ public class DaoFormulario implements DaoBase<Formulario>{
 	public List<Perfil> ObtenerPerfilesFormulario(Formulario formulario){
 		try{
 			iniciarOperacion();
-			List<Perfil> listaPerfiles = sesion.createQuery("SELECT Perfil FROM Formulario g where g.idFormulario = :idFormulario")
+			List<Perfil> listaPerfiles = sesion.createQuery("SELECT perfiles FROM Formulario f where f.idFormulario = :idFormulario")
 					.setParameter("idFormulario",formulario.getIdFormulario()).list();
 			return listaPerfiles;
 		}catch (HibernateException he){

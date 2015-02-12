@@ -11,7 +11,7 @@ import java.util.List;
 public class ModuloService {
     DaoModulo daoModulo;
 
-        public Modulo ObtenerModulo(String idModulo){
+        public Modulo obtenerModulo(String idModulo){
             daoModulo = new DaoModulo();
             for(Modulo modulo: daoModulo.obtener())
                 if (modulo.getIdModulo().equals(idModulo))
@@ -19,15 +19,17 @@ public class ModuloService {
 
             return null;
         }
-    public List<Modulo> ObtenerModulos(){
-        daoModulo = new DaoModulo();
-        return daoModulo.obtener();
-    }
-    public boolean AgregarModulo(Modulo modulo) throws Exception{
+
+        public List<Modulo> obtenerModulos(){
+            daoModulo = new DaoModulo();
+            return daoModulo.obtener();
+        }
+
+    public boolean agregarModulo(Modulo modulo) throws Exception{
         daoModulo = new DaoModulo();
         try{
             // si el id no es nulo, se modifica
-            if(ObtenerModulo(modulo.getIdModulo())== null){
+            if(obtenerModulo(modulo.getIdModulo())== null){
                 daoModulo.agregar(modulo);
                 return true;
                 }
@@ -37,22 +39,25 @@ public class ModuloService {
         }
         return false;
     }
-    public boolean ModificarModulo(Modulo modulo){
-        daoModulo = new DaoModulo();
-            if(daoModulo.modificar(modulo))
+
+        public boolean modificarModulo(Modulo modulo){
+            daoModulo = new DaoModulo();
+                if(daoModulo.modificar(modulo))
+                    return true;
+            else
+                    return false;
+        }
+
+        public boolean eliminarModulo(Modulo modulo){
+            daoModulo = new DaoModulo();
+            if(daoModulo.eliminar(modulo))
                 return true;
-        else
+            else
                 return false;
-    }
-    public boolean EliminarModulo(Modulo modulo){
-        daoModulo = new DaoModulo();
-        if(daoModulo.eliminar(modulo))
-            return true;
-        else
-            return false;
-    }
-    public List<Formulario> obtenerFormulariosModulos(Modulo modulo) throws Exception{
-        daoModulo = new DaoModulo();
-        return daoModulo.ObtenerFormulariosModulos(modulo);
-    }
+        }
+
+        public List<Formulario> obtenerFormulariosModulo(Modulo modulo){
+            daoModulo = new DaoModulo();
+            return daoModulo.obtenerFormulariosModulo(modulo);
+        }
 }

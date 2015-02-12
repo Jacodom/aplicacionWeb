@@ -4,6 +4,7 @@ import java.util.List;
 
 
 import com.model.Grupo;
+import com.model.Perfil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -112,4 +113,5 @@ public class DaoUsuario implements DaoBase<Usuario> {
 				sesion.close();
 		}
 	}
+
 }

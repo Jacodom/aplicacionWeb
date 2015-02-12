@@ -45,7 +45,7 @@ public class Modulo implements Serializable {
 		this.descripcionModulo = descripcionModulo;
 	}
 	
-	Set<Formulario> getFormularios() {
+	public Set<Formulario> getFormularios() {
 		return this.formularios;
 	}
 

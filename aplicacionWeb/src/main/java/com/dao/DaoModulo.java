@@ -97,11 +97,10 @@ public class DaoModulo implements DaoBase<Modulo> {
 		return true;
 		
 	}
-	public List<Formulario> ObtenerFormulariosModulos(Modulo modulo){
+	public List<Formulario> obtenerFormulariosModulo(Modulo modulo){
 		try{
 			iniciarOperacion();
-			List<Formulario> listaFormularios = sesion.createQuery("SELECT Formulario FROM Modulo g where g.idModulo= :idModulo")
-					.setParameter("idModulo",modulo.getIdModulo()).list();
+			List<Formulario> listaFormularios = sesion.createQuery("SELECT formularios FROM Modulo m where m.idModulo= :idModulo").setParameter("idModulo",modulo.getIdModulo()).list();
 			return listaFormularios;
 		}catch (HibernateException he){
 			manejarExcepcion(he);
