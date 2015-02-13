@@ -21,6 +21,7 @@ import java.util.List;
  */
 @Controller
 @SessionAttributes("usuarioSession")
+
 public class LoginController {
 
     @RequestMapping(value = "/Usuarios/login.do",method = RequestMethod.GET)

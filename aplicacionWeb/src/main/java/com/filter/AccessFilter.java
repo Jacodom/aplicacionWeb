@@ -6,6 +6,7 @@ import com.model.Usuario;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -17,11 +18,37 @@ public class AccessFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest httpReq = (HttpServletRequest) servletRequest;
         HttpServletResponse httpRes = (HttpServletResponse) servletResponse;
+        HttpSession session = httpReq.getSession();
 
         String urlEntera = httpReq.getRequestURL().toString();
         String url = urlEntera.substring(urlEntera.lastIndexOf("/")+1);
 
-        Usuario user = new Usuario();
+        if(isAjax(httpReq)){
+            System.out.println("es ajax!");
+            filterChain.doFilter(servletRequest,servletResponse);
+        }else {
+
+
+            if (url.equals("login.do")) {
+                if ((session.getAttribute("usuarioSession") == null)) {
+                    filterChain.doFilter(servletRequest, servletResponse);
+                } else {
+                    httpRes.sendRedirect(httpReq.getContextPath() + "/Usuarios/usuario.do");
+                }
+            } else {
+                if (session.getAttribute("usuarioSession") == null) {
+                    httpRes.sendRedirect(httpReq.getContextPath() + "/Usuarios/login.do");
+                } else {
+                    //chequear permisos
+                    filterChain.doFilter(servletRequest, servletResponse);
+                }
+            }
+        }
+
+
+
+
+ /*       Usuario user = new Usuario();
         user= (Usuario)httpReq.getAttribute("usuario");
         System.out.println(urlEntera);
         System.out.println(url);
@@ -29,19 +56,16 @@ public class AccessFilter implements Filter {
         if(url.equals("agregarUsuario.do")){
             filterChain.doFilter(servletRequest,servletResponse);
         }
+*/
 
-        if(isAjax(httpReq)){
-            System.out.println("es ajax!");
-            filterChain.doFilter(servletRequest,servletResponse);
-        }
 
-        if(url.equals("addUsuario.do")){
+        /*if(url.equals("addUsuario.do")){
             System.out.println("se llegó al addusuario");
             filterChain.doFilter(servletRequest,servletResponse);
         }
 
         if(url.equals("login.do"))
-            filterChain.doFilter(servletRequest,servletResponse);
+            filterChain.doFilter(servletRequest,servletResponse);*/
 /*        if(url.equals("login.do")){
             System.out.println("llegue al login");
             filterChain.doFilter(servletRequest,servletResponse);
