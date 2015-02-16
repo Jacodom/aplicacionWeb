@@ -20,7 +20,7 @@
 
 
 
-
+	<mvc:resources mapping="/img/**" location="img" />
  	 
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
