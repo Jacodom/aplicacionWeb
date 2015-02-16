@@ -53,4 +53,15 @@ public class LoginController {
         return mav;
     }
 
+    @RequestMapping(value = "/Usuarios/logout.do",method = RequestMethod.GET)
+    public ModelAndView logoutUsuario(@ModelAttribute("usuarioLogin")Usuario usuario,SessionStatus status){
+        status.setComplete();
+
+        ModelAndView mav= new ModelAndView();
+
+        mav.setViewName("login");
+
+        return mav;
+    }
+
 }

@@ -19,5 +19,7 @@
 </head>
 <body>
   <jsp:include page="panelUsuario.jsp"></jsp:include>
+    <!--contenido -->
+    <jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

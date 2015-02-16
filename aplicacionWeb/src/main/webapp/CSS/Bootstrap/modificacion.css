@@ -106,3 +106,11 @@
 .spinner {
     display: inline-block;
 }
+
+.footer p{
+    padding-top: 0px;
+}
+
+.footer  a{
+    color: #B94A48;
+}

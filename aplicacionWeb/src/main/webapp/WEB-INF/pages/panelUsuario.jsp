@@ -28,7 +28,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a href="#" class="navbar-brand">Inicio</a>
+          <a href="usuario.jsp" class="navbar-brand">Inicio</a>
         </div>
         <div id="navBarCollapse" class="collapse navbar-collapse">
 
@@ -47,11 +47,19 @@
                   </li>
               </c:forEach>
           </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li>
-              <a href="#">${usuarioSession.nombreUsuario}</a>
+
+            <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">${usuarioSession.nombreUsuario}<span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li>
+                        <a href="/Usuarios/logout.do">Salir</a>
+                    </li>
+                </ul>
             </li>
           </ul>
+
+
         </div>
       </div>
     </div>

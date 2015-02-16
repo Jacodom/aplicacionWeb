@@ -109,6 +109,7 @@
         </div>
     </div>
 
+        <jsp:include page="footer.jsp"></jsp:include>
 
         <script src="${pageContext.request.contextPath}/js/agregarUsuario.js"></script>
 
