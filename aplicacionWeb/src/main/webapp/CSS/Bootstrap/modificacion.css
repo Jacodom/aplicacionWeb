@@ -10,8 +10,8 @@
 
 .navbar-inverse{
     background-image:none;
-    background-color: #b2b1e0;
-    border-color: #AFAFB3;
+    background-color: #4B4A79;
+    border-color: #6B6464;
     color: #ffffff;
     text-shadow: none;
 }
@@ -32,7 +32,7 @@
 }
 
 .navbar-inverse .navbar-collapse{
-    border-color: #8A88C7;
+    border-color: #6B6464;
 }
 
 .navbar-inverse .navbar-toggle{
@@ -40,11 +40,11 @@
 }
 
 .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus{
-    background-color: #7f87b7;
+    background-color: #6c7db7;
 }
 
 .navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
-    color: #4D4949;
+    color: #7F7F86;
 }
 
 #navBarCollapse{
@@ -58,7 +58,7 @@
 
 .navbar-inverse .navbar-nav{
     background-image:none;
-    background-color: #b2b1e0;
+    background-color: #4B4A79;
     color: #ffffff;
     text-shadow: none;
 }
@@ -78,7 +78,7 @@
 }
 
 .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus{
-    background-color: #7F87B7;
+    background-color: #5B5A90;
 }
 
 .error-ingreso{
@@ -89,10 +89,6 @@
     border-color: #e2e2ff;
 }
 
-.panel > .panel-default > panel-heading{
-    background-image: none;
-    background-color: #CBCAFF;
-}
 
 .btn-info{
     background-image: none;
