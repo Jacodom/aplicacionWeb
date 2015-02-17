@@ -28,7 +28,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a href="usuario.jsp" class="navbar-brand">Inicio</a>
+          <a href="/Usuarios/usuario.do" class="navbar-brand">Inicio</a>
         </div>
         <div id="navBarCollapse" class="collapse navbar-collapse">
 

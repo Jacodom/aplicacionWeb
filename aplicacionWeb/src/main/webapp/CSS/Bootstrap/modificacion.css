@@ -11,7 +11,7 @@
 .navbar-inverse{
     background-image:none;
     background-color: #b2b1e0;
-    border-color: #AEB7FA;
+    border-color: #AFAFB3;
     color: #ffffff;
     text-shadow: none;
 }
@@ -19,7 +19,7 @@
 .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .active > a{
     background-image: none;
     color: #FFFFFF;
-    background-color: #AEB7FA;
+    background-color: #AFAFB3;
     box-shadow: none;
 }
 
@@ -32,7 +32,7 @@
 }
 
 .navbar-inverse .navbar-collapse{
-    border-color: #AEB7FA;
+    border-color: #8A88C7;
 }
 
 .navbar-inverse .navbar-toggle{
@@ -41,6 +41,10 @@
 
 .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus{
     background-color: #7f87b7;
+}
+
+.navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
+    color: #4D4949;
 }
 
 #navBarCollapse{
@@ -113,4 +117,47 @@
 
 .footer  a{
     color: #B94A48;
+}
+
+.footer a .fa-github{
+    color: #080808;
+}
+
+.footer .fa-github:hover{
+    color: #B94A48;
+}
+
+.banner{
+    text-align: center;
+    color:#ffffff;
+    margin: 50px;
+}
+
+.infoModulo{
+    background: linear-gradient(180deg,#F7F7F7 0%,#ffffff 100%);
+    border-right: 1px solid #E7E7E7;
+    text-align: center;
+    font-family: "proxima-nova","Helvetica Neue", Helvetica, Arial, sans-serif;
+    min-height: 300px;
+}
+
+.infoModulo h2{
+    margin-top: 30px;
+}
+
+.infoModulo i{
+    margin: 20px 0px;
+}
+
+.infoModulo p{
+    margin-top: 40px;
+}
+
+.jumbotron{
+    background: linear-gradient(180deg,#64638C 0%,#A8A8A8 100%);
+    margin-bottom: 0px;
+}
+
+.jumbotron p{
+    color: #D8D8D8;
 }

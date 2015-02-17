@@ -20,6 +20,48 @@
 <body>
   <jsp:include page="panelUsuario.jsp"></jsp:include>
     <!--contenido -->
+  <div class="jumbotron">
+      <div class="container">
+          <div class="row">
+              <div class="col-xs-12 col-md-12 col-lg-12">
+                  <div class="banner">
+                      <i class="fa fa-shield fa-5x"></i>
+                      <h2>Modulo de Seguridad</h2>
+                      <p>Administre su sitio</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-xs-12 col-md-6 col-lg-3 infoModulo">
+            <h2>Responsive</h2>
+              <i class="fa fa-mobile fa-4x"></i>
+              <p>Diseño adaptable al dispositivo del cual se accede al sitio.</p>
+          </div>
+
+          <div class="col-xs-12 col-md-6 col-lg-3 infoModulo">
+              <h2>Dinámico</h2>
+              <i class="fa fa-refresh fa-4x"></i>
+              <p>Capacidad para gestionar las acciones de los distintos grupos de usuarios y los niveles de acceso.</p>
+          </div>
+
+          <div class="col-xs-12 col-md-6 col-lg-3 infoModulo">
+              <h2>Confiable</h2>
+              <i class="fa fa-check-circle fa-4x"></i>
+              <p>Control de acceso y de transacciones a los distintos módulos y páginas.</p>
+          </div>
+
+          <div class="col-xs-12 col-md-6 col-lg-3 infoModulo">
+              <h2>Potente</h2>
+              <i class="fa fa-database fa-4x"></i>
+              <p>Utilizando MySql+Hibernate logra un desempeño óptimo.</p>
+          </div>
+
+      </div>
+
+  </div>
     <jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

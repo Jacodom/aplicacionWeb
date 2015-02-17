@@ -22,7 +22,9 @@
       <p class="text-center">Desarrollado por:
                 <a href="https://twitter.com/jacodom" target="_blank">@jacobo</a>,
                 <a href="https://twitter.com/pablo_tico" target="_blank">@pablo</a> y
-                <a href="https://twitter.com/aquiles_12" target="_blank">@aquiles</a> . Código en <a href="https://github.com/Jacodom/aplicacionWeb" target="_blank ">Github.</a></p>
+                <a href="https://twitter.com/aquiles_12" target="_blank">@aquiles</a> .
+                </p>
+        <p class="text-center"> <a href="https://github.com/Jacodom/aplicacionWeb"><i class="fa fa-github fa-2x"></i></a></p>
     </div>
   </footer>
 </body>
