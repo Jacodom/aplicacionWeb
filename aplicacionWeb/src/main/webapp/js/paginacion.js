@@ -6,11 +6,73 @@ $(document).ready(function(){
 
     //eventos
     iniciarPaginacion();
+
     $('.numerador').click(function(e){
-        cargarUsuarios($(this).text());
+        var nroPaginaActual = parseInt($(this).text());
+        var nroPaginaSiguiente = nroPaginaActual+1;
+        var nroPaginaAnterior = nroPaginaActual-1;
+
+        if(nroPaginaAnterior===0){
+            $('#anterior').addClass('disabled');
+        }else{
+            $('#anterior').removeClass('disabled');
+        }
+
+        if($(this).is('.numerador:last')){
+            $('#siguiente').addClass('disabled');
+        }else{
+            $('#siguiente').removeClass('disabled');
+        }
+
+        cargarUsuarios(nroPaginaActual);
     });
 
+    $('#siguiente').click(function (e) {
 
+
+        if($(this).hasClass('disabled')){
+            return;
+        }else{
+            var nroPaginaActual = parseInt($('.numerador.active').text());
+            var nroPaginaSiguente = nroPaginaActual+1;
+
+            cargarUsuarios(nroPaginaSiguente);
+
+            if(nroPaginaActual===1){
+                $('#anterior').removeClass('disabled');
+            }
+
+            if($('.numerador.active').is('.numerador:last')){
+                $('#siguiente').addClass('disabled');
+            }else{
+                $('#siguiente').removeClass('disabled');
+            }
+
+        }
+    });
+
+    $('#anterior').click(function (e){
+        if($(this).hasClass('disabled')){
+            return;
+        }else{
+            var nroPaginaActual = parseInt($('.numerador.active').text());
+            var nroPaginaAnterior = nroPaginaActual-1;
+
+            cargarUsuarios(nroPaginaAnterior);
+
+            if(nroPaginaAnterior===1){
+                $('#anterior').addClass('disabled');
+            }
+
+            if(!$('numerador.active').is('.numerador:last')){
+                $('#siguiente').removeClass('disabled');
+            }
+
+
+        }
+
+
+    });
 
 
     //funciones
@@ -19,6 +81,7 @@ $(document).ready(function(){
 
     function iniciarPaginacion(){
         $('#pag1').addClass('active');
+        $('#anterior').addClass('disabled');
         cargarUsuarios($('.numerador.active').text());
     }
 

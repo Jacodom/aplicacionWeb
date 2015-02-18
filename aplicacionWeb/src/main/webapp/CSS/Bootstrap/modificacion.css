@@ -172,7 +172,7 @@
 }
 
 #tablaUsuarios{
-    margin: 25px;
+    margin: 10px;
 }
 
 .pagination > .active > a{
@@ -195,3 +195,45 @@
     background-color: #B1B0D8;
     border-color: #8584CA;
 }
+
+.pagination > .disabled > span,
+.pagination > .disabled > span:hover,
+.pagination > .disabled > span:focus,
+.pagination > .disabled > a,
+.pagination > .disabled > a:hover,
+.pagination > .disabled > a:focus {
+    color: #4B4A79;
+    cursor: not-allowed;
+    background-color: #eaeaea;
+    border-color: #8382d1;
+}
+
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+    z-index: 2;
+    color: #fff;
+    cursor: hand;
+    background-color: #4B4A79;
+    border-color: #434288;
+}
+
+table{
+    cursor: hand;
+}
+
+.table{
+    margin-bottom: 0px;
+}
+
+.fa-check-circle{
+    color: #3e8f3e;
+}
+
+.fa-times-circle{
+    color: #ac2925;
+}
+

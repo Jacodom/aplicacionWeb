@@ -36,19 +36,19 @@
             </div>
 
 
-              <!--prueba pagination-->
+              <!--pagination-->
             <div class="text-center">
               <nav>
                 <ul class="pagination">
-                  <li>
+                  <li id="anterior">
                     <a href="#" aria-label="Previous">
                       <span aria-hidden="true">&laquo;</span>
                     </a>
                   </li>
                   <c:forEach var="pagina" begin="1" end="${cantPaginas}">
-                    <li class="numerador" id="pag${pagina}"><a><c:out value="${pagina}"></c:out></a></li>
+                    <li class="numerador" id="pag${pagina}"><a href="#"><c:out value="${pagina}"></c:out></a></li>
                   </c:forEach>
-                  <li>
+                  <li id="siguiente">
                     <a href="#" aria-label="Next">
                       <span aria-hidden="true">&raquo;</span>
                     </a>
@@ -61,6 +61,16 @@
           </div>
         </div>
       </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+                <div class="boxLista">
+                    <div id="datosUsuario"></div>
+                </div>
+            </div>
+        </div>
+
+
     </div>
 
     <jsp:include page="footer.jsp"></jsp:include>

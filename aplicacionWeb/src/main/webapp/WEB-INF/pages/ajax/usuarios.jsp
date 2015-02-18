@@ -24,7 +24,7 @@
           <th>Nombre</th>
           <th>Username</th>
           <th>Email</th>
-          <th>Estado</th>
+          <th class="text-center">Estado</th>
         </tr>
         </thead>
         <tbody>
@@ -33,7 +33,16 @@
               <td><c:out value="${usuario.nombreUsuario}"></c:out></td>
               <td><c:out value="${usuario.idUsuario}"></c:out></td>
               <td><c:out value="${usuario.emailUsuario}"></c:out></td>
-              <td><c:out value="${usuario.estadoUsuario}"></c:out></td>
+              <td class="text-center">
+                <c:choose>
+                  <c:when test="${usuario.estadoUsuario==true}">
+                    <i class="fa fa-check-circle"></i>
+                  </c:when>
+                  <c:otherwise>
+                    <i class="fa fa-times-circle"></i>
+                  </c:otherwise>
+                </c:choose>
+              </td>
             </tr>
           </c:forEach>
         </tbody>

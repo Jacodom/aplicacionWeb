@@ -49,7 +49,7 @@
 
           <div class="col-xs-12 col-md-6 col-lg-3 infoModulo">
               <h2>Confiable</h2>
-              <i class="fa fa-check-circle fa-4x"></i>
+              <i class="fa fa-check fa-4x"></i>
               <p>Control de acceso y de transacciones a los distintos módulos y páginas.</p>
           </div>
 
