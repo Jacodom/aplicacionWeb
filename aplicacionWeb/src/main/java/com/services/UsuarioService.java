@@ -133,7 +133,7 @@ public class UsuarioService {
         for(Modulo modulo : moduloService.obtenerModulos()){
             for(Formulario formulario : modulo.getFormularios()){
                 for(Perfil perfil : obtenerPerfilesUsuario(usuario)){
-                    if(perfil.getFormulario().getIdFormulario().equals(formulario.getIdFormulario())){
+                    if(perfil.getFormulario().getIdFormulario().equals(formulario.getIdFormulario())&&!listaModulos.contains(modulo)){
                         listaModulos.add(modulo);
                     }
                 }
@@ -141,5 +141,11 @@ public class UsuarioService {
         }
 
         return listaModulos;
+    }
+
+    public List<Usuario> obtenerUsuariosPorPagina(int pagina, int maximosResultados){
+        daoUsuario = new DaoUsuario();
+        int primerResultado = pagina * maximosResultados - maximosResultados;
+        return daoUsuario.obtenerPorPagina(primerResultado,maximosResultados);
     }
 }

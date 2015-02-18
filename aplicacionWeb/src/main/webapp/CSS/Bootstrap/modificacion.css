@@ -157,3 +157,41 @@
 .jumbotron p{
     color: #D8D8D8;
 }
+
+.boxLista{
+    margin-top: 100px;
+}
+
+.boxLista h2{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.numerador{
+
+}
+
+#tablaUsuarios{
+    margin: 25px;
+}
+
+.pagination > .active > a{
+    background-color: #4B4A79;
+    border-color: #434288;
+}
+
+.pagination > .active >a:hover{
+    background-color: #4e5b79;
+    border-color:#434288 ;
+}
+
+.pagination > li > a{
+    color:#4B4A79;
+    border: 1px solid #4B4A79;
+}
+
+.pagination > li > a:hover{
+    color:#4B4A79;
+    background-color: #B1B0D8;
+    border-color: #8584CA;
+}

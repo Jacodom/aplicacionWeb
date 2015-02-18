@@ -1,13 +1,15 @@
 package com.controllers;
 
-import com.model.Perfil;
+import com.helpers.ConstructorVistaHelper;
 import com.model.Usuario;
 import com.services.UsuarioService;
-import com.sun.javafx.sg.prism.NGShape;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -80,5 +82,28 @@ public class UsuarioController {
         }
     }
 
+    @RequestMapping(value = "/Usuarios/consultarUsuarios.do",method = RequestMethod.GET)
+    public ModelAndView consultarUsuarios(@ModelAttribute("usuarioSession")Usuario usuarioSession){
+        ModelAndView mav = setearVista(new ModelAndView(),"consultarUsuarios",usuarioSession);
+        userService = new UsuarioService();
+        ConstructorVistaHelper cHelper = new ConstructorVistaHelper();
 
+        int cantP = cHelper.obtenerCantidadPaginas(userService.obtenerUsuarios().size(),10);
+
+        mav.addObject("cantPaginas",cantP);
+
+        return mav;
+    }
+
+    @RequestMapping(value = "/Usuarios/ajax/usuarios.do",method = RequestMethod.GET)
+    public String usuariosPagina(Model model, @RequestParam("pg")int pg){
+        userService = new UsuarioService();
+
+        List<Usuario> listaUsuarios = userService.obtenerUsuariosPorPagina(pg,10);
+
+        model.addAttribute("listaUsuarios",listaUsuarios);
+
+        return "/ajax/usuarios";
+
+    }
 }

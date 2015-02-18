@@ -47,6 +47,8 @@ public class DaoUsuario implements DaoBase<Usuario> {
     			sesion.close();
     	}
     }
+
+
     
 	public Boolean agregar(Usuario usuario) {
 		 try{ 
@@ -106,6 +108,22 @@ public class DaoUsuario implements DaoBase<Usuario> {
 					"where u.idUsuario= :idUsuario").setParameter("idUsuario", usuario.getIdUsuario()).list();
 			return listaGrupos;
 		}catch(HibernateException he){
+			manejarExcepcion(he);
+			throw he;
+		}finally {
+			if(sesion!=null)
+				sesion.close();
+		}
+	}
+
+	public List<Usuario>obtenerPorPagina(int primerResultado, int maximosResultados){
+		try{
+			iniciarOperacion();
+			List<Usuario>listaUsuarios = sesion.createQuery("FROM Usuario u order by u.nombreUsuario asc ")
+					.setFirstResult(primerResultado)
+					.setMaxResults(maximosResultados).list();
+			return listaUsuarios;
+		}catch (HibernateException he){
 			manejarExcepcion(he);
 			throw he;
 		}finally {
