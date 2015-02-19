@@ -3,6 +3,7 @@ package com.controllers;
 import com.model.Modulo;
 import com.model.Perfil;
 import com.model.Usuario;
+import com.services.SeguridadService;
 import com.services.UsuarioService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,24 +33,30 @@ public class LoginController {
     @RequestMapping(value = "/Usuarios/login.do",method = RequestMethod.POST)
     public ModelAndView loginUsuario(@ModelAttribute("usuarioLogin")Usuario usuario)throws Exception{
         UsuarioService userService =  new UsuarioService();
+        SeguridadService seguridadService = new SeguridadService();
         ModelAndView mav = new ModelAndView();
 
         if(userService.obtenerUsuario(usuario.getIdUsuario())==null) {
             mav.setViewName("login");
             mav.addObject("errorUsername", "El usuario ingresado no existe!");
         }else{
-            if(userService.verificarPassword(usuario)) {
-                usuario =userService.obtenerUsuario(usuario.getIdUsuario());
-                mav.setViewName("usuario");
-                mav.addObject("usuarioSession",usuario);
-                mav.addObject("modulosUsuario",userService.obtenerModulosUsuario(usuario));
-                mav.addObject("perfilesUsuario",userService.obtenerPerfilesUsuario(usuario));
-            }else{
-                mav.setViewName("login");
-                mav.addObject("errorPassword","La contraseña es incorrecta!");
+                usuario.setClaveUsuario(seguridadService.encriptarPassword(usuario.getClaveUsuario()));
+                if(userService.verificarPassword(usuario)){
+                    usuario =userService.obtenerUsuario(usuario.getIdUsuario());
+                    if(usuario.getEstadoUsuario()==false){
+                        mav.setViewName("login");
+                        mav.addObject("errorUsername","El usuario no se encuentra activo!");
+                    }else {
+                        mav.setViewName("usuario");
+                        mav.addObject("usuarioSession", usuario);
+                        mav.addObject("modulosUsuario", userService.obtenerModulosUsuario(usuario));
+                        mav.addObject("perfilesUsuario", userService.obtenerPerfilesUsuario(usuario));
+                    }
+                }else{
+                    mav.setViewName("login");
+                    mav.addObject("errorPassword","La contraseña es incorrecta!");
+                }
             }
-        }
-
         return mav;
     }
 

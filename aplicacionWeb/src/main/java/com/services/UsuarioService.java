@@ -92,7 +92,7 @@ public class UsuarioService {
     public boolean modificarUsuario(Usuario usuario) throws Exception {
         daoUsuario= new DaoUsuario();
         try{
-            if(this.verificarEmail(usuario.getEmailUsuario())){
+            if(!this.verificarEmail(usuario.getEmailUsuario())){
                 daoUsuario.modificar(usuario);
                 return  true;
             }
