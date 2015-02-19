@@ -106,4 +106,15 @@ public class UsuarioController {
         return "/ajax/usuarios";
 
     }
+
+    @RequestMapping(value = "/Usuarios/ajax/usuario.do",method = RequestMethod.GET)
+    public String detallesUsuario(Model model,@RequestParam("idUsuario")String idUsuario){
+        userService = new UsuarioService();
+
+        Usuario user = userService.obtenerUsuario(idUsuario);
+
+        model.addAttribute("usuarioDetalles",user);
+
+        return "ajax/usuario";
+    }
 }
