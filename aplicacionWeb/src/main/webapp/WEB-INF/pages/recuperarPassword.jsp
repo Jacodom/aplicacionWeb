@@ -58,7 +58,7 @@
                 <div class="text-center">
                   <div class="btn-group">
                     <button class="btn btn-success" type="button" id="btnRecuperar"><span>Recuperar</span><i id="iconoSubmit" class="fa"></i></button>
-                    <a href="${pageContext.requesst.contextPath}/Usuarios/login.do"><button class="btn btn-default" type="button" id="btnVolver"><span>Volver</span><i></i></button></a>
+                    <a href="${pageContext.request.contextPath}/Usuarios/login.do"><button class="btn btn-default" type="button" id="btnVolver"><span>Volver</span><i></i></button></a>
                   </div>
                 </div>
 
