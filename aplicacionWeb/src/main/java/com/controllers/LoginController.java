@@ -35,6 +35,7 @@ public class LoginController {
         UsuarioService userService =  new UsuarioService();
         SeguridadService seguridadService = new SeguridadService();
         ModelAndView mav = new ModelAndView();
+        String passIngresada = usuario.getClaveUsuario();
 
         if(userService.obtenerUsuario(usuario.getIdUsuario())==null) {
             mav.setViewName("login");
@@ -53,6 +54,7 @@ public class LoginController {
                         mav.addObject("perfilesUsuario", userService.obtenerPerfilesUsuario(usuario));
                     }
                 }else{
+                    usuario.setClaveUsuario(passIngresada);
                     mav.setViewName("login");
                     mav.addObject("errorPassword","La contraseña es incorrecta!");
                 }

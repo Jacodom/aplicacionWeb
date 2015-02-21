@@ -2,14 +2,14 @@ package com.controllers;
 
 import com.helpers.ConstructorVistaHelper;
 import com.model.Usuario;
+import com.services.EmailService;
+import com.services.SeguridadService;
 import com.services.UsuarioService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -93,6 +93,50 @@ public class UsuarioController {
         mav.addObject("cantPaginas",cantP);
 
         return mav;
+    }
+
+    @RequestMapping(value = "/Usuarios/recuperarPassword.do",method = RequestMethod.GET)
+    public ModelAndView mostrarRecuperarPassword(@ModelAttribute("usuarioRecup")Usuario usuarioRecup){
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("recuperarPassword");
+
+        return mav;
+    }
+
+    @RequestMapping(value = "/Usuarios/recuperarPassword.do",method = RequestMethod.POST)
+    public @ResponseBody boolean recuperarPassword(@RequestBody Usuario usuarioRecup) throws Exception {
+        UsuarioService usuarioService = new UsuarioService();
+        SeguridadService seguridadService = new SeguridadService();
+        EmailService emailService = new EmailService();
+
+
+        Usuario userBD = usuarioService.obtenerUsuario(usuarioRecup.getIdUsuario());
+
+        if(userBD!=null){
+            if(userBD.getEmailUsuario().equals(usuarioRecup.getEmailUsuario())){
+                String nuevaPassword = seguridadService.generarClave();
+                userBD.setClaveUsuario(seguridadService.encriptarPassword(nuevaPassword));
+                if(usuarioService.modificarUsuario(userBD)){
+                    userBD.setClaveUsuario(nuevaPassword);
+                    if(emailService.enviarEmail(userBD,"modulo.seguridad.uai@gmail.com",userBD.getEmailUsuario(),"Generación de nueva clave","","generar_clave")){
+                        return true;
+                    }else{
+                        //no se pudo mandar el mail
+                        return false;
+                    }
+                }else{
+                    //no se pudo guardar la nueva password
+                    return false;
+                }
+
+            }else{
+                //no coinciden los datos ingresados
+                return false;
+            }
+        }else{
+            //no existe el user solicitado
+            return false;
+        }
     }
 
     @RequestMapping(value = "/Usuarios/ajax/usuarios.do",method = RequestMethod.GET)

@@ -29,7 +29,7 @@ public class AccessFilter implements Filter {
         }else {
 
 
-            if (url.equals("login.do")) {
+            if (url.equals("login.do")||url.equals("recuperarPassword.do")) {
                 if ((session.getAttribute("usuarioSession") == null)) {
                     filterChain.doFilter(servletRequest, servletResponse);
                 } else {

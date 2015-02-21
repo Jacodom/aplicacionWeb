@@ -21,43 +21,44 @@
 
     </head>
     <body>
-        <br>
-        <br>
-        <br>
-        <br>
         <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-lg-offset-3 col-md-12 col-xs-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <strong>Ingrese datos para inicio de sesión. </strong>
-                        </div>
+            <div class="wrapForm">
+                <div class="row">
+                    <div class="col-lg-6 col-lg-offset-3 col-md-12 col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <strong>Ingrese datos para inicio de sesión. </strong>
+                            </div>
 
-                        <div class="panel-body">
-                            <form:form  role="form" id="formLogin" action="${pageContext.request.contextPath}/Usuarios/login.do" method="POST" modelAttribute="usuarioLogin">
-                                <div>
-                                    <div class="form-group" style="margin-bottom: 25px">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                            <form:input path="idUsuario" class="form-control" id="inputUsername"/>
+                            <div class="panel-body">
+                                <form:form  role="form" id="formLogin" action="${pageContext.request.contextPath}/Usuarios/login.do" method="POST" modelAttribute="usuarioLogin">
+                                    <div>
+                                        <div class="form-group" style="margin-bottom: 25px">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                                <form:input path="idUsuario" class="form-control" id="inputUsername"/>
+                                            </div>
+                                            <div class="error-ingreso help-block" id="errorDisplayUserName">${errorUsername}</div>
                                         </div>
-                                        <div class="error-ingreso help-block" id="errorDisplayUserName">${errorUsername}</div>
                                     </div>
-                                </div>
 
-                                <div>
-                                    <div class="form-group" style="margin-bottom: 25px">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                            <form:input path="claveUsuario" class="form-control" type="password" id="pswUser"/>
+                                    <div>
+                                        <div class="form-group" style="margin-bottom: 25px">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                                <form:input path="claveUsuario" class="form-control" type="password" id="pswUser"/>
+                                            </div>
+                                            <div class="error-ingreso help-block" id="errorDisplayPassword">${errorPassword}</div>
                                         </div>
-                                        <div class="error-ingreso help-block" id="errorDisplayPassword">${errorPassword}</div>
                                     </div>
-                                </div>
 
-                                <input type="submit" name="btnLogin" id="btnLogin" value="Login" class="btn btn-success center-block">
+                                    <div class="text-center">
+                                        <a href="${pageContext.request.contextPath}/Usuarios/recuperarPassword.do">¿Ha olvidado su contraseña?</a>
 
-                            </form:form>
+                                        <input type="submit" name="btnLogin" id="btnLogin" value="Login" class="btn btn-success center-block">
+                                    </div>
+                                </form:form>
+                            </div>
                         </div>
                     </div>
                 </div>

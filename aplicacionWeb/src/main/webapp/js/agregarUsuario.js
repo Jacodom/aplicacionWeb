@@ -77,11 +77,13 @@ $(document).ready(function(){
         var emailUser = $(this).val();
 
         if(verificarIngresoMail(emailUser)==false){
-            if(emailUser=="")
+            if(emailUser=="") {
                 $('#errorDisplayEmail').text("Debe ingresar un mail");
-            $('#emailUser').closest('.form-group').removeClass('has-success').addClass('has-error');
-            $('#iconoEmail').removeClass('glyphicon-asterisk glyphicon-ok ').addClass('glyphicon-remove');
-            $('#errorDisplayEmail').text("Debe ingresar un mail válido");
+            }else {
+                $('#emailUser').closest('.form-group').removeClass('has-success').addClass('has-error');
+                $('#iconoEmail').removeClass('glyphicon-asterisk glyphicon-ok ').addClass('glyphicon-remove');
+                $('#errorDisplayEmail').text("Debe ingresar un mail válido");
+            }
         }else{
 
             $('#iconoEmail').removeClass('glyphicon-asterisk glyphicon-remove').addClass('fa fa-circle-o-notch fa-spin');
