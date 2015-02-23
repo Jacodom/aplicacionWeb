@@ -73,12 +73,18 @@ public class UsuarioController {
     @ResponseBody public boolean agregarUsuarioPost(@RequestBody Usuario usuario) throws Exception {
         userService=new UsuarioService();
         SeguridadService seguridadService = new SeguridadService();
+        EmailService emailService = new EmailService();
 
-        usuario.setClaveUsuario(seguridadService.encriptarPassword(seguridadService.generarClave()));
-
+        String claveUsuario = seguridadService.generarClave();
+        usuario.setClaveUsuario(seguridadService.encriptarPassword(claveUsuario));
 
         if (userService.agregarUsuario(usuario)){
-            return true;
+            usuario.setClaveUsuario(claveUsuario);
+            if(emailService.enviarEmail(usuario,"modulo.seguridad.uai@gmail.com",usuario.getEmailUsuario(),"Nuevo usuario","","nuevo_usuario")){
+                return true;
+            }else {
+                return false;
+            }
         }else{
             return false;
         }

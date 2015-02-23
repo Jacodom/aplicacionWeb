@@ -36,7 +36,18 @@ public class EmailService {
                 emailSender.enviarMail(from, to, asunto, contenido);
                 return true;
             }else {
-                return false;
+                if(accion.equals("nuevo_usuario")){
+                    Template templateMail = Velocity.getTemplate("/velocity/templateNuevoUsuario.vm","UTF-8");
+                    VelocityContext velocityContext = new VelocityContext();
+                    velocityContext.put("usuario",usuario);
+                    StringWriter stringWriter = new StringWriter();
+                    templateMail.merge(velocityContext,stringWriter);
+                    contenido = stringWriter.toString();
+                    emailSender.enviarMail(from,to,asunto,contenido);
+                    return true;
+                }else {
+                    return false;
+                }
             }
         }catch (Exception e){
             throw e;
