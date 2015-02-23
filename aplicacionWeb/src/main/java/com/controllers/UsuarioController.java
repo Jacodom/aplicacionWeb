@@ -1,6 +1,7 @@
 package com.controllers;
 
 import com.helpers.ConstructorVistaHelper;
+import com.model.Grupo;
 import com.model.Usuario;
 import com.services.EmailService;
 import com.services.SeguridadService;
@@ -164,8 +165,10 @@ public class UsuarioController {
         userService = new UsuarioService();
 
         Usuario user = userService.obtenerUsuario(idUsuario);
+        List<Grupo>listaGruposUser =  userService.obtenerGruposUsuario(user);
 
         model.addAttribute("usuarioDetalles",user);
+        model.addAttribute("listaGruposUser",listaGruposUser);
 
         return "ajax/usuario";
     }

@@ -15,10 +15,11 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/Bootstrap/bootstrap-theme.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/font-awesome/font-awesome.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/Bootstrap/modificacion.css">
+  <script src="${pageContext.request.contextPath}/js/detallesUsuario.js"></script>
 </head>
 <body>
     <div class="table-responsive">
-      <table class="table table-bordered table-hover">
+      <table class="table table-bordered table-hover" id="tableU">
         <thead>
         <tr>
           <th>Nombre</th>

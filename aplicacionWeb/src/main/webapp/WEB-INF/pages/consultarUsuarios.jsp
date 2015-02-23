@@ -18,6 +18,7 @@
     <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.js"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
     <script src="${pageContext.request.contextPath}/js/paginacion.js"></script>
+
 </head>
 <body>
     <jsp:include page="panelUsuario.jsp"></jsp:include>
@@ -64,9 +65,9 @@
 
         <div class="row">
             <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-                <div class="boxLista">
-                    <div id="datosUsuario"></div>
-                </div>
+                    <div id="datosUsuario">
+                        <!--aca van los detalles del usuario -->
+                    </div>
             </div>
         </div>
 
