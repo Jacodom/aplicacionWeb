@@ -241,6 +241,10 @@ table{
     color: #ffffff;
 }
 
+#addUsuarioForm .alert{
+    margin-top: 30px;
+}
+
 .fa-check-circle{
     color: #3e8f3e;
 }

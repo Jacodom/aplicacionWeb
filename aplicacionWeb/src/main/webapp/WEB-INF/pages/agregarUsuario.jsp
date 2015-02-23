@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -11,7 +12,7 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/Bootstrap/modificacion.css">
         <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.js"></script>
         <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
-
+        <script src="${pageContext.request.contextPath}/js/agregarUsuario.js"></script>
     </head>
     <body>
 
@@ -50,13 +51,13 @@
                     </div>
 
                     <div class="panel-body">
-                        <form:form role="form" id="addUsuarioForm" action="${pageContext.request.contextPath}/Usuarios/addUsuario.do" method="post" modelAttribute="usuario">
+                        <form role="form" id="addUsuarioForm" action="${pageContext.request.contextPath}/Usuarios/addUsuario.do" method="post">
                             <div>
                                 <!-- Nombre -->
                                 <div class="form-group">
-                                    <label class="control-label" for="userNameInput">Nombre </label>
+                                    <label class="control-label" for="nameInput">Nombre </label>
                                     <div class="input-group">
-                                        <form:input path="idUsuario" class="form-control" id="nameInput"/>
+                                        <input path="idUsuario" class="form-control" id="nameInput"/>
                                         <span class="input-group-addon"><span id="iconoNombre" class="glyphicon glyphicon-asterisk"></span></span>
 
                                     </div>
@@ -69,7 +70,7 @@
                                 <div class="form-group">
                                     <label class="control-label" for="userNameInput">Username </label>
                                     <div class="input-group">
-                                        <form:input path="nombreUsuario" class="form-control" id="userNameInput"/>
+                                        <input path="nombreUsuario" class="form-control" id="userNameInput"/>
                                         <span class="input-group-addon"><span id="iconoUserName" class="glyphicon glyphicon-asterisk"></span></span>
                                     </div>
                                     <div class="error-ingreso help-block" id="errorDisplayUserName"></div>
@@ -79,27 +80,38 @@
                                 <div class="form-group">
                                     <label for="emailUser">Email</label>
                                     <div class="input-group">
-                                        <form:input path="emailUsuario" type="text" class="form-control" id="emailUser" name="emailUser" placeholder="ejemplo@ejemplo.com"/>
+                                        <input path="emailUsuario" type="text" class="form-control" id="emailUser" name="emailUser" placeholder="ejemplo@ejemplo.com"/>
                                         <span class="input-group-addon"><span id="iconoEmail" class="glyphicon glyphicon-asterisk"></span></span>
                                     </div>
                                     <div class="error-ingreso help-block" id="errorDisplayEmail"></div>
                                 </div>
 
-                                <!-- Password -->
-                                <div class="form-group">
-                                    <label for="passwordUser">Password</label>
-                                    <div class="input-group">
-                                        <form:input path="claveUsuario" type="password" class="form-control" id="passwordUser" />
-                                        <span class="input-group-addon"><span id="iconoPassword" class="glyphicon glyphicon-asterisk"></span></span>
-                                    </div>
-                                    <div class="error-ingreso help-block" id="errorDisplayPassword"></div>
+                                <!-- estado -->
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value="" id="chkEstado">
+                                        Activo
+                                    </label>
                                 </div>
 
                                 <div class="error-ingreso help-block" id="errorDisplayAgregar"></div>
-                                <input type="submit" name="btnRegistrar" id="btnRegistrar" value="Registrar" class="btn btn-info center-block">
+                                <button class="btn btn-success center-block" type="button" id="btnRegistrar"><span>Registrar</span><i id="iconoSubmit" class="fa"></i></button>
+                                <!--<input type="submit" name="btnRegistrar" id="btnRegistrar" value="Registrar" class="btn btn-info center-block">-->
+
+
+                                        <div class="alert alert-success center-block">
+                                            El usuario ha sido agregado correctamente, continúe agregando usuarios o
+                                            <a href="${pageContext.request.contextPath}/Usuarios/usuario.do">vuelva al inicio.</a>
+                                        </div>
+
+                                        <div class="alert alert-danger center-block">
+                                            El usuario no ha podido ser agregado. Intente nuevamente.
+                                        </div>
+
+
 
                             </div>
-                        </form:form>
+                        </form>
                     </div>
                     <div class="panel-footer">
                         <strong><span class="glyphicon glyphicon-asterisk"></span> Campos Requeridos</strong>
@@ -111,7 +123,7 @@
 
         <jsp:include page="footer.jsp"></jsp:include>
 
-        <script src="${pageContext.request.contextPath}/js/agregarUsuario.js"></script>
+
 
 
     </body>

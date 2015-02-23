@@ -4,11 +4,53 @@
 $(document).ready(function(){
 
     //eventos
+    limpiarTextos();
+    apagarAlertas();
     $('#userNameInput').focusout(verificarUsername);
     $('#emailUser').focusout(verificarEmail);
-    //$('#btnRegistrar').click(addUsuario);
+    $('#btnRegistrar').click(addUsuario);
 
     //funciones
+
+    function limpiarTextos(){
+        $('#nameInput').val("");
+        $('#userNameInput').val("");
+        $('#emailUser').val("");
+        $('#chkEstado').prop('checked',true);
+        $('#iconoUserName').removeClass('glyphicon-ok').addClass('glyphicon-asterisk');
+        $('#userNameInput').closest('.form-group').removeClass('has-error has-success');
+        $('#iconoEmail').removeClass('glyphicon-ok').addClass('glyphicon-asterisk');
+        $('#emailUser').closest('.form-group').removeClass('has-error has-success');
+    }
+
+    function apagarAlertas(){
+        $('.alert').hide();
+    }
+
+    function deshabilitarElementos(){
+        $('#nameInput').prop('disabled',true);
+        $('#userNameInput').prop('disabled',true);
+        $('#emailUser').prop('disabled',true);
+        $('#chkEstado').prop('disabled',true);
+
+        $('#nameInput').addClass('disabled');
+        $('#userNameInput').addClass('disabled');
+        $('#emailUser').addClass('disabled');
+        $('#chkEstado').addClass('disabled');
+    }
+
+    function habilitarElementos(){
+        $('#nameInput').prop('disabled',false);
+        $('#userNameInput').prop('disabled',false);
+        $('#emailUser').prop('disabled',false);
+        $('#chkEstado').prop('disabled',false);
+
+        $('#nameInput').removeClass('disabled');
+        $('#userNameInput').removeClass('disabled');
+        $('#emailUser').removeClass('disabled');
+        $('#chkEstado').removeClass('disabled');
+    }
+
     function verificarUsername() {
         var userName = $(this).val();
 
@@ -111,17 +153,24 @@ $(document).ready(function(){
         }
     }
 
-    /*function addUsuario(){
+    function addUsuario(){
         var jNombre = $('#nameInput').val();
         var jUserName= $('#userNameInput').val();
         var jEmail= $('#emailUser').val();
-        var jPassword = $('#passwordUser').val();
+        var jPassword ="";
+        var jEstado;
+
+        if($('#chkEstado').is(':checked')){
+            jEstado = true;
+        }else{
+            jEstado=false;
+        }
 
         var jUser = {
             'idUsuario':jUserName,
             'claveUsuario':jPassword,
             'emailUsuario':jEmail,
-            'estadoUsuario':true,
+            'estadoUsuario':jEstado,
             'nombreUsuario':jNombre
         };
 
@@ -132,27 +181,31 @@ $(document).ready(function(){
             if($('#userNameInput').hasClass('has-error')||$('#emailUser').hasClass('has-error')){
                 $('#errorDisplayAgregar').text('No puede agregar un usuario con Username o Email existente');
             }else{
-                $('#btnRegistrar').prop('value','');
-                $('#btnRegistrar').addClass('fa fa-circle-o-notch fa-spin');
+                deshabilitarElementos();
+                $('#iconoSubmit').addClass('fa fa-circle-o-notch fa-spin');
+                $('#btnRegistrar span').text("Registrando  ");
 
                 $.ajax({
-                        type:"POST",
+                        type:$('#addUsuarioForm').attr('method'),
                         url:$('#addUsuarioForm').attr('action'),
                         data: JSON.stringify(jUser),
                         dataType:"json",
                         contentType:"application/json",
                         success:function(response){
-                            if(response==true)
-                                window.location("usuarioAgregado.jsp");
-
+                            $('#iconoSubmit').removeClass('fa fa-circle-o-notch fa-spin');
+                            $('#btnRegistrar span').text('Registrar');
+                            habilitarElementos();
+                            if(response==true) {
+                                limpiarTextos();
+                                $('.alert.alert-success').fadeIn();
+                            }else{
+                                $('.alert.alert-danger').fadeIn();
+                            }
                         }
+
                     }
                 )
             }
-
-
         }
-
-
-    }*/
+    }
 });

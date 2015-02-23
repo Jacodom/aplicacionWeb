@@ -8,9 +8,12 @@ import com.services.UsuarioService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.method.annotation.SessionAttributesHandler;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.mail.Session;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by Jacobo on 25/10/14.
@@ -60,26 +63,24 @@ public class UsuarioController {
     }
 
     @RequestMapping(value = "/Usuarios/agregarUsuario",method = RequestMethod.GET)
-    public ModelAndView agregarUsuario(@ModelAttribute("usuario")Usuario usuario,
+    public ModelAndView agregarUsuarioGet(@ModelAttribute("usuario")Usuario usuario,
                                  @ModelAttribute("usuarioSession")Usuario usuarioSession){
         ModelAndView mav = setearVista(new ModelAndView(),"agregarUsuario",usuarioSession);
         return mav;
     }
 
     @RequestMapping(value = "/Usuarios/addUsuario.do",method = RequestMethod.POST)
-    public ModelAndView agregarUsuario(@ModelAttribute("usuario") Usuario usuario) throws Exception {
+    @ResponseBody public boolean agregarUsuarioPost(@RequestBody Usuario usuario) throws Exception {
         userService=new UsuarioService();
+        SeguridadService seguridadService = new SeguridadService();
 
-        ModelAndView mav = new ModelAndView();
+        usuario.setClaveUsuario(seguridadService.encriptarPassword(seguridadService.generarClave()));
+
 
         if (userService.agregarUsuario(usuario)){
-            mav.setViewName("agregarUsuarioResult");
-            mav.addObject("alerta", "El usuario fue agregado exitosamente!");
-            return mav;
+            return true;
         }else{
-            mav.setViewName("agregarUsuarioResult");
-            mav.addObject("alerta", "Error");
-            return mav;
+            return false;
         }
     }
 
