@@ -72,12 +72,13 @@ public class UsuarioController {
 
         ModelAndView mav = new ModelAndView();
 
-
         if (userService.agregarUsuario(usuario)){
-            mav.setViewName("usuarioAgregado");
+            mav.setViewName("agregarUsuarioResult");
+            mav.addObject("alerta", "El usuario fue agregado exitosamente!");
             return mav;
         }else{
-            mav.setViewName("errorAgregarUsuario");
+            mav.setViewName("agregarUsuarioResult");
+            mav.addObject("alerta", "Error");
             return mav;
         }
     }

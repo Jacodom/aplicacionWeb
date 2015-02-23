@@ -10,7 +10,9 @@
 <head>
     <title></title>
 </head>
+<jsp:include page="panelUsuario.jsp"></jsp:include>
 <body>
-    <h1>Usuario no agregado!</h1>
+<h1>Usuario no agregado!!!</h1>
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

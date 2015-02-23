@@ -4,7 +4,7 @@
     width: 100%; /* ancho*/
     height: 100%;
     margin: 0 auto;
-    top:0 auto;
+    top: 0 auto;
 }
 
 #formLogin .input-group{
@@ -235,6 +235,10 @@ table{
 
 .table{
     margin-bottom: 0px;
+}
+
+.container-agregarUsuarioResult h1{
+    color: #ffffff;
 }
 
 .fa-check-circle{
