@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/Bootstrap/bootstrap-theme.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/font-awesome/font-awesome.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/Bootstrap/modificacion.css">
+  <script src="${pageContext.request.contextPath}/js/modificarUsuario.js"></script>
 </head>
 <body>
     <div class="panel panel-default">
@@ -31,9 +32,9 @@
               <p><strong>Estado:&nbsp</strong></p><p id="detalleEstadoUser">
             </c:when>
             <c:when test="${accion=='M'}">
-              <p><strong>Nombre:&nbsp</strong></p><input class="form-control" id="detalleNombreUser" value="${usuarioDetalles.nombreUsuario}">
-              <p><strong>Username:&nbsp</strong></p><p class="form-control-static" id="detalleUserName">${usuarioDetalles.idUsuario}</p>
-              <p><strong>Email:&nbsp</strong></p><p class="form-control-static" id="detalleEmailUser" >${usuarioDetalles.emailUsuario}</p>
+              <p><strong>Nombre:&nbsp</strong></p><input class="form-control"  id="detalleNombreUser" value="${usuarioDetalles.nombreUsuario}">
+              <p><strong>Username:&nbsp</strong></p><p id="detalleUserName">${usuarioDetalles.idUsuario}</p>
+              <p><strong>Email:&nbsp</strong></p><input class="form-control" id="detalleEmailUser" value="${usuarioDetalles.emailUsuario}">
               <p><strong>Estado:&nbsp</strong></p><p id="detalleEstadoUser"></p>
             </c:when>
           </c:choose>
@@ -51,8 +52,17 @@
             </c:when>
             <c:when test="${accion=='M'}">
               <select>
-                <option>Activo</option>
-                <option>Inactivo</option>
+                <c:choose>
+                  <c:when test="${usuarioDetalles.estadoUsuario==true}">
+                    <option selected="true">Activo</option>
+                    <option>Inactivo</option>
+                  </c:when>
+                  <c:otherwise>
+                    <option>Activo</option>
+                    <option selected="true">Inactivo</option>
+                  </c:otherwise>
+                </c:choose>
+
               </select>
             </c:when>
           </c:choose>
@@ -61,7 +71,7 @@
 
             <div class="col-xs-6 col-md-6 col-lg-6">
               <h4>Grupos del usuario</h4>
-              <select multiple class="form-control">
+              <select id="gruposUsuario" multiple class="form-control">
                 <c:forEach var="grupo" items="${listaGruposUser}">
                   <option>${grupo.descripcionGrupo}</option>
                 </c:forEach>
@@ -76,11 +86,21 @@
 
 
                 <h4>Todos los Grupos</h4>
-                <select multiple class="form-control">
-                  <c:forEach var="grupo" items="${gruposTodos}">
-                    <option>${grupo.descripcionGrupo}</option>
-                  </c:forEach>
-                </select>
+
+                  <c:choose>
+                    <c:when test="${empty gruposTodos}">
+                      <h3 class="text-center">El usuario tiene todos los grupos posibles.</h3>
+                    </c:when>
+                    <c:otherwise>
+                      <select id="gruposTodos" multiple class="form-control">
+                        <c:forEach var="grupo" items="${gruposTodos}">
+                          <option>${grupo.descripcionGrupo}</option>
+                        </c:forEach>
+                      </select>
+                    </c:otherwise>
+                  </c:choose>
+
+
                 <button class="btn btn-success center-block" type="button" id="btnGuardar"><span>Guardar&nbsp</span><i id="iconoGuardar" class="fa fa-floppy-o"></i></button>
               </c:if>
             </div>

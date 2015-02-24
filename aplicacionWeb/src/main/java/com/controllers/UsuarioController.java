@@ -14,6 +14,7 @@ import org.springframework.web.method.annotation.SessionAttributesHandler;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.mail.Session;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -177,6 +178,13 @@ public class UsuarioController {
 
         if(accion.equals("M")){
             List<Grupo> gruposTodos = grupoService.obtenerGrupos();
+            for(Grupo grupoU : listaGruposUser){
+                for(Grupo grupo : grupoService.obtenerGrupos()){
+                    if(grupo.getIdGrupo().equals(grupoU.getIdGrupo())){
+                        gruposTodos.remove(grupo);
+                    }
+                }
+            }
             model.addAttribute("gruposTodos",gruposTodos);
         }
 

@@ -280,6 +280,7 @@ input#detalleNombreUser,input#detalleUserName,input#detalleEmailUser{
 
 #botonesGrupos{
     margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 #btnGuardar{
