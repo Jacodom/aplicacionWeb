@@ -273,3 +273,19 @@ i{
     margin-top: 20px;
 }
 
+input#detalleNombreUser,input#detalleUserName,input#detalleEmailUser{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#botonesGrupos{
+    margin-top: 30px;
+}
+
+#btnGuardar{
+    margin-top: 20px;
+}
+
+#formUserDetalles{
+    border-right: 1px solid #E7E7E7;
+}

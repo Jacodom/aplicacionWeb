@@ -4,6 +4,7 @@ import com.helpers.ConstructorVistaHelper;
 import com.model.Grupo;
 import com.model.Usuario;
 import com.services.EmailService;
+import com.services.GrupoService;
 import com.services.SeguridadService;
 import com.services.UsuarioService;
 import org.springframework.stereotype.Controller;
@@ -100,6 +101,7 @@ public class UsuarioController {
         int cantP = cHelper.obtenerCantidadPaginas(userService.obtenerUsuarios().size(),10);
 
         mav.addObject("cantPaginas",cantP);
+        mav.addObject("accion","C");
 
         return mav;
     }
@@ -161,15 +163,37 @@ public class UsuarioController {
     }
 
     @RequestMapping(value = "/Usuarios/ajax/usuario.do",method = RequestMethod.GET)
-    public String detallesUsuario(Model model,@RequestParam("idUsuario")String idUsuario){
+    public String detallesUsuario(Model model,@RequestParam("idUsuario")String idUsuario,
+                                  @RequestParam("accion")String accion){
         userService = new UsuarioService();
+        GrupoService grupoService = new GrupoService();
 
         Usuario user = userService.obtenerUsuario(idUsuario);
         List<Grupo>listaGruposUser =  userService.obtenerGruposUsuario(user);
 
         model.addAttribute("usuarioDetalles",user);
         model.addAttribute("listaGruposUser",listaGruposUser);
+        model.addAttribute("accion",accion);
+
+        if(accion.equals("M")){
+            List<Grupo> gruposTodos = grupoService.obtenerGrupos();
+            model.addAttribute("gruposTodos",gruposTodos);
+        }
 
         return "ajax/usuario";
+    }
+
+    @RequestMapping(value = "/Usuarios/modificarUsuario.do",method = RequestMethod.GET)
+    public ModelAndView modificarUsuario(@ModelAttribute("usuarioSession")Usuario usuarioSession){
+        ModelAndView mav = setearVista(new ModelAndView(),"modificarUsuario",usuarioSession);
+        userService = new UsuarioService();
+        ConstructorVistaHelper cHelper = new ConstructorVistaHelper();
+
+        int cantP = cHelper.obtenerCantidadPaginas(userService.obtenerUsuarios().size(),10);
+
+        mav.addObject("cantPaginas",cantP);
+        mav.addObject("accion","M");
+
+        return mav;
     }
 }

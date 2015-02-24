@@ -16,7 +16,7 @@ $(document).ready(function (e) {
     function obtenerDetallesUsuario(idUsuario){
         $('#datosUsuario').empty().addClass('fa fa-circle-o-notch fa-spin fa-4x');
 
-        $('#datosUsuario').load('/Usuarios/ajax/usuario.do?idUsuario='+idUsuario);
+        $('#datosUsuario').load('/Usuarios/ajax/usuario.do?idUsuario='+idUsuario+"&accion="+$('#accion').text());
 
         $('#datosUsuario').empty().removeClass('fa fa-circle-o-notch fa-spin fa-4x');
 

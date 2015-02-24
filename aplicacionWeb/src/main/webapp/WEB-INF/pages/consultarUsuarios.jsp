@@ -22,7 +22,7 @@
 </head>
 <body>
     <jsp:include page="panelUsuario.jsp"></jsp:include>
-
+    <div id="accion" style="display: none;">${accion}</div>
     <!--contenido-->
     <div class="container">
       <div class="row">
