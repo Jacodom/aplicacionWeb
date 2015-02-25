@@ -95,7 +95,7 @@ public class UsuarioController {
 
     @RequestMapping(value = "/Usuarios/consultarUsuarios.do",method = RequestMethod.GET)
     public ModelAndView consultarUsuarios(@ModelAttribute("usuarioSession")Usuario usuarioSession){
-        ModelAndView mav = setearVista(new ModelAndView(),"consultarUsuarios",usuarioSession);
+        ModelAndView mav = setearVista(new ModelAndView(),"usuarios",usuarioSession);
         userService = new UsuarioService();
         ConstructorVistaHelper cHelper = new ConstructorVistaHelper();
 
@@ -193,7 +193,7 @@ public class UsuarioController {
 
     @RequestMapping(value = "/Usuarios/modificarUsuario.do",method = RequestMethod.GET)
     public ModelAndView modificarUsuario(@ModelAttribute("usuarioSession")Usuario usuarioSession){
-        ModelAndView mav = setearVista(new ModelAndView(),"modificarUsuario",usuarioSession);
+        ModelAndView mav = setearVista(new ModelAndView(),"usuarios",usuarioSession);
         userService = new UsuarioService();
         ConstructorVistaHelper cHelper = new ConstructorVistaHelper();
 
@@ -201,6 +201,20 @@ public class UsuarioController {
 
         mav.addObject("cantPaginas",cantP);
         mav.addObject("accion","M");
+
+        return mav;
+    }
+
+    @RequestMapping(value = "/Usuarios/eliminarUsuario.do",method = RequestMethod.GET)
+    public ModelAndView eliminarUsuario(@ModelAttribute("usuarioSession")Usuario usuarioSession){
+        ModelAndView mav = setearVista(new ModelAndView(),"usuarios",usuarioSession);
+        userService = new UsuarioService();
+        ConstructorVistaHelper cHelper = new ConstructorVistaHelper();
+
+        int cantP = cHelper.obtenerCantidadPaginas(userService.obtenerUsuarios().size(),10);
+
+        mav.addObject("cantPaginas",cantP);
+        mav.addObject("accion","B");
 
         return mav;
     }
