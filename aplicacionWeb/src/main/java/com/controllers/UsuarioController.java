@@ -14,6 +14,7 @@ import org.springframework.web.method.annotation.SessionAttributesHandler;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.mail.Session;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -172,11 +173,14 @@ public class UsuarioController {
         Usuario user = userService.obtenerUsuario(idUsuario);
         List<Grupo>listaGruposUser =  userService.obtenerGruposUsuario(user);
 
+        //user.setGrupos(null);
+
         model.addAttribute("usuarioDetalles",user);
         model.addAttribute("listaGruposUser",listaGruposUser);
         model.addAttribute("accion",accion);
 
         if(accion.equals("M")){
+
             List<Grupo> gruposTodos = grupoService.obtenerGrupos();
             for(Grupo grupoU : listaGruposUser){
                 for(Grupo grupo : grupoService.obtenerGrupos()){
@@ -185,6 +189,7 @@ public class UsuarioController {
                     }
                 }
             }
+
             model.addAttribute("gruposTodos",gruposTodos);
         }
 
@@ -192,7 +197,7 @@ public class UsuarioController {
     }
 
     @RequestMapping(value = "/Usuarios/modificarUsuario.do",method = RequestMethod.GET)
-    public ModelAndView modificarUsuario(@ModelAttribute("usuarioSession")Usuario usuarioSession){
+    public ModelAndView modificarUsuarioGet(@ModelAttribute("usuarioSession")Usuario usuarioSession){
         ModelAndView mav = setearVista(new ModelAndView(),"usuarios",usuarioSession);
         userService = new UsuarioService();
         ConstructorVistaHelper cHelper = new ConstructorVistaHelper();
@@ -201,6 +206,28 @@ public class UsuarioController {
 
         mav.addObject("cantPaginas",cantP);
         mav.addObject("accion","M");
+
+        return mav;
+    }
+
+    @RequestMapping(value = "/Usuarios/modificarUsuario.do",method = RequestMethod.POST)
+    public ModelAndView modificarUsuarioPost(@ModelAttribute("usuarioDetalles") Usuario usuarioMod,
+                                             HttpSession session) throws Exception {
+        userService = new UsuarioService();
+        ConstructorVistaHelper cHelper = new ConstructorVistaHelper();
+        Usuario userS = (Usuario) session.getAttribute("usuarioSession");
+        ModelAndView mav = setearVista(new ModelAndView(),"usuarios",userS);
+        int cantP = cHelper.obtenerCantidadPaginas(userService.obtenerUsuarios().size(),10);
+
+        mav.addObject("cantPaginas",cantP);
+        mav.addObject("accion","M");
+
+        if(userService.modificarUsuario(usuarioMod)){
+            mav.addObject("alerta","exito");
+            }else{
+                mav.addObject("alerta","error");
+            }
+
 
         return mav;
     }

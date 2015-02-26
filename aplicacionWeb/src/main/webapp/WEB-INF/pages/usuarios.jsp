@@ -71,6 +71,20 @@
             </div>
         </div>
 
+        <!--aca van los errores de modificar el usuario-->
+        <c:choose>
+            <c:when test="${alerta=='exito'}">
+                <div class="alert alert-success center-block">
+                    El usuario ha sido modificado correctamente, continúe modificando usuarios o
+                    <a href="${pageContext.request.contextPath}/Usuarios/usuario.do">vuelva al inicio.</a>
+                </div>
+            </c:when>
+            <c:when test="${alerta=='error'}">
+                <div class="alert alert-danger center-block">
+                    El usuario no ha podido ser modificado. Intente nuevamente.
+                </div>
+            </c:when>
+        </c:choose>
 
     </div>
 

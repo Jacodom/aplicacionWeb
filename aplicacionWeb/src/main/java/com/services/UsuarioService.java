@@ -92,15 +92,11 @@ public class UsuarioService {
     public boolean modificarUsuario(Usuario usuario) throws Exception {
         daoUsuario= new DaoUsuario();
         try{
-            if(!this.verificarEmail(usuario.getEmailUsuario())){
                 daoUsuario.modificar(usuario);
                 return  true;
-            }
         }catch(Exception ex){
             throw new Exception("Error!",ex);
         }
-
-        return false;
     }
 
     public List<Grupo> obtenerGruposUsuario(Usuario usuario){

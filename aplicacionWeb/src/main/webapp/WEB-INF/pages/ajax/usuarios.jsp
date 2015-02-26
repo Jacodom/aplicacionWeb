@@ -49,5 +49,8 @@
         </tbody>
       </table>
     </div>
+<div id="detalles">
+
+</div>
 </body>
 </html>
