@@ -3,6 +3,7 @@ package com.controllers;
 import com.helpers.ConstructorVistaHelper;
 import com.model.Grupo;
 import com.model.Usuario;
+import com.model.UsuarioCambioPassword;
 import com.services.EmailService;
 import com.services.GrupoService;
 import com.services.SeguridadService;
@@ -153,18 +154,41 @@ public class UsuarioController {
     }
 
     @RequestMapping(value = "/Usuarios/cambiarPassword.do",method = RequestMethod.GET)
-    public ModelAndView mostrarCambiarPassword(@ModelAttribute("usuarioSession")Usuario usuarioSession){
+    public ModelAndView mostrarCambiarPassword(@ModelAttribute("usuarioCambioPw")UsuarioCambioPassword usuarioCambioPw,
+                                               HttpSession session){ //agrego un usuario de tipo
+                                                                    //cambioUsuario para no sobreescribir la sesion
+                                                                   //y usarlo en el form de la pag .jsp
+        Usuario usuarioSession = (Usuario) session.getAttribute("usuarioSession"); //obtengo el usuario de la session
         ModelAndView mav = setearVista(new ModelAndView(), "cambiarPassword", usuarioSession);
         return mav;
     }
 
     @RequestMapping(value = "/Usuarios/cambiarPassword.do", method = RequestMethod.POST)
-    public void cambiarContrasena(@ModelAttribute("cambiarPass") Usuario usuario) throws Exception {
+    public ModelAndView cambiarPassword(@ModelAttribute("usuarioCambioPw") UsuarioCambioPassword usuarioCambioPw,
+                                  HttpSession session) throws Exception {
         userService = new UsuarioService();
-        String clave = usuario.getClaveUsuario();
-        if (userService.verificarPassword(usuario)) {
-            usuario.setClaveUsuario(clave);
+        SeguridadService seguridadService = new SeguridadService();
+
+
+        Usuario usuarioSession = (Usuario) session.getAttribute("usuarioSession"); //obtengo el usuario de la session
+
+        //se crea la vista a retornar(la misma del form) y se le agrega el usuarioSession para la barra de navegacion
+        ModelAndView mav = setearVista(new ModelAndView(),"cambiarPassword",usuarioSession);
+
+        //comparo la clave de la sesion actual con la contraseña anterior ingresada en el form (se encripta)
+        if(usuarioSession.getClaveUsuario().equals(seguridadService.encriptarPassword(usuarioCambioPw.getPasswordAnterior()))){
+            //se le settea la nueva contraseña al usuario
+            usuarioSession.setClaveUsuario(seguridadService.encriptarPassword(usuarioCambioPw.getPasswordNueva()));
+
+            //se guardan los datos y en base a eso las alertas
+            if(userService.modificarUsuario(usuarioSession)){
+                mav.addObject("alerta","exito");
+            }else{
+                mav.addObject("alerta","error");
+            }
         }
+
+        return mav;
     }
 
     @RequestMapping(value = "/Usuarios/ajax/usuarios.do",method = RequestMethod.GET)
