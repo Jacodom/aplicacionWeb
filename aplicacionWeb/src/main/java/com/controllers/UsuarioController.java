@@ -100,9 +100,9 @@ public class UsuarioController {
         userService = new UsuarioService();
         ConstructorVistaHelper cHelper = new ConstructorVistaHelper();
 
-        int cantP = cHelper.obtenerCantidadPaginas(userService.obtenerUsuarios().size(),10);
+        int cantP = cHelper.obtenerCantidadPaginas(userService.obtenerUsuarios().size(), 10);
 
-        mav.addObject("cantPaginas",cantP);
+        mav.addObject("cantPaginas", cantP);
         mav.addObject("accion","C");
 
         return mav;
@@ -149,6 +149,21 @@ public class UsuarioController {
         }else{
             //no existe el user solicitado
             return false;
+        }
+    }
+
+    @RequestMapping(value = "/Usuarios/cambiarPassword.do",method = RequestMethod.GET)
+    public ModelAndView mostrarCambiarPassword(@ModelAttribute("usuarioSession")Usuario usuarioSession){
+        ModelAndView mav = setearVista(new ModelAndView(), "cambiarPassword", usuarioSession);
+        return mav;
+    }
+
+    @RequestMapping(value = "/Usuarios/cambiarPassword.do", method = RequestMethod.POST)
+    public void cambiarContrasena(@ModelAttribute("cambiarPass") Usuario usuario) throws Exception {
+        userService = new UsuarioService();
+        String clave = usuario.getClaveUsuario();
+        if (userService.verificarPassword(usuario)) {
+            usuario.setClaveUsuario(clave);
         }
     }
 
@@ -202,10 +217,10 @@ public class UsuarioController {
         userService = new UsuarioService();
         ConstructorVistaHelper cHelper = new ConstructorVistaHelper();
 
-        int cantP = cHelper.obtenerCantidadPaginas(userService.obtenerUsuarios().size(),10);
+        int cantP = cHelper.obtenerCantidadPaginas(userService.obtenerUsuarios().size(), 10);
 
-        mav.addObject("cantPaginas",cantP);
-        mav.addObject("accion","M");
+        mav.addObject("cantPaginas", cantP);
+        mav.addObject("accion", "M");
 
         return mav;
     }
@@ -216,7 +231,7 @@ public class UsuarioController {
         userService = new UsuarioService();
         ConstructorVistaHelper cHelper = new ConstructorVistaHelper();
         Usuario userS = (Usuario) session.getAttribute("usuarioSession");
-        ModelAndView mav = setearVista(new ModelAndView(),"usuarios",userS);
+        ModelAndView mav = setearVista(new ModelAndView(), "usuarios", userS);
         int cantP = cHelper.obtenerCantidadPaginas(userService.obtenerUsuarios().size(),10);
 
         mav.addObject("cantPaginas",cantP);
