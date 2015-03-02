@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
   <meta charset="utf-8">
@@ -21,106 +22,99 @@
       <div class="panel-heading">
         <h3 class="text-center panel-title">Datos de Usuario</h3>
       </div>
+
       <div class="panel-body">
+        <form:form action="${pageContext.request.contextPath}/Usuarios/modificarUsuario.do" method="POST" modelAttribute="usuarioDetalles" id="formModificarUsuario">
+          <div class="col-xs-6 col-md-6 col-lg-5 col-lg-offset-1">
 
-        <div class="col-xs-6 col-md-6 col-lg-5 col-lg-offset-1" id="formUserDetalles">
-          <c:choose>
-            <c:when test="${accion=='C'}">
-              <p><strong>Nombre:&nbsp</strong></p><p id="detalleNombreUser"> ${usuarioDetalles.nombreUsuario}</p>
-              <p><strong>Username:&nbsp</strong></p><p id="detalleUserName"> ${usuarioDetalles.idUsuario}</p>
-              <p><strong>Email:&nbsp</strong></p><p id="detalleEmailUser"> ${usuarioDetalles.emailUsuario}</p>
-              <p><strong>Estado:&nbsp</strong></p><p id="detalleEstadoUser">
-            </c:when>
-            <c:when test="${accion=='M'}">
-              <p><strong>Nombre:&nbsp</strong></p><input class="form-control"  id="detalleNombreUser" value="${usuarioDetalles.nombreUsuario}">
-              <p><strong>Username:&nbsp</strong></p><p id="detalleUserName">${usuarioDetalles.idUsuario}</p>
-              <p><strong>Email:&nbsp</strong></p><input class="form-control" id="detalleEmailUser" value="${usuarioDetalles.emailUsuario}">
-              <p><strong>Estado:&nbsp</strong></p><p id="detalleEstadoUser"></p>
-            </c:when>
-          </c:choose>
-
-          <c:choose>
-            <c:when test="${accion=='C'}">
               <c:choose>
-                <c:when test="${usuarioDetalles.estadoUsuario==true}">
-                  <i class="fa fa-check-circle"></i>
+                <c:when test="${accion=='C'}">
+                  <p><strong>Nombre:&nbsp</strong></p><p id="detalleNombreUser"> ${usuarioDetalles.nombreUsuario}</p>
+                  <p><strong>Username:&nbsp</strong></p><p id="detalleUserName"> ${usuarioDetalles.idUsuario}</p>
+                  <p><strong>Email:&nbsp</strong></p><p id="detalleEmailUser"> ${usuarioDetalles.emailUsuario}</p>
+                  <p><strong>Estado:&nbsp</strong></p><p id="detalleEstadoUser">
                 </c:when>
-                <c:otherwise>
-                  <i class="fa fa-times-circle"></i>
-                </c:otherwise>
+                <c:when test="${accion=='M'}">
+                  <p><strong>Nombre:&nbsp</strong></p>
+                    <form:input path="nombreUsuario" class="form-control"  id="detalleNombreUser" value="${usuarioDetalles.nombreUsuario}"/>
+                  <p><strong>Username:&nbsp</strong></p>
+                    <form:input path="idUsuario" class="form-control disabled" disabled="false" id="detalleUserName" value="${usuarioDetalles.idUsuario}"/>
+                  <p><strong>Email:&nbsp</strong></p>
+                    <form:input path="emailUsuario" class="form-control" id="detalleEmailUser" value="${usuarioDetalles.emailUsuario}"/>
+                  <p><strong>Estado:&nbsp</strong></p>
+                </c:when>
               </c:choose>
-            </c:when>
-            <c:when test="${accion=='M'}">
-              <select>
-                <c:choose>
-                  <c:when test="${usuarioDetalles.estadoUsuario==true}">
-                    <option selected="true">Activo</option>
-                    <option>Inactivo</option>
-                  </c:when>
-                  <c:otherwise>
-                    <option>Activo</option>
-                    <option selected="true">Inactivo</option>
-                  </c:otherwise>
-                </c:choose>
 
-              </select>
-            </c:when>
-          </c:choose>
-
-            </div>
-
-            <div class="col-xs-6 col-md-6 col-lg-6">
-              <h4>Grupos del usuario</h4>
-              <select id="gruposUsuario" multiple class="form-control">
-                <c:forEach var="grupo" items="${listaGruposUser}">
-                  <option>${grupo.descripcionGrupo}</option>
-                </c:forEach>
-              </select>
-              <c:if test="${accion=='M'}">
-                <div class="text-center">
-                  <div class="btn-group" id="botonesGrupos">
-                    <button class="btn btn-success center-block" type="button" id="btnAdd"><i id="iconoAdd" class="fa fa-arrow-up"></i></button>
-                    <button class="btn btn-danger center-block" type="button" id="btnDel"><i id="iconoDel" class="fa fa-arrow-down"></i></button>
-                  </div>
-                </div>
-
-
-                <h4>Todos los Grupos</h4>
-
+              <c:choose>
+                <c:when test="${accion=='C'}">
                   <c:choose>
-                    <c:when test="${empty gruposTodos}">
-                      <h3 class="text-center">El usuario tiene todos los grupos posibles.</h3>
+                    <c:when test="${usuarioDetalles.estadoUsuario==true}">
+                      <i class="fa fa-check-circle"></i>
                     </c:when>
                     <c:otherwise>
-                      <select id="gruposTodos" multiple class="form-control">
-                        <c:forEach var="grupo" items="${gruposTodos}">
-                          <option>${grupo.descripcionGrupo}</option>
-                        </c:forEach>
-                      </select>
+                      <i class="fa fa-times-circle"></i>
                     </c:otherwise>
                   </c:choose>
+                </c:when>
+                <c:when test="${accion=='M'}">
+                  <form:select path="estadoUsuario">
+                    <c:choose>
+                      <c:when test="${usuarioDetalles.estadoUsuario==true}">
+                        <form:option value="true" selected="true">Activo</form:option>
+                        <form:option value="false">Inactivo</form:option>
+                      </c:when>
+                      <c:otherwise>
+                        <form:option value="true">Activo</form:option>
+                        <form:option value="false" selected="true">Inactivo</form:option>
+                      </c:otherwise>
+                    </c:choose>
+                  </form:select>
+                </c:when>
+              </c:choose>
+          </div>
+          <div class="col-xs-6 col-md-6 col-lg-6">
+                  <h4>Grupos del usuario</h4>
+                  <form:select path="grupos" items="${listaGruposUser}"
+                               itemValue="idGrupo"
+                               itemLabel="descripcionGrupo" id="gruposUsuario"
+                               class="form-control" multiple="multiple">
+
+                  </form:select>
+
+                  <c:if test="${accion=='M'}">
+                    <div class="text-center">
+                      <div class="btn-group" id="botonesGrupos">
+                        <button class="btn btn-success center-block" type="button" id="btnAdd"><i id="iconoAdd" class="fa fa-arrow-up"></i></button>
+                        <button class="btn btn-danger center-block" type="button" id="btnDel"><i id="iconoDel" class="fa fa-arrow-down"></i></button>
+                      </div>
+                    </div>
 
 
-                <button class="btn btn-success center-block" type="button" id="btnGuardar"><span>Guardar&nbsp</span><i id="iconoGuardar" class="fa fa-floppy-o"></i></button>
-              </c:if>
-            </div>
+                    <h4>Todos los Grupos</h4>
 
-        </div>
+                      <c:choose>
+                        <c:when test="${empty gruposTodos}">
+                          <h3 class="text-center">El usuario tiene todos los grupos posibles.</h3>
+                        </c:when>
+                        <c:otherwise>
+                          <select id="gruposTodos" multiple class="form-control">
+                            <c:forEach var="grupo" items="${gruposTodos}">
+                              <option value="${grupo.idGrupo}">${grupo.descripcionGrupo}</option>
+                            </c:forEach>
+                          </select>
+                        </c:otherwise>
+                      </c:choose>
 
 
+                    <button class="btn btn-success center-block" type="submit" id="btnGuardar"><span>Guardar&nbsp</span><i id="iconoGuardar" class="fa fa-floppy-o"></i></button>
+                  </c:if>
 
+          </div>
+
+
+        </form:form>
       </div>
-    </div>
 
-    <c:if test="${accion=='M'}">
-      <div class="alert alert-success center-block">
-        El usuario ha sido modificado correctamente, continúe modificando usuarios o
-        <a href="${pageContext.request.contextPath}/Usuarios/usuario.do">vuelva al inicio.</a>
-      </div>
 
-      <div class="alert alert-danger center-block">
-        El usuario no ha podido ser modificado. Intente nuevamente.
-      </div>
-    </c:if>
 </body>
 </html>

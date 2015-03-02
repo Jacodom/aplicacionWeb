@@ -3,6 +3,7 @@ package com.controllers;
 import com.helpers.ConstructorVistaHelper;
 import com.model.Grupo;
 import com.model.Usuario;
+import com.model.UsuarioCambioPassword;
 import com.services.EmailService;
 import com.services.GrupoService;
 import com.services.SeguridadService;
@@ -14,6 +15,7 @@ import org.springframework.web.method.annotation.SessionAttributesHandler;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.mail.Session;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -99,9 +101,9 @@ public class UsuarioController {
         userService = new UsuarioService();
         ConstructorVistaHelper cHelper = new ConstructorVistaHelper();
 
-        int cantP = cHelper.obtenerCantidadPaginas(userService.obtenerUsuarios().size(),10);
+        int cantP = cHelper.obtenerCantidadPaginas(userService.obtenerUsuarios().size(), 10);
 
-        mav.addObject("cantPaginas",cantP);
+        mav.addObject("cantPaginas", cantP);
         mav.addObject("accion","C");
 
         return mav;
@@ -151,6 +153,44 @@ public class UsuarioController {
         }
     }
 
+    @RequestMapping(value = "/Usuarios/cambiarPassword.do",method = RequestMethod.GET)
+    public ModelAndView mostrarCambiarPassword(@ModelAttribute("usuarioCambioPw")UsuarioCambioPassword usuarioCambioPw,
+                                               HttpSession session){ //agrego un usuario de tipo
+                                                                    //cambioUsuario para no sobreescribir la sesion
+                                                                   //y usarlo en el form de la pag .jsp
+        Usuario usuarioSession = (Usuario) session.getAttribute("usuarioSession"); //obtengo el usuario de la session
+        ModelAndView mav = setearVista(new ModelAndView(), "cambiarPassword", usuarioSession);
+        return mav;
+    }
+
+    @RequestMapping(value = "/Usuarios/cambiarPassword.do", method = RequestMethod.POST)
+    public ModelAndView cambiarPassword(@ModelAttribute("usuarioCambioPw") UsuarioCambioPassword usuarioCambioPw,
+                                  HttpSession session) throws Exception {
+        userService = new UsuarioService();
+        SeguridadService seguridadService = new SeguridadService();
+
+
+        Usuario usuarioSession = (Usuario) session.getAttribute("usuarioSession"); //obtengo el usuario de la session
+
+        //se crea la vista a retornar(la misma del form) y se le agrega el usuarioSession para la barra de navegacion
+        ModelAndView mav = setearVista(new ModelAndView(),"cambiarPassword",usuarioSession);
+
+        //comparo la clave de la sesion actual con la contraseña anterior ingresada en el form (se encripta)
+        if(usuarioSession.getClaveUsuario().equals(seguridadService.encriptarPassword(usuarioCambioPw.getPasswordAnterior()))){
+            //se le settea la nueva contraseña al usuario
+            usuarioSession.setClaveUsuario(seguridadService.encriptarPassword(usuarioCambioPw.getPasswordNueva()));
+
+            //se guardan los datos y en base a eso las alertas
+            if(userService.modificarUsuario(usuarioSession)){
+                mav.addObject("alerta","exito");
+            }else{
+                mav.addObject("alerta","error");
+            }
+        }
+
+        return mav;
+    }
+
     @RequestMapping(value = "/Usuarios/ajax/usuarios.do",method = RequestMethod.GET)
     public String usuariosPagina(Model model, @RequestParam("pg")int pg){
         userService = new UsuarioService();
@@ -172,11 +212,14 @@ public class UsuarioController {
         Usuario user = userService.obtenerUsuario(idUsuario);
         List<Grupo>listaGruposUser =  userService.obtenerGruposUsuario(user);
 
+        //user.setGrupos(null);
+
         model.addAttribute("usuarioDetalles",user);
         model.addAttribute("listaGruposUser",listaGruposUser);
         model.addAttribute("accion",accion);
 
         if(accion.equals("M")){
+
             List<Grupo> gruposTodos = grupoService.obtenerGrupos();
             for(Grupo grupoU : listaGruposUser){
                 for(Grupo grupo : grupoService.obtenerGrupos()){
@@ -185,6 +228,7 @@ public class UsuarioController {
                     }
                 }
             }
+
             model.addAttribute("gruposTodos",gruposTodos);
         }
 
@@ -192,15 +236,37 @@ public class UsuarioController {
     }
 
     @RequestMapping(value = "/Usuarios/modificarUsuario.do",method = RequestMethod.GET)
-    public ModelAndView modificarUsuario(@ModelAttribute("usuarioSession")Usuario usuarioSession){
+    public ModelAndView modificarUsuarioGet(@ModelAttribute("usuarioSession")Usuario usuarioSession){
         ModelAndView mav = setearVista(new ModelAndView(),"usuarios",usuarioSession);
         userService = new UsuarioService();
         ConstructorVistaHelper cHelper = new ConstructorVistaHelper();
 
+        int cantP = cHelper.obtenerCantidadPaginas(userService.obtenerUsuarios().size(), 10);
+
+        mav.addObject("cantPaginas", cantP);
+        mav.addObject("accion", "M");
+
+        return mav;
+    }
+
+    @RequestMapping(value = "/Usuarios/modificarUsuario.do",method = RequestMethod.POST)
+    public ModelAndView modificarUsuarioPost(@ModelAttribute("usuarioDetalles") Usuario usuarioMod,
+                                             HttpSession session) throws Exception {
+        userService = new UsuarioService();
+        ConstructorVistaHelper cHelper = new ConstructorVistaHelper();
+        Usuario userS = (Usuario) session.getAttribute("usuarioSession");
+        ModelAndView mav = setearVista(new ModelAndView(), "usuarios", userS);
         int cantP = cHelper.obtenerCantidadPaginas(userService.obtenerUsuarios().size(),10);
 
         mav.addObject("cantPaginas",cantP);
         mav.addObject("accion","M");
+
+        if(userService.modificarUsuario(usuarioMod)){
+            mav.addObject("alerta","exito");
+            }else{
+                mav.addObject("alerta","error");
+            }
+
 
         return mav;
     }

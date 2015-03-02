@@ -39,7 +39,7 @@ public class AccessFilter implements Filter {
                 if (session.getAttribute("usuarioSession") == null) {
                     httpRes.sendRedirect(httpReq.getContextPath() + "/Usuarios/login.do");
                 } else {
-                    //chequear permisos
+                    //chequear perfiles
                     filterChain.doFilter(servletRequest, servletResponse);
                 }
             }

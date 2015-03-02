@@ -2,7 +2,7 @@
  * Created by Jacobo on 23/02/2015.
  */
 
-$(document).ready(function (e) {
+$(document).ready(function () {
 
     //eventos
     $('#tableU tbody tr').click(function () {
@@ -21,7 +21,7 @@ $(document).ready(function (e) {
         $('#datosUsuario').empty().removeClass('fa fa-circle-o-notch fa-spin fa-4x');
 
         $('html, body').animate({
-            scrollTop: $("#datosUsuarios").offset().top
+            scrollTop: $("#detalles").offset().top
         }, 1000);
     }
 

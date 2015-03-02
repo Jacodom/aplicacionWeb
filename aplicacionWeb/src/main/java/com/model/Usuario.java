@@ -84,7 +84,7 @@ public class Usuario implements Serializable {
 		this.nombreUsuario = nombreUsuario;
 	}
 
-	Set<Grupo> getGrupos() {
+	public Set<Grupo> getGrupos() {
 		return this.grupos;
 	}
 	
@@ -93,7 +93,7 @@ public class Usuario implements Serializable {
 		return Collections.unmodifiableSet(grupos);
 	}
 
-	void setGrupos(HashSet<Grupo> grupos) {
+	public void setGrupos(Set<Grupo> grupos) {
 		this.grupos = grupos;
 	}	
 	

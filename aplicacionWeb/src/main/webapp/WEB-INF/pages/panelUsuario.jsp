@@ -53,7 +53,10 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">${usuarioSession.nombreUsuario}<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                     <li>
-                        <a href="/Usuarios/logout.do">Salir</a>
+                        <a href="${pageContext.request.contextPath}/Usuarios/cambiarPassword.do">Cambiar Contraseña</a>
+                    </li>
+                    <li>
+                        <a href="${pageContext.request.contextPath}/Usuarios/logout.do">Salir</a>
                     </li>
                 </ul>
             </li>
