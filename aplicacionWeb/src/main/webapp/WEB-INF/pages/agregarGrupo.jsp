@@ -33,7 +33,7 @@
       <div class="col-lg-offset-2 col-md-8 col-xs-8">
         <div class="panel panel-default">
           <div class="panel-heading">
-            <strong>Datos de Nuevo Grupo</strong>
+            <strong>Datos del Nuevo Grupo</strong>
           </div>
           <div class="panel-body">
             <form:form role="form" id="addGrupoForm" action="${pageContext.request.contextPath}/Grupos/addGrupo.do" method="POST" modelAttribute="NuevoGrupo">
@@ -63,7 +63,7 @@
                   </label>
                 </div> -->
                <!-- <button class="btn btn-success center-block" type="button" id="btnRegistrar"><span>Registrar</span><i id="iconoSubmit" class="fa"></i></button>-->
-                <input type="submit" name="btnLogin" id="btnLogin" value="Login" class="btn btn-success center-block">
+                <input type="submit" name="btnRegistrar" id="btnRegistrar" value="Registrar" class="btn btn-success center-block">
             </form:form>
           </div>
           <div class="panel-footer">
