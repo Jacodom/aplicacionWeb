@@ -104,7 +104,7 @@ public class DaoGrupo implements DaoBase<Grupo>{
 	public List<Usuario>obtenerUsuariosGrupo(Grupo grupo){
 		try{
 			iniciarOperacion();
-			List<Usuario> listaUsuarios = sesion.createQuery("SELECT usuarios FROM Grupo g where g.idGrupo= :idGrupo")
+			List<Usuario> listaUsuarios = sesion.createQuery("SELECT usuarios FROM Grupo g " +" where g.idGrupo= :idGrupo")
 					.setParameter("idGrupo",grupo.getIdGrupo()).list();
 			return listaUsuarios;
 		}catch (HibernateException he){
@@ -119,7 +119,7 @@ public class DaoGrupo implements DaoBase<Grupo>{
 	public List<Perfil> obtenerPerfilesGrupo(Grupo grupo){
 		try{
 			iniciarOperacion();
-			List<Perfil> listaPerfiles = sesion.createQuery("SELECT perfiles from Grupo g where g.idGrupo = :idGrupo")
+			List<Perfil> listaPerfiles = sesion.createQuery("SELECT perfiles FROM Grupo g "+" where g.idGrupo = :idGrupo")
 					.setParameter("idGrupo",grupo.getIdGrupo()).list();
 			return listaPerfiles;
 		}catch (HibernateException he){
