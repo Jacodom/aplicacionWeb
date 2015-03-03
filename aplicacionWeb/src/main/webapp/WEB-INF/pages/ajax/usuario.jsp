@@ -57,18 +57,20 @@
                   </c:choose>
                 </c:when>
                 <c:when test="${accion=='M'}">
-                  <form:select path="estadoUsuario">
-                    <c:choose>
-                      <c:when test="${usuarioDetalles.estadoUsuario==true}">
-                        <form:option value="true" selected="true">Activo</form:option>
-                        <form:option value="false">Inactivo</form:option>
-                      </c:when>
-                      <c:otherwise>
-                        <form:option value="true">Activo</form:option>
-                        <form:option value="false" selected="true">Inactivo</form:option>
-                      </c:otherwise>
-                    </c:choose>
-                  </form:select>
+                  <div class="col-xs-12 col-md-3 col-lg-6">
+                    <form:select class="form-control" path="estadoUsuario">
+                      <c:choose>
+                        <c:when test="${usuarioDetalles.estadoUsuario==true}">
+                          <form:option value="true" selected="true">Activo</form:option>
+                          <form:option value="false">Inactivo</form:option>
+                        </c:when>
+                        <c:otherwise>
+                          <form:option value="true">Activo</form:option>
+                          <form:option value="false" selected="true">Inactivo</form:option>
+                        </c:otherwise>
+                      </c:choose>
+                    </form:select>
+                  </div>
                 </c:when>
               </c:choose>
           </div>

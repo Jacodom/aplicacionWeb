@@ -26,7 +26,7 @@ public class SeguridadService {
     public String generarClave()throws Exception{
         int PASSWORD_LENGTH=6;
         Random RANDOM = new SecureRandom();
-        String letters = "abcdefghjkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ23456789+@";
+        String letters = "abcdefghjkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ23456789";
 
         String pw = "";
         for (int i=0; i<PASSWORD_LENGTH; i++)

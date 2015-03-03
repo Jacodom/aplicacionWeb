@@ -255,6 +255,7 @@ public class UsuarioController {
         userService = new UsuarioService();
         ConstructorVistaHelper cHelper = new ConstructorVistaHelper();
         Usuario userS = (Usuario) session.getAttribute("usuarioSession");
+        usuarioMod.setClaveUsuario(userService.obtenerUsuario(usuarioMod.getIdUsuario()).getClaveUsuario());
         ModelAndView mav = setearVista(new ModelAndView(), "usuarios", userS);
         int cantP = cHelper.obtenerCantidadPaginas(userService.obtenerUsuarios().size(),10);
 

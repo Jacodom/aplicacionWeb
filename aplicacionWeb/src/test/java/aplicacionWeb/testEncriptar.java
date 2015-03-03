@@ -14,8 +14,9 @@ public class testEncriptar {
    public static void main(String args[]) throws Exception {
        UsuarioService usuarioService = new UsuarioService();
        SeguridadService seguridadService = new SeguridadService();
-       Usuario user = usuarioService.obtenerUsuario("jacodom");
+       Usuario user = usuarioService.obtenerUsuario("hernan");
 
+       user.setClaveUsuario("1234");
        user.setClaveUsuario(seguridadService.encriptarPassword(user.getClaveUsuario()));
 
        usuarioService.modificarUsuario(user);
