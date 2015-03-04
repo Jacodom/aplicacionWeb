@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/Bootstrap/modificacion.css">
     <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.js"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
-    <script src="${pageContext.request.contextPath}/js/agregarUsuario.js"></script>
+    <script src="${pageContext.request.contextPath}/js/agregarGrupo.js"></script>
 </head>
 <body>
   <jsp:include page="panelUsuario.jsp"></jsp:include>
@@ -56,14 +56,24 @@
                   </div>
                 </div>
                 <!-- estado -->
-             <!-- <div class="checkbox">
-                  <label>
-                    <form path="estadoGrupo" type="checkbox" value="" id="chkEstado"/> va el parche
-                    Activo
-                  </label>
-                </div> -->
-               <!-- <button class="btn btn-success center-block" type="button" id="btnRegistrar"><span>Registrar</span><i id="iconoSubmit" class="fa"></i></button>-->
-                <input type="submit" name="btnRegistrar" id="btnRegistrar" value="Registrar" class="btn btn-success center-block">
+                  <tr>
+                      <td>Activo:</td>
+                      <td><form:checkbox path="estadoGrupo" value="Activo" id="chkEstado" /></td>
+                  </tr>
+                 <button class="btn btn-success center-block" type="submit" id="btnRegistrar"><span>Registrar</span><i id="iconoSubmit" class="fa"></i></button>
+                  <br>
+                  <c:choose>
+                      <c:when test="${alerta=='exito'}">
+                          <div class="alert alert-success center-block">
+                             Se ha agregado el grupo con éxito!
+                          </div>
+                      </c:when>
+                      <c:when test="${alerta=='error'}">
+                          <div class="alert alert-danger center-block">
+                              Se ha producido un error al agregar el gurpo, intentelo nuevamente!
+                          </div>
+                      </c:when>
+                  </c:choose>
             </form:form>
           </div>
           <div class="panel-footer">

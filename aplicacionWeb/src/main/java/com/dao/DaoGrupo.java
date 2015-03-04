@@ -21,7 +21,7 @@ public class DaoGrupo implements DaoBase<Grupo>{
 	private void iniciarOperacion() throws HibernateException 
     { 
         sesion = HibernateUtil.obtenerInstanciaSesion().openSession();
-        transaccion = sesion.beginTransaction(); 
+         transaccion = sesion.beginTransaction();
     }  
 
     private void manejarExcepcion(HibernateException he) throws HibernateException 

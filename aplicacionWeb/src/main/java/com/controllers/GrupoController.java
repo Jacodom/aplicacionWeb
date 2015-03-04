@@ -23,11 +23,11 @@ public class GrupoController {
         private UsuarioService userService;
 
     // GET
-    /*@RequestMapping(value = "Grupos/grupo.do", method = RequestMethod.GET)
-    public ModelAndView mostrarPagina(@ModelAttribute("usuarioSession") Usuario usuarioSession ,@ModelAttribute ("grupo") Grupo grupo) throws Exception {
-        ModelAndView mav = setearVista(new ModelAndView(),"agregarGrupo",usuarioSession);
+    @RequestMapping(value = "/Grupos/agregarGrupo.do",method = RequestMethod.GET)
+    public ModelAndView agregarGrupoGet(@ModelAttribute ("NuevoGrupo") Grupo grupo,@ModelAttribute("usuarioSession")Usuario usuarioSession) throws Exception {
+        ModelAndView mav = setearVista(new ModelAndView(),"agregarGrupo", usuarioSession);
         return mav;
-    }*/
+    }
     public ModelAndView setearVista(ModelAndView vista, String nombreVista, Usuario user) throws Exception {
         userService = new UsuarioService();
         vista.setViewName(nombreVista);
@@ -36,25 +36,22 @@ public class GrupoController {
 
         return vista;
     }
-    @RequestMapping(value = "/Grupos/agregarGrupo.do",method = RequestMethod.GET)
-    public ModelAndView agregarGrupoGet(@ModelAttribute ("NuevoGrupo") Grupo grupo) throws Exception {
-        ModelAndView mav = setearVista(new ModelAndView(),"agregarGrupo",new Usuario());
-        return mav;
-    }
-    @RequestMapping(value = "/Grupos/addGrupo.do",method = RequestMethod.POST)
-    public ModelAndView agregarGrupoPost(@ModelAttribute ("NuevoGrupo") Grupo grupo) throws Exception {
+    @RequestMapping(value = "/Grupos/addGrupo.do",method = RequestMethod.POST) // agregar usuario session al post
+    public ModelAndView agregarGrupoPost(@ModelAttribute ("NuevoGrupo") Grupo grupo,@ModelAttribute("usuarioSession")Usuario usuarioSession) throws Exception {
         groupService = new GrupoService();
-        ModelAndView mav = new ModelAndView();
+        ModelAndView mav = setearVista(new ModelAndView(),"agregarGrupo", usuarioSession);
             if(groupService.obtenerGrupo(grupo.getIdGrupo())!=null){
                 mav.setViewName("agregarGrupo");
                 mav.addObject("errorGrupoExist","El grupo ya existe!, pruebe con otro código");
             }else{
                 mav.setViewName("agregarGrupo");
-                mav.addObject("idGrupo", grupo.getIdGrupo());
-                mav.addObject("descripcionGrupo",grupo.getDescripcionGrupo());
-                mav.addObject("estadoGrupo",grupo.getEstadoGrupo());
-              //  mav.addObject("successGrupo","El grupo se agregó con éxito");
-                groupService.agregarGrupo(grupo);
+                if(groupService.agregarGrupo(grupo)){
+                    mav.addObject("alerta","exito");
+                }
+                else{
+                    mav.addObject("alerta","error");
+                }
+
             }
 
         return mav;
