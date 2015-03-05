@@ -31,6 +31,9 @@ public class Formulario implements Serializable {
 	@Column(name="nombre_formulario")
 	private String nombreFormulario;
 
+	@Column(name = "url_formulario")
+	private String urlFormulario;
+
 	//bi-directional many-to-one association to Modulo
 	@ManyToOne
 	private Modulo modulo;
@@ -44,10 +47,12 @@ public class Formulario implements Serializable {
 	private Set<Perfil> perfiles= new HashSet<Perfil>();
 
 	public String getIdFormulario() {
+
 		return this.idFormulario;
 	}
 
 	public void setIdFormulario(String idFormulario) {
+
 		this.idFormulario = idFormulario;
 	}
 
@@ -60,19 +65,31 @@ public class Formulario implements Serializable {
 	}
 	
 	public boolean getEstadoFormulario() {
+
 		return this.estadoFormulario;
 	}
 
 	public void setEstadoFormulario(boolean estadoFormulario) {
+
 		this.estadoFormulario = estadoFormulario;
 	}
 
 	public String getNombreFormulario() {
+
 		return this.nombreFormulario;
 	}
 
 	public void setNombreFormulario(String nombreFormulario) {
+
 		this.nombreFormulario = nombreFormulario;
+	}
+
+	public String getUrlFormulario() {
+		return urlFormulario;
+	}
+
+	public void setUrlFormulario(String urlFormulario) {
+		this.urlFormulario = urlFormulario;
 	}
 
 	public Modulo getModulo() {

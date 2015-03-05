@@ -82,7 +82,7 @@ public class Grupo implements Serializable {
 		return Collections.unmodifiableSet(usuarios);
 	}
 
-	Set<Usuario> getUsuarios() {
+	public Set<Usuario> getUsuarios() {
 		return this.usuarios;
 	}
 

@@ -1,12 +1,17 @@
 package com.dao;
 
 import java.util.List;
+
+import com.model.Formulario;
+import com.model.Grupo;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.hibernate.HibernateUtil;
 import com.model.Perfil;
+import org.springframework.orm.hibernate3.HibernateTemplate;
+import sun.misc.Perf;
 
 public class DaoPerfil implements DaoBase<Perfil> {
 	
@@ -23,7 +28,7 @@ public class DaoPerfil implements DaoBase<Perfil> {
     private void manejarExcepcion(HibernateException he) throws HibernateException 
     { 
         transaccion.rollback(); 
-        throw new HibernateException("Ocurrió un error en la capa de acceso a datos", he); 
+        throw new HibernateException("Ocurriï¿½ un error en la capa de acceso a datos", he); 
     }
 
 
@@ -82,5 +87,39 @@ public class DaoPerfil implements DaoBase<Perfil> {
 		return true;
 		
 	}
-	
+
+	public List<Perfil>obtenerPorPagina(int primerResultado, int maximosResultados){
+		try{
+			iniciarOperacion();
+			List<Perfil>listaPerfiles = sesion.createQuery("FROM Perfil p order by p.idPerfil asc ")
+					.setFirstResult(primerResultado)
+					.setMaxResults(maximosResultados).list();
+			return listaPerfiles;
+		}catch (HibernateException he){
+			manejarExcepcion(he);
+			throw he;
+		}finally {
+			if(sesion!=null)
+				sesion.close();
+		}
+	}
+
+	public List<Perfil> filtrarPerfiles(Grupo grupo,Formulario formulario){
+		try {
+			iniciarOperacion();
+			List<Perfil> listaPerfiles = sesion.createQuery("SELECT Perfil FROM Perfil p " +
+					"where p.grupo.idGrupo = :idGrupo " +
+					"and p.formulario.idFormulario= :idFormulario")
+					.setParameter("idGrupo",grupo.getIdGrupo())
+					.setParameter("idFormulario",formulario.getIdFormulario()).list();
+			return listaPerfiles;
+		}catch (HibernateException he){
+			manejarExcepcion(he);
+			throw he;
+		}finally {
+			if(sesion!=null)
+				sesion.close();
+		}
+	}
+
 }

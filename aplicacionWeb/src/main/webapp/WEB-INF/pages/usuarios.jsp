@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/Bootstrap/modificacion.css">
     <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.js"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
-    <script src="${pageContext.request.contextPath}/js/paginacion.js"></script>
+    <script src="${pageContext.request.contextPath}/js/paginacionUsuarios.js"></script>
 
 </head>
 <body>
@@ -85,7 +85,6 @@
                 </div>
             </c:when>
         </c:choose>
-
     </div>
 
     <jsp:include page="footer.jsp"></jsp:include>
