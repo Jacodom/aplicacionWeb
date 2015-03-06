@@ -19,6 +19,7 @@
   <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.js"></script>
   <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
   <script src="${pageContext.request.contextPath}/js/paginacionPerfiles.js"></script>
+  <script src="${pageContext.request.contextPath}/js/eliminarPerfil.js"></script>
 </head>
 <body>
   <jsp:include page="panelUsuario.jsp"></jsp:include>

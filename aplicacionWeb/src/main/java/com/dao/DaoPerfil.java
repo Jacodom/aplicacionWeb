@@ -5,6 +5,7 @@ import java.util.List;
 import com.model.Formulario;
 import com.model.Grupo;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -74,7 +75,9 @@ public class DaoPerfil implements DaoBase<Perfil> {
 	public Boolean eliminar(Perfil perfil){
 		try{
 			iniciarOperacion();
-			sesion.delete(perfil);
+			Query q = sesion.createQuery("DELETE from Perfil where idPerfil = :idPerfil")
+					.setParameter("idPerfil",perfil.getIdPerfil());
+			q.executeUpdate();
 			transaccion.commit();
 		}catch(HibernateException he){
 			manejarExcepcion(he);

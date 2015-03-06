@@ -4,9 +4,10 @@
 $(document).ready(function () {
 
     //eventos
-    $('#tableP tbody tr').click(function () {
+    $('#tableP tbody tr td.infoP').click(function () {
 
-        var id = $(this).find("td").eq(0).html();
+        var id = $(this).closest('tr').find('td').eq(0).html();
+        //var id = $(this).find("td").eq(0).html();
         obtenerDetallesPerfil(id);
     });
 

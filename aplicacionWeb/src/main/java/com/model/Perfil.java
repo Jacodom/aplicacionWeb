@@ -27,19 +27,19 @@ public class Perfil implements Serializable {
 	private Date fechaAuditoria;
 
 	//bi-directional one-to-many association to Usuario
-	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@ManyToOne(cascade=CascadeType.PERSIST,fetch=FetchType.EAGER)
 	private Usuario usuario;
 
 	//bi-directional many-to-one association to Formulario
-	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@ManyToOne(cascade=CascadeType.PERSIST,fetch=FetchType.EAGER)
 	private Formulario formulario;
 
 	//bi-directional many-to-one association to Grupo
-	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@ManyToOne(cascade=CascadeType.PERSIST,fetch=FetchType.EAGER)
 	private Grupo grupo;
 
 	//bi-directional many-to-one association to Permiso
-	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@ManyToOne(cascade=CascadeType.PERSIST,fetch=FetchType.EAGER)
 	private Permiso permiso;
 
 	public int getIdPerfil() {
