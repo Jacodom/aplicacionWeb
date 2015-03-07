@@ -290,3 +290,9 @@ input#detalleNombreUser,input#detalleUserName,input#detalleEmailUser{
 #formUserDetalles{
     border-right: 1px solid #E7E7E7;
 }
+
+td a:hover{
+    color: #ac2925;
+    font-style: normal;
+    text-decoration: none;
+}

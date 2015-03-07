@@ -94,7 +94,7 @@ $(document).ready(function(){
 
         $('#tablaPerfiles').empty().addClass('fa fa-circle-o-notch fa-spin fa-4x');
 
-        $('#tablaPerfiles').load('/Perfiles/ajax/perfiles.do?pg='+nroPagina);
+        $('#tablaPerfiles').load('/Perfiles/ajax/perfiles.do?pg='+nroPagina+'&accion='+$('#accion').text());
 
         $('#tablaPerfiles').empty().removeClass('fa fa-circle-o-notch fa-spin fa-4x');
 

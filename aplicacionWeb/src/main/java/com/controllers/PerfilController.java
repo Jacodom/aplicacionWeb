@@ -34,7 +34,7 @@ public class PerfilController {
     }
 
     @RequestMapping(value = "/Perfiles/consultarPerfiles.do",method = RequestMethod.GET)
-    public ModelAndView perfilesGet(@ModelAttribute("usuarioSession")Usuario usuarioSession){
+    public ModelAndView consultarPerfilesGet(@ModelAttribute("usuarioSession")Usuario usuarioSession){
         ModelAndView mav = setearVista(new ModelAndView(),"perfiles",usuarioSession);
 
         ConstructorVistaHelper cHelper = new ConstructorVistaHelper();
@@ -49,13 +49,44 @@ public class PerfilController {
         return mav;
     }
 
+    @RequestMapping(value = "/Perfiles/eliminarPerfiles.do",method = RequestMethod.GET)
+    public ModelAndView eliminarPerfilesGet(@ModelAttribute("usuarioSession")Usuario usuarioSession){
+        ModelAndView mav = setearVista(new ModelAndView(),"perfiles",usuarioSession);
+
+        ConstructorVistaHelper cHelper = new ConstructorVistaHelper();
+
+        perfilService = new PerfilService();
+
+        int cantP = cHelper.obtenerCantidadPaginas(perfilService.obtenerPerfiles().size(),10);
+
+        mav.addObject("cantPaginas",cantP);
+        mav.addObject("accion","B");
+
+        return mav;
+    }
+
+    @RequestMapping(value = "/Perfiles/eliminarPerfiles.do",method = RequestMethod.POST)
+    @ResponseBody public boolean eliminarPerfilPost(@RequestBody String idPerfil){
+        perfilService = new PerfilService();
+
+        int id = Integer.parseInt(idPerfil);
+
+        if(perfilService.eliminarPerfil(perfilService.obtenerPerfil(id))){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     @RequestMapping(value = "/Perfiles/ajax/perfiles.do",method = RequestMethod.GET)
-    public String usuariosPagina(Model model, @RequestParam("pg")int pg){
+    public String usuariosPagina(Model model, @RequestParam("pg")int pg,
+                                 @RequestParam("accion")String accion){
         perfilService = new PerfilService();
 
         List<Perfil> listaPerfiles = perfilService.obtenerPerfilesPorPagina(pg, 10);
 
         model.addAttribute("listaPerfiles",listaPerfiles);
+        model.addAttribute("accion",accion);
 
         return "/ajax/perfiles";
 
