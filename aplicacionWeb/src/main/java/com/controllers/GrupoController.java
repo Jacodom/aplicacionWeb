@@ -40,10 +40,10 @@ public class GrupoController {
     public ModelAndView agregarGrupoPost(@ModelAttribute ("NuevoGrupo") Grupo grupo,@ModelAttribute("usuarioSession")Usuario usuarioSession) throws Exception {
         groupService = new GrupoService();
         ModelAndView mav = setearVista(new ModelAndView(),"agregarGrupo", usuarioSession);
-            if(groupService.obtenerGrupo(grupo.getIdGrupo())!=null){
+            /*if(groupService.obtenerGrupo(grupo.getIdGrupo())!=null){
                 mav.setViewName("agregarGrupo");
                 mav.addObject("errorGrupoExist","El grupo ya existe!, pruebe con otro código");
-            }else{
+            }else{*/
                 mav.setViewName("agregarGrupo");
                 if(groupService.agregarGrupo(grupo)){
                     mav.addObject("alerta","exito");
@@ -52,11 +52,20 @@ public class GrupoController {
                     mav.addObject("alerta","error");
                 }
 
-            }
+           // }
 
         return mav;
     }
-
+    @RequestMapping(value = "/Grupos/verificarGrupo.do",method = RequestMethod.POST ,produces = "application/json")
+    @ResponseBody public boolean verificarIdGrupo(@RequestBody String idGrupo){
+        groupService=new GrupoService();
+        if(groupService.verificarGrupo(idGrupo)){
+            return true; //no existe el grupo
+        }
+        else{
+            return false; //hay un grupo con el mismo código
+        }
+    }
 
 
 }

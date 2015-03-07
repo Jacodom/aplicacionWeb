@@ -55,6 +55,8 @@
                     <span class="input-group-addon"><span id="iconoNombre" class="glyphicon glyphicon-asterisk"></span></span>
                   </div>
                 </div>
+                  <!-- alerta de campos vacios -->
+                  <div class="error-ingreso help-block" id="errorvalidacion">Debe completar los campos requeridos!</div>
                 <!-- estado -->
                   <tr>
                       <td>Activo:</td>
