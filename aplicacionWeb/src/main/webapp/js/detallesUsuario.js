@@ -5,9 +5,9 @@
 $(document).ready(function () {
 
     //eventos
-    $('#tableU tbody tr').click(function () {
+    $('#tableU tbody tr td.infoP').click(function () {
 
-        var id = $(this).find("td").eq(1).html();
+        var id = $(this).closest('tr').find('td').eq(1).html();
         obtenerDetallesUsuario(id);
     });
 

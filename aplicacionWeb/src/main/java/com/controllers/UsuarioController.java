@@ -192,12 +192,14 @@ public class UsuarioController {
     }
 
     @RequestMapping(value = "/Usuarios/ajax/usuarios.do",method = RequestMethod.GET)
-    public String usuariosPagina(Model model, @RequestParam("pg")int pg){
+    public String usuariosPagina(Model model, @RequestParam("pg")int pg,
+                                 @RequestParam("accion")String accion){
         userService = new UsuarioService();
 
         List<Usuario> listaUsuarios = userService.obtenerUsuariosPorPagina(pg,10);
 
         model.addAttribute("listaUsuarios",listaUsuarios);
+        model.addAttribute("accion",accion);
 
         return "/ajax/usuarios";
 
@@ -273,7 +275,7 @@ public class UsuarioController {
     }
 
     @RequestMapping(value = "/Usuarios/eliminarUsuario.do",method = RequestMethod.GET)
-    public ModelAndView eliminarUsuario(@ModelAttribute("usuarioSession")Usuario usuarioSession){
+    public ModelAndView eliminarUsuarioGet(@ModelAttribute("usuarioSession")Usuario usuarioSession){
         ModelAndView mav = setearVista(new ModelAndView(),"usuarios",usuarioSession);
         userService = new UsuarioService();
         ConstructorVistaHelper cHelper = new ConstructorVistaHelper();
@@ -284,5 +286,18 @@ public class UsuarioController {
         mav.addObject("accion","B");
 
         return mav;
+    }
+
+    @RequestMapping(value = "/Usuarios/eliminarUsuario.do",method = RequestMethod.POST)
+    @ResponseBody public boolean eliminarUsuarioPost(@RequestBody String idUsuario) throws Exception {
+        userService = new UsuarioService();
+
+        Usuario user = userService.obtenerUsuario(idUsuario);
+
+        if(userService.eliminarUsuario(user)){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

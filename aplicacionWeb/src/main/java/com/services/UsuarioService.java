@@ -81,7 +81,9 @@ public class UsuarioService {
     public boolean eliminarUsuario(Usuario usuario) throws Exception {
         daoUsuario= new DaoUsuario();
         try{
-            daoUsuario.eliminar(usuario);
+            if(daoUsuario.eliminar(usuario)){
+                return true;
+            }
         }catch(Exception ex){
             throw new Exception("Error!",ex);
         }

@@ -36,7 +36,7 @@ public class Usuario implements Serializable {
 	private String nombreUsuario;
 
 	//bi-directional many-to-many association to Grupo
-	@ManyToMany(fetch=FetchType.EAGER,cascade = CascadeType.ALL)
+	@ManyToMany(fetch=FetchType.EAGER)
 	private Set<Grupo> grupos=new HashSet<Grupo>();
 
 

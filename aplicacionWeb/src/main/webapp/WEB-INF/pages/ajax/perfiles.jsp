@@ -22,7 +22,7 @@
 <div class="table-responsive">
   <table class="table table-bordered table-hover" id="tableP">
     <thead>
-    <tr>
+    <tr class="text-center">
       <th>ID</th>
       <th>Grupo</th>
       <th>Formulario</th>
@@ -60,7 +60,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-            <h4 class="modal-title text-center">Eliminar Usuario</h4>
+            <h4 class="modal-title text-center">Eliminar Perfil</h4>
           </div>
           <div class="modal-body">
             <div id="mensajeModal" class="text-center">

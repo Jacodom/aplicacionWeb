@@ -30,7 +30,7 @@ public class Grupo implements Serializable {
 	private boolean estadoGrupo;
 
 	//bi-directional many-to-one association to Perfil
-	@OneToMany(mappedBy="grupo")
+	@OneToMany(mappedBy="grupo",cascade = CascadeType.REMOVE)
 	private Set<Perfil> perfiles= new HashSet<Perfil>();
 
 	//bi-directional many-to-many association to Usuario

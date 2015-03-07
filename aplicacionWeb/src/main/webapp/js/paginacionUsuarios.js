@@ -90,7 +90,7 @@ $(document).ready(function(){
 
         $('#tablaUsuarios').empty().addClass('fa fa-circle-o-notch fa-spin fa-4x');
 
-        $('#tablaUsuarios').load('/Usuarios/ajax/usuarios.do?pg='+nroPagina);
+        $('#tablaUsuarios').load('/Usuarios/ajax/usuarios.do?pg='+nroPagina+"&accion="+$('#accion').text());
 
         $('#tablaUsuarios').empty().removeClass('fa fa-circle-o-notch fa-spin fa-4x');
 

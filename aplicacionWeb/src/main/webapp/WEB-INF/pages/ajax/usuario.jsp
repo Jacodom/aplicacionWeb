@@ -28,7 +28,7 @@
           <div class="col-xs-6 col-md-6 col-lg-5 col-lg-offset-1">
 
               <c:choose>
-                <c:when test="${accion=='C'}">
+                <c:when test="${accion=='C'||accion=='B'}">
                   <p><strong>Nombre:&nbsp</strong></p><p id="detalleNombreUser"> ${usuarioDetalles.nombreUsuario}</p>
                   <p><strong>Username:&nbsp</strong></p><p id="detalleUserName"> ${usuarioDetalles.idUsuario}</p>
                   <p><strong>Email:&nbsp</strong></p><p id="detalleEmailUser"> ${usuarioDetalles.emailUsuario}</p>
@@ -46,7 +46,7 @@
               </c:choose>
 
               <c:choose>
-                <c:when test="${accion=='C'}">
+                <c:when test="${accion=='C'||accion=='B'}">
                   <c:choose>
                     <c:when test="${usuarioDetalles.estadoUsuario==true}">
                       <i class="fa fa-check-circle"></i>

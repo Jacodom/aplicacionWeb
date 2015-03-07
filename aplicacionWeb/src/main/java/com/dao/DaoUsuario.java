@@ -6,6 +6,7 @@ import java.util.List;
 import com.model.Grupo;
 import com.model.Perfil;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -88,6 +89,10 @@ public class DaoUsuario implements DaoBase<Usuario> {
 		try{
 			iniciarOperacion();
 			sesion.delete(usuario);
+
+			//Query q = sesion.createQuery("DELETE from Usuario where idUsuario = :idUsuario")
+			//		.setParameter("idUsuario",usuario.getIdUsuario());
+			//q.executeUpdate();
 			transaccion.commit();
 		}catch(HibernateException he){
 			manejarExcepcion(he);
