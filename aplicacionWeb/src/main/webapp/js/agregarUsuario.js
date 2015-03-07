@@ -62,7 +62,7 @@ $(document).ready(function(){
 
             $.ajax({
                 type:"POST",
-                url:'/Usuarios/verifyUsuario.do',
+                url:"/Usuarios/verifyUsuario.do",
                 data:userName,
                 dataType:"json",
                 contentType:"application/json",

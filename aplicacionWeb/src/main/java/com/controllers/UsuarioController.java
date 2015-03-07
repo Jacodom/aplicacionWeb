@@ -186,6 +186,8 @@ public class UsuarioController {
             }else{
                 mav.addObject("alerta","error");
             }
+        }else{
+            mav.addObject("errorPassword","La contraseña ingresada no coindice con la almacenada en la base de datos. ");
         }
 
         return mav;

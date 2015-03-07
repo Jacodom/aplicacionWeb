@@ -261,7 +261,7 @@ i{
     margin-top: 100px;
 }
 
-#formRecuperar, #formLogin{
+#formRecuperar, #formLogin, #formCambioPW{
     margin: 20px;
 }
 
@@ -269,7 +269,7 @@ i{
     margin: 20px;
 }
 
-#formRecuperar .alert{
+#formRecuperar, #formCambioPW .alert{
     margin-top: 20px;
 }
 
@@ -295,4 +295,8 @@ td a:hover{
     color: #ac2925;
     font-style: normal;
     text-decoration: none;
+}
+
+.label-info{
+    background-color: #4B4A79;
 }

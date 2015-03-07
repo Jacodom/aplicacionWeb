@@ -40,7 +40,7 @@
                       <ul class="dropdown-menu" role="menu">
                           <c:forEach var="perfil" items="${perfilesUsuario}">
                               <c:if test="${perfil.formulario.modulo.idModulo==modulo.idModulo}">
-                                <li><a href="/${modulo.descripcionModulo}/${perfil.formulario.urlFormulario}.do">${perfil.formulario.nombreFormulario}</a></li>
+                                <li><a href="${pageContext.request.contextPath}/${modulo.descripcionModulo}/${perfil.formulario.urlFormulario}.do">${perfil.formulario.nombreFormulario}</a></li>
                               </c:if>
                           </c:forEach>
                       </ul>

@@ -78,10 +78,10 @@
                   </c:choose>
             </form:form>
           </div>
-          <div class="panel-footer">
-            <strong><span class="glyphicon glyphicon-asterisk"></span> Campos Requeridos</strong>
-          </div>
         </div>
+            <div class="panel-footer">
+                <strong><span class="glyphicon glyphicon-asterisk"></span> Campos Requeridos</strong>
+            </div>
       </div>
     </div>
   </div>
