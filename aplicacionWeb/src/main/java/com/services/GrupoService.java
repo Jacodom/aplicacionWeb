@@ -66,4 +66,16 @@ public class GrupoService {
         daoGrupo =  new DaoGrupo();
         return daoGrupo.obtenerPerfilesGrupo(grupo);
     }
+    public boolean verificarGrupo(String idGrupo){
+        daoGrupo= new DaoGrupo();
+        List<Grupo> listaGrupos = daoGrupo.obtener();
+        for(Grupo group : listaGrupos){
+            if(idGrupo.equals(group.getIdGrupo()))
+                //Falso cuando existe uno que tiene ese nombre
+                return false;
+        }
+
+        //Verdadero cuando no existe el grupo
+        return true;
+    }
 }
