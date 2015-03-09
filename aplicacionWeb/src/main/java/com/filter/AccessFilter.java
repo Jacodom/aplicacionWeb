@@ -1,7 +1,10 @@
 package com.filter;
 
 
+import com.model.Formulario;
+import com.model.Perfil;
 import com.model.Usuario;
+import com.services.UsuarioService;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -21,15 +24,15 @@ public class AccessFilter implements Filter {
         HttpSession session = httpReq.getSession();
 
         String urlEntera = httpReq.getRequestURL().toString();
-        String url = urlEntera.substring(urlEntera.lastIndexOf("/")+1);
+        String url = urlEntera.substring(urlEntera.lastIndexOf("/") + 1);
 
-        if(isAjax(httpReq)){
+        if (isAjax(httpReq)) {
             System.out.println("es ajax!");
-            filterChain.doFilter(servletRequest,servletResponse);
-        }else {
+            filterChain.doFilter(servletRequest, servletResponse);
+        } else {
 
 
-            if (url.equals("login.do")||url.equals("recuperarPassword.do")) {
+            if (url.equals("login.do") || url.equals("recuperarPassword.do")) {
                 if ((session.getAttribute("usuarioSession") == null)) {
                     filterChain.doFilter(servletRequest, servletResponse);
                 } else {
@@ -40,11 +43,34 @@ public class AccessFilter implements Filter {
                     httpRes.sendRedirect(httpReq.getContextPath() + "/Usuarios/login.do");
                 } else {
                     //chequear perfiles
-                    filterChain.doFilter(servletRequest, servletResponse);
+                    if (verificarAccesoPagina(url, (Usuario) session.getAttribute("usuarioSession"))) {
+                        filterChain.doFilter(servletRequest, servletResponse);
+                    } else {
+                        httpRes.sendRedirect(httpReq.getContextPath() + "/Usuarios/accesoDenegado.do");
+                    }
                 }
             }
         }
+    }
 
+
+    public boolean verificarAccesoPagina(String url, Usuario usuario){
+        UsuarioService usuarioService =  new UsuarioService();
+        if(url.equals("usuario.do")||
+                url.equals("accesoDenegado.do")||
+                url.equals("logout.do")||
+                url.equals("cambiarPassword.do")){
+            return true;
+        }else{
+            for(Perfil perfil : usuarioService.obtenerPerfilesUsuario(usuario)){
+                String formURL = perfil.getFormulario().getUrlFormulario()+".do";
+                if(formURL.equals(url)){
+                    return  true;
+                }
+            }
+            return false;
+        }
+    }
 
 
 
@@ -75,7 +101,7 @@ public class AccessFilter implements Filter {
             if(user.getIdUsuario().equals("jacodom"))
                 filterChain.doFilter(servletRequest,servletResponse);
         }*/
-    }
+
 
 
     public static boolean isAjax(HttpServletRequest request) {
