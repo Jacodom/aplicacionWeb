@@ -130,5 +130,20 @@ public class DaoGrupo implements DaoBase<Grupo>{
 				sesion.close();
 		}
 	}
+	public List<Grupo>obtenerPorPagina(int primerResultado, int maximosResultados){
+		try{
+			iniciarOperacion();
+			List<Grupo>listaGrupo = sesion.createQuery("FROM Grupo u order by u.descripcionGrupo asc ")
+					.setFirstResult(primerResultado)
+					.setMaxResults(maximosResultados).list();
+			return listaGrupo;
+		}catch (HibernateException he){
+			manejarExcepcion(he);
+			throw he;
+		}finally {
+			if(sesion!=null)
+				sesion.close();
+		}
+	}
     
 }

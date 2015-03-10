@@ -57,7 +57,7 @@ public class GrupoService {
             return false;
     }
 
-    public List<Usuario> obtenerUsuariosGrupo(Grupo grupo)throws Exception{
+    public List<Usuario> obtenerUsuariosGrupo(Grupo grupo){
         daoGrupo = new DaoGrupo();
         return daoGrupo.obtenerUsuariosGrupo(grupo);
     }
@@ -78,4 +78,10 @@ public class GrupoService {
         //Verdadero cuando no existe el grupo
         return true;
     }
+    public List<Grupo> obtenerGruposPorPagina(int pagina, int maximosResultados){
+        daoGrupo = new DaoGrupo();
+        int primerResultado = pagina * maximosResultados - maximosResultados;
+        return daoGrupo.obtenerPorPagina(primerResultado, maximosResultados);
+    }
+
 }
