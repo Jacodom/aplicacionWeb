@@ -149,7 +149,6 @@ public class Formulario implements Serializable {
 		public int hashCode(){
 			int result;
 	        result = this.getIdFormulario().hashCode();
-	        result = 100 * result + this.getDescripcionFormulario().hashCode();
 	        return result;
 		}
 

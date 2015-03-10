@@ -3,6 +3,7 @@ package com.controllers;
 import com.helpers.ConstructorVistaHelper;
 import com.model.Perfil;
 import com.model.Usuario;
+import com.services.FormularioService;
 import com.services.GrupoService;
 import com.services.PerfilService;
 import com.services.UsuarioService;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -108,5 +110,45 @@ public class PerfilController {
         model.addAttribute("accion",accion);
 
         return "ajax/perfil";
+    }
+
+    @RequestMapping(value = "/Perfiles/agregarPerfil.do",method = RequestMethod.GET)
+    public ModelAndView agregarPerfilGet(@ModelAttribute("perfil")Perfil perfil,
+                                         HttpSession session){
+        ModelAndView mav = setearVista(new ModelAndView(),"agregarPerfil",(Usuario)session.getAttribute("usuarioSession"));
+
+        GrupoService grupoService = new GrupoService();
+        FormularioService formularioService = new FormularioService();
+
+        mav.addObject("listaGrupos",grupoService.obtenerGrupos());
+        mav.addObject("listaFormularios", formularioService.obtenerFormularios());
+
+        return mav;
+    }
+
+    @RequestMapping(value = "/Perfiles/agregarPerfil.do",method = RequestMethod.POST)
+    public ModelAndView agregarPerfilPost(@ModelAttribute("perfil")Perfil perfil,
+                                          HttpSession session){
+        ModelAndView mav = setearVista(new ModelAndView(),"agregarPerfil",(Usuario)session.getAttribute("usuarioSession"));
+
+        perfilService = new PerfilService();
+
+        GrupoService grupoService = new GrupoService();
+        FormularioService formularioService = new FormularioService();
+
+        mav.addObject("listaGrupos",grupoService.obtenerGrupos());
+        mav.addObject("listaFormularios", formularioService.obtenerFormularios());
+
+        if(perfilService.verificarPerfil(perfil)){
+           mav.addObject("alerta","existe");
+        }else{
+            if(perfilService.agregarPerfil(perfil)){
+                mav.addObject("alerta","exito");
+            }else{
+                mav.addObject("alerta","error");
+            }
+        }
+
+        return mav;
     }
 }

@@ -18,7 +18,7 @@ import java.util.List;
 public class FormularioService {
     DaoFormulario  daoFormulario;
 
-    public Formulario ObtenerFormulario(String idFormulario){
+    public Formulario obtenerFormulario(String idFormulario){
         daoFormulario = new DaoFormulario();
         for (Formulario formulario: daoFormulario.obtener())
             if(formulario.getIdFormulario().equals(idFormulario))
@@ -26,14 +26,14 @@ public class FormularioService {
 
         return null;
     }
-    public List<Formulario> ObtenerFormularios(){
+    public List<Formulario> obtenerFormularios(){
         daoFormulario = new DaoFormulario();
         return daoFormulario.obtener();
     }
-    public boolean AgregarFormulario(Formulario formulario) throws Exception{
+    public boolean agregarFormulario(Formulario formulario) throws Exception{
         daoFormulario = new DaoFormulario();
         try{
-            if(ObtenerFormulario(formulario.getIdFormulario())== null) {
+            if(obtenerFormulario(formulario.getIdFormulario())== null) {
                 daoFormulario.agregar(formulario);
                 return true;
             }
@@ -43,25 +43,25 @@ public class FormularioService {
 
         return false;
     }
-    public boolean ModificarFormulario(Formulario formulario) throws Exception{
+    public boolean modificarFormulario(Formulario formulario) throws Exception{
         daoFormulario = new DaoFormulario();
         if(daoFormulario.modificar(formulario))
             return true;
         else
             return false;
     }
-    public boolean EliminarFormulario(Formulario formulario) throws Exception{
+    public boolean eliminarFormulario(Formulario formulario) throws Exception{
         daoFormulario = new DaoFormulario();
         if(daoFormulario.eliminar(formulario))
             return true;
         else
             return false;
     }
-    public List<Perfil> ObtenerPerfilesFormulario(Formulario formulario) throws Exception{
+    public List<Perfil> obtenerPerfilesFormulario(Formulario formulario) throws Exception{
         daoFormulario = new DaoFormulario();
         return daoFormulario.ObtenerPerfilesFormulario(formulario);
     }
-    public List<Permiso> ObtenerPermisosFormularios(Formulario formulario) throws  Exception{
+    public List<Permiso> obtenerPermisosFormularios(Formulario formulario) throws  Exception{
         daoFormulario= new DaoFormulario();
         return daoFormulario.ObtenerPermisosFormulario(formulario);
     }

@@ -29,6 +29,19 @@ public class PerfilService {
         return daoPerfil.obtener();
     }
 
+    public boolean verificarPerfil(Perfil perfil){
+        DaoPerfil daoPerfil = new DaoPerfil();
+        for(Perfil perfilBD : daoPerfil.obtener()) {
+            if (perfilBD.getGrupo().getIdGrupo().equals(perfil.getGrupo().getIdGrupo())) {
+                if (perfilBD.getFormulario().getIdFormulario().equals(perfil.getFormulario().getIdFormulario())) {
+                    //true cuando existe uno
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 
     public List<Perfil> obtenerPerfilesPorPagina(int pagina, int maximosResultados){
         DaoPerfil daoPerfil = new DaoPerfil();

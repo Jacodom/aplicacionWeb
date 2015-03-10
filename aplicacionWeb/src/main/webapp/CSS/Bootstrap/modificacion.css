@@ -261,7 +261,7 @@ i{
     margin-top: 100px;
 }
 
-#formRecuperar, #formLogin, #formCambioPW{
+#formRecuperar, #formLogin, #formCambioPW, #formAgregarPerfil{
     margin: 20px;
 }
 
@@ -269,7 +269,7 @@ i{
     margin: 20px;
 }
 
-#formRecuperar, #formCambioPW .alert{
+#formRecuperar, #formCambioPW, #formAgregarPerfil .alert{
     margin-top: 20px;
 }
 
@@ -299,4 +299,12 @@ td a:hover{
 
 .label-info{
     background-color: #4B4A79;
+}
+#formAgregarPerfil label{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#formAgregarPerfil #btnGuardar{
+    margin-top: 50px;
 }

@@ -22,7 +22,7 @@
       <div class="row">
         <div class="col-xs-12 col-md-12 col-lg-12">
           <img src="${pageContext.request.contextPath}/img/error500Page.png" alt="Obi: may the force be with you...always" class="img-responsive center-block">
-          <h3 class="text-center"><strong>Ups! </strong>algo no funcionó en el servidor. Actualiza la página en unos minutos. <small> Para volver al inicio haz click <a href="/Usuarios/usuario.do">aquí.</a></small> </h3>
+          <h3 class="text-center"><strong>Ups! </strong>algo no funcionó en el servidor. Actualiza la página en unos minutos. <small> Para volver al inicio haz click <a href="${pageContext.request.contextPath}/Usuarios/usuario.do">aquí.</a></small> </h3>
         </div>
       </div>
     </div>
