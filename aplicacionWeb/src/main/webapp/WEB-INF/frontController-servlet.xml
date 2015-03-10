@@ -22,6 +22,7 @@
 		<property name="formatters">
 			<set>
 				<ref bean="grupoFormatter"/>
+				<ref bean="usuarioFormatter"/>
 <!--				<ref bean="usuarioFormatter"/>
 				<ref bean="formularioFormatter"/>
 				<ref bean="perfilFormatter"/>
@@ -33,8 +34,9 @@
 	</bean>
 
 	<bean id="grupoFormatter" class="com.Formatters.FormatterGrupo"/>
-<!--	<bean id="usuarioFormatter" class="com.uai.moduloseguridad.spring.UsuarioFormatter"/>
-	<bean id="formularioFormatter" class="com.uai.moduloseguridad.spring.FormularioFormatter"/>
+	<bean id="usuarioFormatter" class="com.Formatters.FormatterUsuario"/>
+
+	<!--<bean id="formularioFormatter" class="com.uai.moduloseguridad.spring.FormularioFormatter"/>
 	<bean id="perfilFormatter" class="com.uai.moduloseguridad.spring.PerfilFormatter"/>
 	<bean id="moduloFormatter" class="com.uai.moduloseguridad.spring.ModuloFormatter"/>
 	<bean id="permisoFormatter" class="com.uai.moduloseguridad.spring.PermisoFormatter"/>
