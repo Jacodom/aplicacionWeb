@@ -37,7 +37,7 @@ public class GrupoController {
 
         return vista;
     }
-    @RequestMapping(value = "/Grupos/addGrupo.do",method = RequestMethod.POST) // agregar usuario session al post
+    @RequestMapping(value = "/Grupos/agregarGrupo.do",method = RequestMethod.POST) // agregar usuario session al post
     public ModelAndView agregarGrupoPost(@ModelAttribute ("NuevoGrupo") Grupo grupo,@ModelAttribute("usuarioSession")Usuario usuarioSession) throws Exception {
         groupService = new GrupoService();
         ModelAndView mav = setearVista(new ModelAndView(),"agregarGrupo", usuarioSession);

@@ -30,13 +30,13 @@
   <br>
   <div class="container">
     <div class="row">
-      <div class="col-lg-offset-2 col-md-8 col-xs-8">
+      <div class="col-lg-offset-2 col-md-12 col-xs-12">
         <div class="panel panel-default">
           <div class="panel-heading">
             <strong>Datos del Nuevo Grupo</strong>
           </div>
           <div class="panel-body">
-            <form:form role="form" id="addGrupoForm" action="${pageContext.request.contextPath}/Grupos/addGrupo.do" method="POST" modelAttribute="NuevoGrupo">
+            <form:form role="form" id="addGrupoForm" action="${pageContext.request.contextPath}/Grupos/agregarGrupo.do" method="POST" modelAttribute="NuevoGrupo">
               <div>
                 <!-- Id_Grupo // Codigo  -->
                 <div class="form-group">
@@ -84,6 +84,7 @@
             </div>
       </div>
     </div>
+  </div>
   </div>
   <jsp:include page="footer.jsp"></jsp:include>
 
