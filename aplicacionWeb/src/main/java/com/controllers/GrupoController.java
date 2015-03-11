@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.method.annotation.SessionAttributesHandler;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.security.acl.Group;
 import java.util.List;
 
@@ -121,6 +122,25 @@ public class GrupoController {
 
         mav.addObject("cantPaginas", cantP);
         mav.addObject("accion", "M");
+
+        return mav;
+    }
+    @RequestMapping(value = "/Grupos/modificarGrupo.do",method = RequestMethod.POST)
+    public ModelAndView modificarGrupoPost(@ModelAttribute("grupoDetalle") Grupo grupo,
+                                             @ModelAttribute("usuarioSession") Usuario usuarioSession) throws Exception {
+        groupService = new GrupoService();
+        ConstructorVistaHelper cHelper = new ConstructorVistaHelper();
+        ModelAndView mav = setearVista(new ModelAndView(), "grupos", usuarioSession);
+        int cantP = cHelper.obtenerCantidadPaginas(userService.obtenerUsuarios().size(),10);
+
+        mav.addObject("cantPaginas",cantP);
+        mav.addObject("accion","M");
+
+        if(groupService.modificarGrupo(grupo)){
+            mav.addObject("alerta","exito");
+        }else{
+            mav.addObject("alerta","error");
+        }
 
         return mav;
     }

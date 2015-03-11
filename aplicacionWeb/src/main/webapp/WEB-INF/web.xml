@@ -51,15 +51,15 @@
         <location>/400</location>
     </error-page>-->
 
-    <error-page>
+    <!--<error-page>
         <error-code>404</error-code>
         <location>/WEB-INF/pages/error404.jsp</location>
-    </error-page>
+    </error-page> -->
 
-    <error-page>
+   <!--<error-page>
         <error-code>500</error-code>
         <location>/WEB-INF/pages/error500.jsp</location>
-    </error-page>
+    </error-page> -->
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>

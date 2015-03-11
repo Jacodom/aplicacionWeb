@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/Bootstrap/bootstrap-theme.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/font-awesome/font-awesome.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/Bootstrap/modificacion.css">
-    <script src="${pageContext.request.contextPath}/js/modificarUsuario.js"></script>
+    <script src="${pageContext.request.contextPath}/js/modificarGrupo.js"></script>
 </head>
 <body>
       <div class="panel panel-default">
