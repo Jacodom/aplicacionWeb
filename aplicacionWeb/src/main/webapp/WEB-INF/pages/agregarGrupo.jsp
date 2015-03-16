@@ -30,7 +30,7 @@
   <br>
   <div class="container">
     <div class="row">
-      <div class="col-lg-offset-2 col-md-12 col-xs-12">
+      <div class="col-lg-offset-2 col-lg-8 col-md-12 col-xs-12">
         <div class="panel panel-default">
           <div class="panel-heading">
             <strong>Datos del Nuevo Grupo</strong>
