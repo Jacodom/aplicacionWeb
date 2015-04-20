@@ -269,7 +269,7 @@ i{
     margin: 20px;
 }
 
-#formRecuperar, #formCambioPW, #formAgregarPerfil .alert{
+#formRecuperar .alert, #formCambioPW .alert, #formAgregarPerfil .alert{
     margin-top: 20px;
 }
 
